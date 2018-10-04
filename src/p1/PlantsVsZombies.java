@@ -5,7 +5,7 @@ import java.util.Random;
 public class PlantsVsZombies {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method 
 		long seed = (args.length > 1?Long.parseLong(args[1]):new Random().nextInt(1000));
 
 		Random rnd = new Random(seed);
