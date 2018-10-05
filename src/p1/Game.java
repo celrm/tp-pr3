@@ -117,7 +117,7 @@ public class Game {
 	            sol = true;
 	        }
 	    }
-	    return true;
+	    return sol;
 	}
 
 	
