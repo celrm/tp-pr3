@@ -65,11 +65,11 @@ public class Game {
 		//lanzar guisantes
 		
 		for (int i = 0; i < zombieList.length(); ++i) {
-			int posZombie = zombieList.list(i).posx();
+			int posZombie = zombieList.list(i).posy();
 			boolean hayPlantas = false;
 			int j = 0;
 			while (j < sunflowerList.length() && !hayPlantas) {
-				hayPlantas = (sunflowerList.list(j).posx() == posZombie-1);
+				hayPlantas = (sunflowerList.list(j).posy() == posZombie-1);
 				++j;
 			}
 			if (hayPlantas) sunflowerList.list(j-1).serDanado(1);
@@ -77,7 +77,7 @@ public class Game {
 				hayPlantas = false;
 				j = 0;
 				while (j < peashooterList.length() && !hayPlantas) {
-					hayPlantas = (peashooterList.list(j).posx() == posZombie-1);
+					hayPlantas = (peashooterList.list(j).posy() == posZombie-1);
 					++j;
 				}
 				if (hayPlantas) peashooterList.list(j-1).serDanado(1);
@@ -86,7 +86,7 @@ public class Game {
 				hayPlantas = false;
 				j = 0;
 				while (j < zombieList.length() && !hayPlantas) {
-					hayPlantas = (zombieList.list(j).posx() == posZombie-1);
+					hayPlantas = (zombieList.list(j).posy() == posZombie-1);
 					++j;
 				}
 				if (!hayPlantas) zombieList.list(i).avanzar();
