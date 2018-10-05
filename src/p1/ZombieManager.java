@@ -26,6 +26,6 @@ public class ZombieManager {
 	}
 	
 	public boolean remZombies() {
-	    return (numZombies == 0);
+	    return numZombies;
 	}
 }
