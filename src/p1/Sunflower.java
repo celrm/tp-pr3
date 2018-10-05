@@ -29,7 +29,10 @@ public class Sunflower {
 			this.juego.cambiarSoles(10);
 	}
 	
-	public int pos() {
+	public int posx(){
 		return this.x;
+	}
+	public int posy(){
+		return this.y;
 	}
 }
