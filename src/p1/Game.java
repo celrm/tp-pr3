@@ -22,6 +22,7 @@ public class Game {
 		this.zombieList = new ZombieList();
 		this.cycleCount = 0;
 		this.soles = new SuncoinManager();
+		this.zManager = new ZombieManager(n);
 	}
 	
 	public int ciclos(){
@@ -95,15 +96,29 @@ public class Game {
 		}
 	}
 	
-	public boolean isNotFinished(){
-        if()
-	    
-	    for (int i = 0; i < this.zlength() && !sol; ++i){
-	        if (this.z(i).vida() > 0){
+	public boolean playerWins(){
+	    boolean sol = false;
+        if(this.zManager.remZombies()){
+            sol = true;
+            for (int i = 0; i < this.zlength() && sol; ++i){
+                if (this.z(i).vida() > 0){
+                    sol = false;
+                }
+            }
+        }
+        return sol;
+
+	}
+	
+	public boolean zombieWin(){
+	    boolean sol = false;
+	    for (int i = 0; i < this.zlength && !sol; ++i){
+	        if (this.z(i).posy() == 0){
 	            sol = true;
 	        }
 	    }
+	    return true;
 	}
-	
+
 	
 }
