@@ -119,6 +119,11 @@ public class Game {
 	    }
 	    return sol;
 	}
+    
+    
+	public void draw() {}
+	public void command() {}
+	public void computer() {}
 
 	
 }
