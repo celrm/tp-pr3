@@ -149,6 +149,7 @@ public class Game {
 		opcional proporciona un control del comportamiento del programa lo que nos permitirá
 		repetir exactamente una misma ejecución.
 		 */
+		 /*zombie Mabnager: zombie is added*/
 	}
 
 	
