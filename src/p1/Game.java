@@ -3,9 +3,9 @@ package p1;
 import java.util.Random;
 
 public class Game {
-	private SunflowerList a;
-	private PeashooterList b;
-	private ZombieList c;
+	private SunflowerList sunflowerList;
+	private PeashooterList peashooterList;
+	private ZombieList zombieList;
 	
 	private int cycleCount;
 	private SuncoinManager soles;
@@ -13,37 +13,37 @@ public class Game {
 	private Level level;
 	
 	public void update() {
-		for (int i = 0; i < a.length(); ++i) {
-			if(a.lista(i).vida()>0) a.lista(i).generarSoles();
+		for (int i = 0; i < sunflowerList.length(); ++i) {
+			if(sunflowerList.lista(i).vida()>0) sunflowerList.lista(i).generarSoles();
 		}
 		//lanzar guisantes
 		
-		for (int i = 0; i < c.length(); ++i) {
-			int posZombie = c.list(i).pos();
+		for (int i = 0; i < zombieList.length(); ++i) {
+			int posZombie = zombieList.list(i).posx();
 			boolean hayPlantas = false;
 			int j = 0;
-			while (j < a.length() && !hayPlantas) {
-				hayPlantas = (a.list(j).pos() == posZombie-1);
+			while (j < sunflowerList.length() && !hayPlantas) {
+				hayPlantas = (sunflowerList.list(j).posx() == posZombie-1);
 				++j;
 			}
-			if (hayPlantas) a.list(j-1).serDanado(1);
+			if (hayPlantas) sunflowerList.list(j-1).serDanado(1);
 			else {
 				hayPlantas = false;
 				j = 0;
-				while (j < b.length() && !hayPlantas) {
-					hayPlantas = (b.list(j).pos() == posZombie-1);
+				while (j < peashooterList.length() && !hayPlantas) {
+					hayPlantas = (peashooterList.list(j).posx() == posZombie-1);
 					++j;
 				}
-				if (hayPlantas) b.list(j-1).serDanado(1);
+				if (hayPlantas) peashooterList.list(j-1).serDanado(1);
 				else {
 				
 				hayPlantas = false;
 				j = 0;
-				while (j < c.length() && !hayPlantas) {
-					hayPlantas = (c.list(j).pos() == posZombie-1);
+				while (j < zombieList.length() && !hayPlantas) {
+					hayPlantas = (zombieList.list(j).posx() == posZombie-1);
 					++j;
 				}
-				if (!hayPlantas) c.list(i).avanzar();
+				if (!hayPlantas) zombieList.list(i).avanzar();
 				
 				}
 			}
