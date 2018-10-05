@@ -6,18 +6,19 @@ import java.util.Scanner;
 public class Controller {
 	private Game game;
 	private Scanner in;
+	private boolean sigoAqui; // por favor, pon un nombre más decente. he recuperado este bool para el exit
 	
 	public Controller(Game j, Scanner sc) {
 		this.game = j;
 		this.in = sc;
-
+		this.sigoAqui = true;
 	}
 	
 	public void run() {
-		while(!this.game.playerWins() || !this.game.zombiesWin()){
+		while(!this.game.playerWins() && !this.game.zombiesWin() && this.sigoAqui){
 			this.game.update();
 			this.game.draw();
-			this.game.command();
+			this.option();
 			this.game.computer();
 		}
 		
@@ -32,20 +33,32 @@ public class Controller {
 		}
 	}
 	
-	public void option(){
+	private void option(){
 		System.out.print("Command > ");
 		String[]words = this.in.nextLine().toLowerCase().trim().split("\\");
 
 		switch(words[0]) {
 		case "add": 
+		case "a": ;
 		case "reset":
+		case "r": ;
 		case "list":
+		case "l": this.list();
 		case "exit":
-		case "help": this.help();
+		case "e": this.sigoAqui = false;
+		case "help":
+		case "h": this.help();
+		case "":;
+		default: System.out.println("Wrong command.");
 		}
 	}
 	
-	private void help(){
+	private void list() {
+		System.out.println("[S]unflower: Cost: 20 suncoins Harm: 0");
+		System.out.println("[P]eashooter: Cost: 50 suncoins Harm: 1");
+	}
+	 
+	private void help() {
 		System.out.println("Add <plant> <x> <y>: Adds a plant in position x, y.");
 		System.out.println("List: Prints the list of available plants.");
 		System.out.println("Reset: Starts a new game.");

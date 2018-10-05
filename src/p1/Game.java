@@ -134,11 +134,21 @@ public class Game {
 	    return sol;
 	}
 	
-	public void command() {
-	    
-	}
 	public void computer() {
 		// hay que usar el rand y el level aquí.
+		
+		/*
+		La frecuencia de aparición de los zombis. La frecuencia determina la probabilidad 
+		de que aparezca un zombi en un ciclo dado. Así pues, si la frecuencia es 0.2, saldrá
+		aproximadamente un zombie cada 5 ciclos; aunque al tratarse de una probabilidad
+		pueden salir más espaciados o menos según la aleatoriedad.
+		
+		Cuando aparece un zombi el ordenador lo coloca en una de las filas del tablero aleato-
+		riamente. Para controlar el comportamiento aleatorio del juego y poder repetir varias veces
+		la misma ejecución utilizaremos una semilla, o como se conoce en inglés, seed. Este valor
+		opcional proporciona un control del comportamiento del programa lo que nos permitirá
+		repetir exactamente una misma ejecución.
+		 */
 	}
 
 	
