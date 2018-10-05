@@ -56,8 +56,7 @@ public class Game {
 
 	public void draw(){
 		GamePrinter print = new GamePrinter(this, 4, 8);
-		System.out.println(print);
-		// El sistema es capaz de imprimir algo de tipo GamePrinter?? No creo?? No llego a entender esto
+		System.out.println(print.toString());
 	}
 	public void update() {
 		for (int i = 0; i < sunflowerList.length(); ++i) {
@@ -128,7 +127,9 @@ public class Game {
 	public void command() {
 	    
 	}
-	public void computer() {}
+	public void computer() {
+		// hay que usar el rand y el level aquí.
+	}
 
 	
 }
