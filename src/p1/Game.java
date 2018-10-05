@@ -135,6 +135,9 @@ public class Game {
 	}
 	
 	public void computer() {
+	    if (this.zManager.isZombieAdded()){
+	        //falta implementar la fila aleatoria donde aparece en zombie y añadir zombie
+	    }
 		// hay que usar el rand y el level aquí.
 		
 		/*
@@ -149,7 +152,6 @@ public class Game {
 		opcional proporciona un control del comportamiento del programa lo que nos permitirá
 		repetir exactamente una misma ejecución.
 		 */
-		 /*zombie Mabnager: zombie is added*/
 	}
 
 	
