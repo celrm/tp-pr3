@@ -55,8 +55,9 @@ public class Game {
 	}
 
 	public void draw(){
-		GamePrinter print = new GamePrinter(this, 4, 8);;
+		GamePrinter print = new GamePrinter(this, 4, 8);
 		System.out.println(print);
+		// El sistema es capaz de imprimir algo de tipo GamePrinter?? No creo?? No llego a entender esto.
 	}
 	public void update() {
 		for (int i = 0; i < sunflowerList.length(); ++i) {
