@@ -62,6 +62,10 @@ public class Game {
 		System.out.println(print.toString());
 	}
 	
+	public void addZombie(int x){
+	    this.zombieList.add()
+	    
+	}
 	public void update() {
 		// crear soles
 		for (int i = 0; i < slength(); ++i) {
