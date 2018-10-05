@@ -14,7 +14,7 @@ public class ZombieManager {
 		this.rnd = new Random();
 	}
 	
-	public boolean isZombieAdded(Level level) {
+	public boolean isZombieAdded() {
 		Double d = rnd.nextDouble();
 		if (d < this.frec) {
 			this.numZombies -= 1;
