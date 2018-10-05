@@ -12,6 +12,8 @@ public class Game {
 	private Random rand;
 	private Level level;
 	
+	private ZombieManager zManager;
+	
     public Game(Random ran, Level n) {
 		this.level = n;
 		this.rand = ran;
@@ -91,6 +93,16 @@ public class Game {
 				}
 			}
 		}
+	}
+	
+	public boolean isNotFinished(){
+        if()
+	    
+	    for (int i = 0; i < this.zlength() && !sol; ++i){
+	        if (this.z(i).vida() > 0){
+	            sol = true;
+	        }
+	    }
 	}
 	
 	
