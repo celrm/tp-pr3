@@ -98,7 +98,7 @@ public class Game {
 	
 	public boolean playerWins(){
 	    boolean sol = false;
-        if(this.zManager.remZombies()){
+        if(this.zManager.remZombies() == 0){
             sol = true;
             for (int i = 0; i < this.zlength() && sol; ++i){
                 if (this.z(i).vida() > 0){
