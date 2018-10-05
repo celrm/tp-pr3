@@ -125,6 +125,7 @@ public class Game {
 	}
 	
 	public void command() {
+		
 	    
 	}
 	public void computer() {

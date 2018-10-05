@@ -35,7 +35,10 @@ public class Controller {
 	public void option(){
 		System.out.print("Command > ");
 		String[]words = this.in.nextLine().toLowerCase().trim().split("\\");
-		// No entiendo qué hace esto, adónde va words??
+
+		switch(words[0]) {
+			
+		}
 	}
 
 }
