@@ -15,6 +15,7 @@ public class PeashooterList {
 	
 	public Peashooter lista(int pos){
 		return this.lista[pos];
+		//creo que en vista a proteger las listas habría que clonar o algo así y devolver la copia, que piensas???
 	}
 	
 	public void addPeashooter (int x, int y, Game juego){
