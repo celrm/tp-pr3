@@ -62,8 +62,8 @@ public class Game {
 		System.out.println(print.toString());
 	}
 	
-	public void addZombie(int x){
-	    this.zombieList.add()
+	public void addZ(int x){
+	    this.zombieList.addZ(x, 0, this);
 	    
 	}
 	public void update() {
