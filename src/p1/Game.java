@@ -22,7 +22,7 @@ public class Game {
 		this.zombieList = new ZombieList();
 		this.cycleCount = 0;
 		this.soles = new SuncoinManager();
-		this.zManager = new ZombieManager(n);
+		this.zManager = new ZombieManager(this.level);
 	}
 	
 	public int ciclos(){
@@ -62,22 +62,20 @@ public class Game {
 		System.out.println(print.toString());
 	}
 	
-	public void addZ(int x){
-	    this.zombieList.addZ(x, 0, this);
-	    
-	}
 	public void update() {
 		// crear soles
 		for (int i = 0; i < slength(); ++i) {
 			if(s(i).vida()>0) s(i).generarSoles();
 		}
-		// lanzar guisantes
+		//lanzar guisantes
 		for (int i = 0; i < plength(); ++i) {
 			if(p(i).vida()>0) {
-				for (int j = 0; j < zlength(); ++j) {
-					// hacer cosas
-				
-				
+				boolean found = false;
+				for (int j = 0; j < zlength() && !found; ++j) {
+					if (z(j).vida() > 0 && p(i).posx() == z(j).posx()){
+						this.zombieList.danar(j);
+						found = true;
+					}
 				}
 			}
 		}
@@ -140,23 +138,9 @@ public class Game {
 	
 	public void computer() {
 	    if (this.zManager.isZombieAdded()){
-	        //falta implementar la fila aleatoria donde aparece en zombie y añadir zombie
+	    	int x = this.rand.nextInt() % 4;
+	    	 this.zombieList.addZombie(x, 0, this);
 	    }
-		// hay que usar el rand y el level aquí.
-		
-		/*
-		La frecuencia de aparición de los zombis. La frecuencia determina la probabilidad 
-		de que aparezca un zombi en un ciclo dado. Así pues, si la frecuencia es 0.2, saldrá
-		aproximadamente un zombie cada 5 ciclos; aunque al tratarse de una probabilidad
-		pueden salir más espaciados o menos según la aleatoriedad.
-		
-		Cuando aparece un zombi el ordenador lo coloca en una de las filas del tablero aleato-
-		riamente. Para controlar el comportamiento aleatorio del juego y poder repetir varias veces
-		la misma ejecución utilizaremos una semilla, o como se conoce en inglés, seed. Este valor
-		opcional proporciona un control del comportamiento del programa lo que nos permitirá
-		repetir exactamente una misma ejecución.
-		 */
 	}
 
-	
 }
