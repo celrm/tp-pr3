@@ -37,8 +37,21 @@ public class Controller {
 		String[]words = this.in.nextLine().toLowerCase().trim().split("\\");
 
 		switch(words[0]) {
-			
+		case "add": 
+		case "reset":
+		case "list":
+		case "exit":
+		case "help": this.help();
 		}
+	}
+	
+	private void help(){
+		System.out.println("Add <plant> <x> <y>: Adds a plant in position x, y.");
+		System.out.println("List: Prints the list of available plants.");
+		System.out.println("Reset: Starts a new game.");
+		System.out.println("Help: Prints this help message.");
+		System.out.println("Exit: Terminates the program.");
+		System.out.println("[none]: Skips cycle.");
 	}
 
 }

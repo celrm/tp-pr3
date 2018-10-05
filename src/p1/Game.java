@@ -32,9 +32,11 @@ public class Game {
 	public int slength(){
 		return this.sunflowerList.length();
 	}
+	
 	public int plength(){
 		return this.peashooterList.length();
 	}
+	
 	public int zlength(){
 		return this.zombieList.length();
 	}
@@ -42,11 +44,12 @@ public class Game {
 	public Peashooter p (int pos){
 		return this.peashooterList.lista(pos);
 	}
+	
 	public Sunflower s (int pos){
 		return this.sunflowerList.lista(pos);
 	}
 	
-	public Zombie z(int pos){
+	public Zombie z (int pos){
 		return this.zombieList.lista(pos);
 	}
 	
@@ -58,38 +61,49 @@ public class Game {
 		GamePrinter print = new GamePrinter(this, 4, 8);
 		System.out.println(print.toString());
 	}
+	
 	public void update() {
-		for (int i = 0; i < sunflowerList.length(); ++i) {
-			if(sunflowerList.lista(i).vida()>0) sunflowerList.lista(i).generarSoles();
+		// crear soles
+		for (int i = 0; i < slength(); ++i) {
+			if(s(i).vida()>0) s(i).generarSoles();
 		}
-		//lanzar guisantes
+		// lanzar guisantes
+		for (int i = 0; i < plength(); ++i) {
+			if(p(i).vida()>0) {
+				for (int j = 0; j < zlength(); ++j) {
+					// hacer cosas
+				
+				
+				}
+			}
+		}
 		
-		for (int i = 0; i < zombieList.length(); ++i) {
-			int posZombie = zombieList.lista(i).posy();
+		for (int i = 0; i < zlength(); ++i) {
+			int posZombie = z(i).posy();
 			boolean hayPlantas = false;
 			int j = 0;
-			while (j < sunflowerList.length() && !hayPlantas) {
-				hayPlantas = (sunflowerList.lista(j).posy() == posZombie-1);
+			while (j < slength() && !hayPlantas) {
+				hayPlantas = (s(j).posy() == posZombie-1);
 				++j;
 			}
-			if (hayPlantas) sunflowerList.lista(j-1).serDanado(1);
+			if (hayPlantas) s(j-1).serDanado(1);
 			else {
 				hayPlantas = false;
 				j = 0;
-				while (j < peashooterList.length() && !hayPlantas) {
-					hayPlantas = (peashooterList.lista(j).posy() == posZombie-1);
+				while (j < plength() && !hayPlantas) {
+					hayPlantas = (p(j).posy() == posZombie-1);
 					++j;
 				}
-				if (hayPlantas) peashooterList.lista(j-1).serDanado(1);
+				if (hayPlantas) p(j-1).serDanado(1);
 				else {
 				
 				hayPlantas = false;
 				j = 0;
-				while (j < zombieList.length() && !hayPlantas) {
-					hayPlantas = (zombieList.lista(j).posy() == posZombie-1);
+				while (j < zlength() && !hayPlantas) {
+					hayPlantas = (z(j).posy() == posZombie-1);
 					++j;
 				}
-				if (!hayPlantas) zombieList.lista(i).avanza();
+				if (!hayPlantas) z(i).avanza();
 				
 				}
 			}
@@ -119,13 +133,8 @@ public class Game {
 	    }
 	    return sol;
 	}
-
-	public void help(){
-		
-	}
 	
 	public void command() {
-		
 	    
 	}
 	public void computer() {

@@ -17,6 +17,7 @@ public class Peashooter {
 	public int vida(){
 		return this.vida;
 	}
+	
 	public void serDanado(int dano){
 		this.vida -= dano;
 	}

@@ -16,6 +16,7 @@ public class PeashooterList {
 	public Peashooter lista(int pos){
 		return this.lista[pos];
 	}
+	
 	public void addPeashooter (int x, int y, Game juego){
 		this.lista[cont] = new Peashooter(x,y, juego);
 		++this.cont;
