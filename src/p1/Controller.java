@@ -31,4 +31,10 @@ public class Controller {
 		    System.out.println("Chao");
 		}
 	}
+	
+	public void option(){
+		System.out.print("Command > ");
+		String[]words = this.in.nextLine().toLowerCase().trim().split("\\");
+	}
+
 }
