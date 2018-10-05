@@ -65,31 +65,31 @@ public class Game {
 		//lanzar guisantes
 		
 		for (int i = 0; i < zombieList.length(); ++i) {
-			int posZombie = zombieList.list(i).posy();
+			int posZombie = zombieList.lista(i).posy();
 			boolean hayPlantas = false;
 			int j = 0;
 			while (j < sunflowerList.length() && !hayPlantas) {
-				hayPlantas = (sunflowerList.list(j).posy() == posZombie-1);
+				hayPlantas = (sunflowerList.lista(j).posy() == posZombie-1);
 				++j;
 			}
-			if (hayPlantas) sunflowerList.list(j-1).serDanado(1);
+			if (hayPlantas) sunflowerList.lista(j-1).serDanado(1);
 			else {
 				hayPlantas = false;
 				j = 0;
 				while (j < peashooterList.length() && !hayPlantas) {
-					hayPlantas = (peashooterList.list(j).posy() == posZombie-1);
+					hayPlantas = (peashooterList.lista(j).posy() == posZombie-1);
 					++j;
 				}
-				if (hayPlantas) peashooterList.list(j-1).serDanado(1);
+				if (hayPlantas) peashooterList.lista(j-1).serDanado(1);
 				else {
 				
 				hayPlantas = false;
 				j = 0;
 				while (j < zombieList.length() && !hayPlantas) {
-					hayPlantas = (zombieList.list(j).posy() == posZombie-1);
+					hayPlantas = (zombieList.lista(j).posy() == posZombie-1);
 					++j;
 				}
-				if (!hayPlantas) zombieList.list(i).avanzar();
+				if (!hayPlantas) zombieList.lista(i).avanza();
 				
 				}
 			}
@@ -110,9 +110,9 @@ public class Game {
 
 	}
 	
-	public boolean zombieWin(){
+	public boolean zombiesWin(){
 	    boolean sol = false;
-	    for (int i = 0; i < this.zlength && !sol; ++i){
+	    for (int i = 0; i < this.zlength() && !sol; ++i){
 	        if (this.z(i).posy() == 0){
 	            sol = true;
 	        }
@@ -123,8 +123,6 @@ public class Game {
 	public void help(){
 		
 	}
-	
-	public void draw() {}
 	
 	public void command() {
 	    

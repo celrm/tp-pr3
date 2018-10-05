@@ -25,7 +25,7 @@ public class ZombieManager {
 		
 	}
 	
-	public boolean remZombies() {
-	    return numZombies;
+	public int remZombies() {
+	    return this.numZombies;
 	}
 }
