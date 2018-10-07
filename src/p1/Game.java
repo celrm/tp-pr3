@@ -163,10 +163,11 @@ public class Game {
 	}
 	
 	public void computer() {
-    	int x = this.rand.nextInt() % Game.DIMX;
-	    if (!this.hayCosas(x,Game.DIMY-1) && this.zManager.isZombieAdded()){
+    	int x = Math.abs(this.rand.nextInt() % Game.DIMX);
+	    if (!this.hayCosas(x, Game.DIMY-1) && this.zManager.isZombieAdded()){
 	    	 this.zombieList.addZombie(x, Game.DIMY-1, this);
 	    }
+	    this.zombieList.mierdadefuncion();
 	}
 	
 	private boolean hayCosas(int x, int y) {

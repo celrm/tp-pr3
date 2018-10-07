@@ -23,4 +23,10 @@ public class ZombieList {
 	//public void danar(int pos){
 	//	this.lista[pos].serDanado(1);
 	//}
+
+	public void mierdadefuncion() {
+		for (int i = 0; i < cont; ++i) {
+		System.out.println(Integer.toString(lista[i].posx()) +" "+ Integer.toString(lista[i].posy()));
+		}
+	}
 }
