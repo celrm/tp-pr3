@@ -17,17 +17,23 @@ public class Controller {
 	public void run() {
 		boolean hasAnythingChanged = true;
 		while(!this.game.playerWins() && !this.game.zombiesWin() && this.sigoAqui){
-			this.game.update();
-			this.game.draw();
+			if (hasAnythingChanged) {
+				this.game.draw();
+				this.game.update();
+			}
 			hasAnythingChanged = this.option();
-			this.game.computer();
-			this.game.nextCycle();
+			if (hasAnythingChanged) {
+				this.game.computer();
+				this.game.nextCycle();
+			}
 		}
 		
 		if (this.game.playerWins()) {
+			this.game.draw();
 		    System.out.println("Player wins!");
 		}
 		else if (this.game.zombiesWin()) {
+			this.game.draw();
 		    System.out.println("Zombies win :(");
 		}
 		else {
@@ -61,7 +67,7 @@ public class Controller {
 		case "e": this.sigoAqui = false; break;
 		case "help":
 		case "h": this.help(); break;
-		case "":; break;
+		case "": sol = true; break;
 		default: System.out.println("Wrong command."); break;
 		}
 		return sol;

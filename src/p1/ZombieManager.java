@@ -15,14 +15,16 @@ public class ZombieManager {
 	}
 	
 	public boolean isZombieAdded() {
-		Double d = rnd.nextDouble();
-		if (d < this.frec) {
-			this.numZombies -= 1;
-			return true;
-		} else {
-			return false;
+		if (this.numZombies > 0) {
+			Double d = rnd.nextDouble();
+			if (d < this.frec) {
+				this.numZombies -= 1;
+				return true;
+			} else {
+				return false;
+			}
 		}
-		
+		else return false;
 	}
 	
 	public int remZombies() {

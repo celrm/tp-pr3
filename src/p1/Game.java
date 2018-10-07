@@ -167,7 +167,6 @@ public class Game {
 	    if (!this.hayCosas(x, Game.DIMY-1) && this.zManager.isZombieAdded()){
 	    	 this.zombieList.addZombie(x, Game.DIMY-1, this);
 	    }
-	    this.zombieList.mierdadefuncion();
 	}
 	
 	private boolean hayCosas(int x, int y) {
