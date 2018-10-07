@@ -106,31 +106,33 @@ public class Game {
 		}
 		//zombies atacan
 		for (int i = 0; i < zlength(); ++i) {
-			boolean hayPlantas = false;
-			int j = 0;
-			while (j < slength() && !hayPlantas) {
-				hayPlantas = (s(j).posy() == z(i).posy()-1 && s(j).posx() == z(i).posx());
-				++j;
-			}
-			if (hayPlantas) s(j-1).serDanado(1);
-			else {
-				hayPlantas = false;
-				j = 0;
-				while (j < plength() && !hayPlantas) {
-					hayPlantas = (p(j).posy() == z(i).posy()-1 && p(j).posx() == z(i).posx());
+			if (z(i).vida()>0) {
+				boolean hayPlantas = false;
+				int j = 0;
+				while (j < slength() && !hayPlantas) {
+					hayPlantas = (s(j).posy() == z(i).posy()-1 && s(j).posx() == z(i).posx());
 					++j;
 				}
-				if (hayPlantas) p(j-1).serDanado(1);
+				if (hayPlantas) s(j-1).serDanado(1);
 				else {
-				
-				hayPlantas = false;
-				j = 0;
-				while (j < zlength() && !hayPlantas) {
-					hayPlantas = (z(j).posy() == z(i).posy()-1 && z(j).posx() == z(i).posx());
-					++j;
-				}
-				if (!hayPlantas) z(i).avanza();
-				
+					hayPlantas = false;
+					j = 0;
+					while (j < plength() && !hayPlantas) {
+						hayPlantas = (p(j).posy() == z(i).posy()-1 && p(j).posx() == z(i).posx());
+						++j;
+					}
+					if (hayPlantas) p(j-1).serDanado(1);
+					else {
+					
+					hayPlantas = false;
+					j = 0;
+					while (j < zlength() && !hayPlantas) {
+						hayPlantas = (z(j).posy() == z(i).posy()-1 && z(j).posx() == z(i).posx());
+						++j;
+					}
+					if (!hayPlantas) z(i).avanza();
+					
+					}
 				}
 			}
 		}
