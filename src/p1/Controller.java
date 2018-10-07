@@ -35,21 +35,32 @@ public class Controller {
 	
 	private void option(){
 		System.out.print("Command > ");
-		String[]words = this.in.nextLine().toLowerCase().trim().split("\\");
+		String[]words = this.in.nextLine().toLowerCase().trim().split(" ");
 
 		switch(words[0]) {
-		case "add": 
-		case "a": ;
+		case "add":
+		case "a": {
+			if (words.length == 4) {
+				int x = Integer.parseInt(words[2]);
+				int y = Integer.parseInt(words[3]);		
+				if(x>=0 && y>=0 && x<4 && y<8)
+					this.game.addPlant(words[1], x, y);
+				else System.out.println("Wrong position.");
+			
+			}
+			else System.out.println("Wrong parameters.");
+		} break;
 		case "reset":
-		case "r": ;
+		case "r": 
+			this.game = new Game(this.game.getRand(), this.game.getLevel()); break;
 		case "list":
-		case "l": this.list();
+		case "l": this.list(); break;
 		case "exit":
-		case "e": this.sigoAqui = false;
+		case "e": this.sigoAqui = false; break;
 		case "help":
-		case "h": this.help();
-		case "":;
-		default: System.out.println("Wrong command.");
+		case "h": this.help(); break;
+		case "":; break;
+		default: System.out.println("Wrong command."); break;
 		}
 	}
 	

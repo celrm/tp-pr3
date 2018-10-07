@@ -3,30 +3,43 @@ package p1;
 import java.util.Random;
 
 public class Game {
+
+	private Random rand;
+	private Level level;
+	
 	private SunflowerList sunflowerList;
 	private PeashooterList peashooterList;
 	private ZombieList zombieList;
 	
-	private int cycleCount;
+	private int ciclos;
 	private SuncoinManager soles;
-	private Random rand;
-	private Level level;
 	
 	private ZombieManager zManager;
 	
     public Game(Random ran, Level n) {
-		this.level = n;
 		this.rand = ran;
+		this.level = n;
+		
 		this.sunflowerList = new SunflowerList();
 		this.peashooterList = new PeashooterList();
 		this.zombieList = new ZombieList();
-		this.cycleCount = 0;
-		this.soles = new SuncoinManager();
+		
 		this.zManager = new ZombieManager(this.level);
+		
+		this.ciclos = 0;
+		this.soles = new SuncoinManager();
 	}
+    
+    public Random getRand() {
+    	return this.rand;
+    }
+    
+    public Level getLevel() {
+    	return this.level;
+    }
 	
 	public int ciclos(){
-		return this.cycleCount;
+		return this.ciclos;
 	}
 	
 	public int slength(){
@@ -141,6 +154,10 @@ public class Game {
 	    	int x = this.rand.nextInt() % 4;
 	    	 this.zombieList.addZombie(x, 0, this);
 	    }
+	}
+	
+	public void addPlant(String planta, int x, int y) {
+		
 	}
 
 }
