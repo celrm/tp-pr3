@@ -157,7 +157,37 @@ public class Game {
 	}
 	
 	public void addPlant(String planta, int x, int y) {
+		// recorrer cosas a ver si ya hay algo allí.
+		boolean hayCosas = false;
+		int j = 0;
+		while (j < slength() && !hayCosas) {
+			if (s(j).vida()>0 && s(j).posx()==x && s(j).posy()==y) hayCosas = true;
+		}
+		j = 0;
+		while (j < plength() && !hayCosas) {
+			if (p(j).vida()>0 && p(j).posx()==x && p(j).posy()==y) hayCosas = true;
+		}
+		j = 0;
+		while (j < zlength() && !hayCosas) {
+			if (z(j).vida()>0 && z(j).posx()==x && z(j).posy()==y) hayCosas = true;
+		}
 		
+		if(hayCosas) System.out.println("There's already something there.");
+		else {
+			if(planta.equals("s") || planta.equals("sunflower")) {
+				if (this.soles.num() >= 20) {
+					this.sunflowerList.addSunflower(x, y, this);
+				}
+				else System.out.println("Not enough cash.");
+			}
+			else if(planta.equals("p") || planta.equals("peashooter")) {
+				if (this.soles.num() >= 50) {
+					this.peashooterList.addPeashooter(x, y, this);
+				}
+				else System.out.println("Not enough cash.");
+			}
+			else System.out.println("Wrong plant.");
+		}
 	}
 
 }
