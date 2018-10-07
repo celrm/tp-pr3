@@ -92,13 +92,12 @@ public class Game {
 				}
 			}
 		}
-		
+		//zombies atacan
 		for (int i = 0; i < zlength(); ++i) {
-			int posZombie = z(i).posy();
 			boolean hayPlantas = false;
 			int j = 0;
 			while (j < slength() && !hayPlantas) {
-				hayPlantas = (s(j).posy() == posZombie-1);
+				hayPlantas = (s(j).posy() == z(i).posy()-1 && s(j).posx() == z(i).posx());
 				++j;
 			}
 			if (hayPlantas) s(j-1).serDanado(1);
@@ -106,7 +105,7 @@ public class Game {
 				hayPlantas = false;
 				j = 0;
 				while (j < plength() && !hayPlantas) {
-					hayPlantas = (p(j).posy() == posZombie-1);
+					hayPlantas = (p(j).posy() == z(i).posy()-1 && p(j).posx() == z(i).posx());
 					++j;
 				}
 				if (hayPlantas) p(j-1).serDanado(1);
@@ -115,7 +114,7 @@ public class Game {
 				hayPlantas = false;
 				j = 0;
 				while (j < zlength() && !hayPlantas) {
-					hayPlantas = (z(j).posy() == posZombie-1);
+					hayPlantas = (z(j).posy() == z(i).posy()-1 && z(j).posx() == z(i).posx());
 					++j;
 				}
 				if (!hayPlantas) z(i).avanza();
@@ -152,12 +151,13 @@ public class Game {
 	public void computer() {
 	    if (this.zManager.isZombieAdded()){
 	    	int x = this.rand.nextInt() % 4;
-	    	 this.zombieList.addZombie(x, 0, this);
+	    	while (this.hayCosas(x,7)) 
+		    	x = this.rand.nextInt() % 4;
+	    	 this.zombieList.addZombie(x, 7, this);
 	    }
 	}
 	
-	public void addPlant(String planta, int x, int y) {
-		// recorrer cosas a ver si ya hay algo allí.
+	private boolean hayCosas(int x, int y) {
 		boolean hayCosas = false;
 		int j = 0;
 		while (j < slength() && !hayCosas) {
@@ -171,8 +171,11 @@ public class Game {
 		while (j < zlength() && !hayCosas) {
 			if (z(j).vida()>0 && z(j).posx()==x && z(j).posy()==y) hayCosas = true;
 		}
-		
-		if(hayCosas) System.out.println("There's already something there.");
+		return hayCosas;
+	}
+	
+	public void addPlant(String planta, int x, int y) {		
+		if(this.hayCosas(x,y)) System.out.println("There's already something there.");
 		else {
 			if(planta.equals("s") || planta.equals("sunflower")) {
 				if (this.soles.num() >= 20) {
