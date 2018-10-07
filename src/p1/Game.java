@@ -190,7 +190,8 @@ public class Game {
 		return hayCosas;
 	}
 	
-	public void addPlant(String planta, int x, int y) {
+	public boolean addPlant(String planta, int x, int y) {
+		boolean sol = false;
 		if(this.hayCosas(x,y)) System.out.println("There's already something there.");
 		else if(x<0 || y<0 || x>=Game.DIMX || y>=Game.DIMY) System.out.println("Wrong position.");
 		else {
@@ -198,6 +199,7 @@ public class Game {
 				if (this.soles.num() >= Sunflower.COSTE) {
 					this.sunflowerList.addSunflower(x, y, this);
 					this.cambiarSoles(-Sunflower.COSTE);
+					sol = true;
 				}
 				else System.out.println("Not enough cash.");
 			}
@@ -205,11 +207,13 @@ public class Game {
 				if (this.soles.num() >= Peashooter.COSTE) {
 					this.peashooterList.addPeashooter(x, y, this);
 					this.cambiarSoles(-Peashooter.COSTE);
+					sol = true;
 				}
 				else System.out.println("Not enough cash.");
 			}
 			else System.out.println("Wrong plant.");
 		}
+		return sol;
 	}
 
 }

@@ -15,12 +15,13 @@ public class Controller {
 	}
 	
 	public void run() {
+		boolean hasAnythingChanged = true;
 		while(!this.game.playerWins() && !this.game.zombiesWin() && this.sigoAqui){
 			this.game.update();
 			this.game.draw();
-			this.game.nextCycle();
-			this.option();
+			hasAnythingChanged = this.option();
 			this.game.computer();
+			this.game.nextCycle();
 		}
 		
 		if (this.game.playerWins()) {
@@ -34,7 +35,8 @@ public class Controller {
 		}
 	}
 	
-	private void option(){
+	private boolean option(){
+		boolean sol = false;
 		System.out.print("Command > ");
 		String[]words = this.in.nextLine().toLowerCase().trim().split(" ");
 
@@ -44,13 +46,15 @@ public class Controller {
 			if (words.length == 4) {
 				int x = Integer.parseInt(words[2]);
 				int y = Integer.parseInt(words[3]);
-				this.game.addPlant(words[1], x, y);			
+				sol = this.game.addPlant(words[1], x, y);			
 			}
 			else System.out.println("Wrong parameters.");
 		} break;
 		case "reset":
-		case "r": 
-			this.game = new Game(this.game.getRand(), this.game.getLevel()); break;
+		case "r": {
+			this.game = new Game(this.game.getRand(), this.game.getLevel());
+			sol = true;
+		} break;
 		case "list":
 		case "l": this.list(); break;
 		case "exit":
@@ -60,6 +64,7 @@ public class Controller {
 		case "":; break;
 		default: System.out.println("Wrong command."); break;
 		}
+		return sol;
 	}
 	
 	private void list() {
