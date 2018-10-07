@@ -5,13 +5,15 @@ public class Zombie {
 	private int y;
 	private int vida;
 	private Game juego;
+	
+	public static int VIDA = 5;
 
 	private int nacimiento;
 	
 	public Zombie(int x, int y, Game juego){
 		this.x = x;
 		this.y = y;
-		this.vida = 5;
+		this.vida = Zombie.VIDA;
 		this.juego = juego;
 		this.nacimiento = juego.ciclos();
 	}

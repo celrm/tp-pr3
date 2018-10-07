@@ -43,11 +43,8 @@ public class Controller {
 		case "a": {
 			if (words.length == 4) {
 				int x = Integer.parseInt(words[2]);
-				int y = Integer.parseInt(words[3]);		
-				if(x>=0 && y>=0 && x<4 && y<8)
-					this.game.addPlant(words[1], x, y);
-				else System.out.println("Wrong position.");
-			
+				int y = Integer.parseInt(words[3]);
+				this.game.addPlant(words[1], x, y);			
 			}
 			else System.out.println("Wrong parameters.");
 		} break;
@@ -66,8 +63,8 @@ public class Controller {
 	}
 	
 	private void list() {
-		System.out.println("[S]unflower: Cost: 20 suncoins Harm: 0");
-		System.out.println("[P]eashooter: Cost: 50 suncoins Harm: 1");
+		System.out.println("[S]unflower: Cost: " + Integer.toString(Sunflower.COSTE) + " suncoins Harm: " + Integer.toString(Sunflower.HARM));
+		System.out.println("[P]eashooter: Cost: " + Integer.toString(Peashooter.COSTE) + " suncoins Harm: " + Integer.toString(Peashooter.HARM));
 	}
 	 
 	private void help() {

@@ -20,7 +20,7 @@ public class ZombieList {
 		this.lista[cont] = new Zombie(x,y, juego);
 		++this.cont;
 	}
-	public void danar(int pos){
-		this.lista[pos].serDanado(1);
-	}
+	//public void danar(int pos){
+	//	this.lista[pos].serDanado(1);
+	//}
 }

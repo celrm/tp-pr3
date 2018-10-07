@@ -4,14 +4,18 @@ public class Peashooter {
 	private int x;
 	private int y;
 	private int vida;
-	private Game juego;
+	//private Game juego;
+	
+	public static int VIDA = 3;
+	public static int HARM = 1;
+	public static int COSTE = 50;
 	
 	
 	public Peashooter(int x, int y, Game juego){
 		this.x = x;
 		this.y = y;
-		this.vida = 3;
-		this.juego = juego;
+		this.vida = Peashooter.VIDA;
+	//	this.juego = juego;
 	}
 	
 	public int vida(){

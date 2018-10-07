@@ -3,6 +3,9 @@ package p1;
 import java.util.Random;
 
 public class Game {
+	
+	public static int DIMX = 4;
+	public static int DIMY = 8;
 
 	private Random rand;
 	private Level level;
@@ -75,7 +78,7 @@ public class Game {
 	}
 	
 	public void draw(){
-		GamePrinter print = new GamePrinter(this, 4, 8);
+		GamePrinter print = new GamePrinter(this, Game.DIMX, Game.DIMY);
 
 		System.out.println("Number of cycles: " + Integer.toString(this.ciclos));
 		System.out.println("Sun coins: " + Integer.toString(this.soles.num()));
@@ -95,7 +98,7 @@ public class Game {
 				boolean found = false;
 				for (int j = 0; j < zlength() && !found; ++j) {
 					if (z(j).vida() > 0 && p(i).posx() == z(j).posx()){
-						this.zombieList.danar(j);
+						z(j).serDanado(Peashooter.HARM);
 						found = true;
 					}
 				}
@@ -158,9 +161,9 @@ public class Game {
 	}
 	
 	public void computer() {
-    	int x = this.rand.nextInt() % 4;
-	    if (!this.hayCosas(x,7) && this.zManager.isZombieAdded()){
-	    	 this.zombieList.addZombie(x, 7, this);
+    	int x = this.rand.nextInt() % Game.DIMX;
+	    if (!this.hayCosas(x,Game.DIMY-1) && this.zManager.isZombieAdded()){
+	    	 this.zombieList.addZombie(x, Game.DIMY-1, this);
 	    }
 	}
 	
@@ -181,20 +184,21 @@ public class Game {
 		return hayCosas;
 	}
 	
-	public void addPlant(String planta, int x, int y) {		
+	public void addPlant(String planta, int x, int y) {
 		if(this.hayCosas(x,y)) System.out.println("There's already something there.");
+		else if(x<0 || y<0 || x>=Game.DIMX || y>=Game.DIMY) System.out.println("Wrong position.");
 		else {
 			if(planta.equals("s") || planta.equals("sunflower")) {
-				if (this.soles.num() >= 20) {
+				if (this.soles.num() >= Sunflower.COSTE) {
 					this.sunflowerList.addSunflower(x, y, this);
-					this.cambiarSoles(-20);
+					this.cambiarSoles(-Sunflower.COSTE);
 				}
 				else System.out.println("Not enough cash.");
 			}
 			else if(planta.equals("p") || planta.equals("peashooter")) {
-				if (this.soles.num() >= 50) {
+				if (this.soles.num() >= Peashooter.COSTE) {
 					this.peashooterList.addPeashooter(x, y, this);
-					this.cambiarSoles(-50);
+					this.cambiarSoles(-Peashooter.COSTE);
 				}
 				else System.out.println("Not enough cash.");
 			}
