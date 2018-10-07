@@ -110,7 +110,7 @@ public class Game {
 				boolean hayPlantas = false;
 				int j = 0;
 				while (j < slength() && !hayPlantas) {
-					hayPlantas = (s(j).posy() == z(i).posy()-1 && s(j).posx() == z(i).posx());
+					hayPlantas = (s(j).vida() > 0) && (s(j).posy() == z(i).posy()-1 && s(j).posx() == z(i).posx());
 					++j;
 				}
 				if (hayPlantas) s(j-1).serDanado(1);
@@ -118,7 +118,7 @@ public class Game {
 					hayPlantas = false;
 					j = 0;
 					while (j < plength() && !hayPlantas) {
-						hayPlantas = (p(j).posy() == z(i).posy()-1 && p(j).posx() == z(i).posx());
+						hayPlantas = (p(j).vida() > 0) && (p(j).posy() == z(i).posy()-1 && p(j).posx() == z(i).posx());
 						++j;
 					}
 					if (hayPlantas) p(j-1).serDanado(1);
@@ -127,7 +127,7 @@ public class Game {
 					hayPlantas = false;
 					j = 0;
 					while (j < zlength() && !hayPlantas) {
-						hayPlantas = (z(j).posy() == z(i).posy()-1 && z(j).posx() == z(i).posx());
+						hayPlantas = (z(j).vida()> 0) && (z(j).posy() == z(i).posy()-1 && z(j).posx() == z(i).posx());
 						++j;
 					}
 					if (!hayPlantas) z(i).avanza();
