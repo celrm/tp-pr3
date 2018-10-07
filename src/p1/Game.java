@@ -174,14 +174,17 @@ public class Game {
 		int j = 0;
 		while (j < slength() && !hayCosas) {
 			if (s(j).vida()>0 && s(j).posx()==x && s(j).posy()==y) hayCosas = true;
+			j++;
 		}
 		j = 0;
 		while (j < plength() && !hayCosas) {
 			if (p(j).vida()>0 && p(j).posx()==x && p(j).posy()==y) hayCosas = true;
+			j++;
 		}
 		j = 0;
 		while (j < zlength() && !hayCosas) {
 			if (z(j).vida()>0 && z(j).posx()==x && z(j).posy()==y) hayCosas = true;
+			j++;
 		}
 		return hayCosas;
 	}
