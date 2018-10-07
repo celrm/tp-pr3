@@ -69,9 +69,18 @@ public class Game {
 	public void cambiarSoles(int n){
 		this.soles.add(n);
 	}
-
+	
+	public void nextCycle() {
+		this.ciclos++;
+	}
+	
 	public void draw(){
 		GamePrinter print = new GamePrinter(this, 4, 8);
+
+		System.out.println("Number of cycles: " + Integer.toString(this.ciclos));
+		System.out.println("Sun coins: " + Integer.toString(this.soles.num()));
+		System.out.println("Remaining Zombies: " + Integer.toString(this.zManager.remZombies()));
+		
 		System.out.println(print.toString());
 	}
 	
@@ -149,10 +158,8 @@ public class Game {
 	}
 	
 	public void computer() {
-	    if (this.zManager.isZombieAdded()){
-	    	int x = this.rand.nextInt() % 4;
-	    	while (this.hayCosas(x,7)) 
-		    	x = this.rand.nextInt() % 4;
+    	int x = this.rand.nextInt() % 4;
+	    if (!this.hayCosas(x,7) && this.zManager.isZombieAdded()){
 	    	 this.zombieList.addZombie(x, 7, this);
 	    }
 	}
@@ -180,12 +187,14 @@ public class Game {
 			if(planta.equals("s") || planta.equals("sunflower")) {
 				if (this.soles.num() >= 20) {
 					this.sunflowerList.addSunflower(x, y, this);
+					this.cambiarSoles(-20);
 				}
 				else System.out.println("Not enough cash.");
 			}
 			else if(planta.equals("p") || planta.equals("peashooter")) {
 				if (this.soles.num() >= 50) {
 					this.peashooterList.addPeashooter(x, y, this);
+					this.cambiarSoles(-50);
 				}
 				else System.out.println("Not enough cash.");
 			}

@@ -23,6 +23,8 @@ public class PlantsVsZombies {
 		Game juego = new Game(rnd, level);
 		Scanner sc = new Scanner(System.in);
 		Controller controlador = new Controller(juego, sc);
+
+		System.out.println("Random seed used: " + Long.toString(seed));
 		controlador.run();
 
 	}

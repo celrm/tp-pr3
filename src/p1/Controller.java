@@ -18,6 +18,7 @@ public class Controller {
 		while(!this.game.playerWins() && !this.game.zombiesWin() && this.sigoAqui){
 			this.game.update();
 			this.game.draw();
+			this.game.nextCycle();
 			this.option();
 			this.game.computer();
 		}
