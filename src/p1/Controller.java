@@ -2,7 +2,6 @@ package p1;
 
 import java.util.Scanner;
 
-
 public class Controller {
 	private Game game;
 	private Scanner in;
@@ -23,7 +22,7 @@ public class Controller {
 				this.game.draw();
 			}
 			hasAnythingChanged = this.option();
-			if (hasAnythingChanged) {
+			if (hasAnythingChanged) { //problema: después del reset se ejecuta el computer y entonces puede aparecer un zombie salvaje en el ciclo 0, lo cual está feo
 				this.game.computer();
 			}
 		}
