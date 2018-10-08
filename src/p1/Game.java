@@ -163,9 +163,19 @@ public class Game {
 	}
 	
 	public void computer() {
-    	int x = Math.abs(this.rand.nextInt() % Game.DIMX);
-	    if (!this.hayCosas(x, Game.DIMY-1) && this.zManager.isZombieAdded()){
-	    	 this.zombieList.addZombie(x, Game.DIMY-1, this);
+    //int x = Math.abs(this.rand.nextInt() % Game.DIMX);
+	    if (this.zManager.isZombieAdded()){
+	        int x = Math.abs(this.rand.nextInt() % Game.DIMX);
+	        boolean done = false;
+	        while (!done){
+	        	if (!this.hayCosas(x, Game.DIMY-1)){
+	        		this.zombieList.addZombie(x, Game.DIMY-1, this);
+	        		done = true;
+	        	}
+	        	else{
+	        		x = Math.abs(this.rand.nextInt() % Game.DIMX);
+	        	}
+	        }
 	    }
 	}
 	
