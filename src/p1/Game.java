@@ -171,16 +171,11 @@ public class Game {
 	
 		if (posible && this.zManager.isZombieAdded()){
 			int x = Math.abs(this.rand.nextInt() % Game.DIMX);
-			boolean done = false;
-			while (!done){
-				if (!this.hayCosas(x, Game.DIMY-1)){
-					this.zombieList.addZombie(x, Game.DIMY-1, this);
-					done = true;
-				}
-				else{
-					x = Math.abs(this.rand.nextInt() % Game.DIMX);
-				}
+			
+			while (this.hayCosas(x, Game.DIMY-1)){
+				x = Math.abs(this.rand.nextInt() % Game.DIMX);
 			}
+			this.zombieList.addZombie(x, Game.DIMY-1, this);
 	    }	
 	}
 	
