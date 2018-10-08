@@ -18,16 +18,17 @@ public class Controller {
 		boolean hasAnythingChanged = true;
 		while(!this.game.playerWins() && !this.game.zombiesWin() && this.sigoAqui){
 			if (hasAnythingChanged) {
-				this.game.draw();
+				this.game.nextCycle();
 				this.game.update();
+				this.game.draw();
 			}
 			hasAnythingChanged = this.option();
 			if (hasAnythingChanged) {
 				this.game.computer();
-				this.game.nextCycle();
 			}
 		}
-		
+
+	    System.out.println("Game over");
 		if (this.game.playerWins()) {
 			this.game.draw();
 		    System.out.println("Player wins!");
@@ -41,6 +42,17 @@ public class Controller {
 		}
 	}
 	
+	//sí, lo he buscado. si no, la excepción de parseInt es imposible de evitar.
+	public static boolean isParsable(String input){
+	    boolean parsable = true;
+	    try{
+	        Integer.parseInt(input);
+	    }catch(NumberFormatException e){
+	        parsable = false;
+	    }
+	    return parsable;
+	}
+	
 	private boolean option(){
 		boolean sol = false;
 		System.out.print("Command > ");
@@ -49,10 +61,10 @@ public class Controller {
 		switch(words[0]) {
 		case "add":
 		case "a": {
-			if (words.length == 4) {
+			if (words.length == 4 && isParsable(words[2]) && isParsable(words[3])) {
 				int x = Integer.parseInt(words[2]);
 				int y = Integer.parseInt(words[3]);
-				sol = this.game.addPlant(words[1], x, y);			
+				sol = this.game.addPlant(words[1], x, y);
 			}
 			else System.out.println("Wrong parameters.");
 		} break;

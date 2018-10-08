@@ -29,7 +29,7 @@ public class Game {
 		
 		this.zManager = new ZombieManager(this.level);
 		
-		this.ciclos = 0;
+		this.ciclos = -1;
 		this.soles = new SuncoinManager();
 	}
     
