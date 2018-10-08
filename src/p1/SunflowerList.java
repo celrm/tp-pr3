@@ -14,8 +14,7 @@ public class SunflowerList {
 	}
 	
 	public Sunflower lista(int pos){
-		Sunflower r = this.lista[pos].clone();
-		return r;
+		return this.lista[pos];
 	}
 	
 	public void addSunflower (int x, int y, Game juego){

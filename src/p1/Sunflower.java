@@ -41,7 +41,4 @@ public class Sunflower {
 		return this.y;
 	}
 	
-	public Sunflower clone(){
-		return new Sunflower(this.x, this.y, this.juego);
-	}
 }

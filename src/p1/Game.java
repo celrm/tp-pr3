@@ -97,7 +97,7 @@ public class Game {
 				boolean found = false;
 				for (int j = 0; j < zlength() && !found; ++j) {
 					if (z(j).vida() > 0 && p(i).posx() == z(j).posx()) {
-						this.zombieList.danar(j, Peashooter.HARM);
+						this.z(j).serDanado(Peashooter.HARM);
 						found = true;
 					}
 				}
@@ -113,7 +113,7 @@ public class Game {
 					hayPlantas = (s(j).vida() > 0) && (s(j).posy() == z(i).posy()-1 && s(j).posx() == z(i).posx());
 					++j;
 				}
-				if (hayPlantas) this.sunflowerList.danar(j-1, 1);
+				if (hayPlantas) this.s(j-1).serDanado(1);
 				else {
 					hayPlantas = false;
 					j = 0;
@@ -123,7 +123,7 @@ public class Game {
 						++j;
 					}
 					
-					if (hayPlantas) this.peashooterList.danar(j-1, 1);
+					if (hayPlantas) this.p(j-1).serDanado(1);
 					else {					
 						hayPlantas = false;
 						j = 0;
@@ -134,6 +134,7 @@ public class Game {
 						}
 						if (!hayPlantas) this.zombieList.avanza(i);
 					}
+
 				}
 			}
 		}

@@ -14,8 +14,7 @@ public class ZombieList {
 	}
 	
 	public Zombie lista(int pos){
-		Zombie r = this.lista[pos].clone();
-		return r;
+		return this.lista[pos];
 	}
 	
 	public void avanza (int pos){
@@ -24,9 +23,6 @@ public class ZombieList {
 	public void addZombie (int x, int y, Game juego){
 		this.lista[cont] = new Zombie(x,y, juego);
 		++this.cont;
-	}
-	public void danar(int pos, int cant){
-		this.lista[pos].serDanado(cant);
 	}
 	//public void danar(int pos){
 	//	this.lista[pos].serDanado(1);

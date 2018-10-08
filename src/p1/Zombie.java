@@ -37,7 +37,4 @@ public class Zombie {
 		return this.y;
 	}
 	
-	public Zombie clone(){
-		return new Zombie(this.x, this.y, this.juego);
-	}
 }

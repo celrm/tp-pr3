@@ -26,10 +26,6 @@ public class Peashooter {
 		this.vida -= dano;
 	}
 	
-	public Peashooter clone(){
-		return new Peashooter(this.x, this.y, this.juego);
-	}
-	
 	public int posx(){
 		return this.x;
 	}

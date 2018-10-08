@@ -14,8 +14,7 @@ public class PeashooterList {
 	}
 	
 	public Peashooter lista(int pos){
-		Peashooter r = this.lista[pos].clone();
-		return r;
+		return this.lista[pos];
 	}
 	
 	public void addPeashooter (int x, int y, Game juego){
