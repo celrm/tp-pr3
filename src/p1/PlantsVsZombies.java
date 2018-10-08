@@ -14,7 +14,7 @@ public class PlantsVsZombies {
 		switch(args[0].toLowerCase()) {
 		case "easy" : level  = Level.EASY; break;
 		case "hard" : level = Level.HARD; break;
-		case "insane" : level = Level.INSANE;break;
+		case "insane" : level = Level.INSANE; break;
 		default: level = Level.EASY; break;
 		}
 
