@@ -16,6 +16,7 @@ public class Controller {
 	public void run() {
 		boolean hasAnythingChanged = true;
 		while(!this.game.playerWins() && !this.game.zombiesWin() && this.sigoAqui){
+			
 			if (hasAnythingChanged) {
 				this.game.nextCycle();
 				this.game.update();
