@@ -14,10 +14,16 @@ public class SunflowerList {
 	}
 	
 	public Sunflower lista(int pos){
-		return this.lista[pos];
+		Sunflower r = this.lista[pos].clone();
+		return r;
 	}
+	
 	public void addSunflower (int x, int y, Game juego){
 		this.lista[cont] = new Sunflower(x,y, juego);
 		++this.cont;
+	}
+	
+	public void danar(int pos, int cant){
+		this.lista[pos].serDanado(cant);
 	}
 }
