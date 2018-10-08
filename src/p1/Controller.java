@@ -23,7 +23,7 @@ public class Controller {
 				this.game.draw();
 			}
 			hasAnythingChanged = this.option();
-			if (hasAnythingChanged) { //problema: después del reset se ejecuta el computer y entonces puede aparecer un zombie salvaje en el ciclo 0, lo cual está feo
+			if (hasAnythingChanged) {//problema: después del reset se ejecuta el computer y entonces puede aparecer un zombie salvaje en el ciclo 0, lo cual está feo
 				this.game.computer();
 			}
 		}
