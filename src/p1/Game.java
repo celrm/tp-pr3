@@ -164,19 +164,24 @@ public class Game {
 	
 	public void computer() {
     //int x = Math.abs(this.rand.nextInt() % Game.DIMX);
-	    if (this.zManager.isZombieAdded()){
-	        int x = Math.abs(this.rand.nextInt() % Game.DIMX);
-	        boolean done = false;
-	        while (!done){
-	        	if (!this.hayCosas(x, Game.DIMY-1)){
-	        		this.zombieList.addZombie(x, Game.DIMY-1, this);
-	        		done = true;
-	        	}
-	        	else{
-	        		x = Math.abs(this.rand.nextInt() % Game.DIMX);
-	        	}
-	        }
-	    }
+		boolean posible = false;
+		for (int i = 0; i < Game.DIMX && !posible; ++i){
+			posible = !this.hayCosas(i, Game.DIMY - 1);
+		}
+	
+		if (posible && this.zManager.isZombieAdded()){
+			int x = Math.abs(this.rand.nextInt() % Game.DIMX);
+			boolean done = false;
+			while (!done){
+				if (!this.hayCosas(x, Game.DIMY-1)){
+					this.zombieList.addZombie(x, Game.DIMY-1, this);
+					done = true;
+				}
+				else{
+					x = Math.abs(this.rand.nextInt() % Game.DIMX);
+				}
+			}
+	    }	
 	}
 	
 	private boolean hayCosas(int x, int y) {
