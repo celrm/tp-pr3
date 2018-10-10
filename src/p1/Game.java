@@ -106,23 +106,10 @@ public class Game {
 		}
 		//zombies atacan
 		for (int i = 0; i < zlength(); ++i) {
-			if (z(i).vida()>0) {
-				boolean hayPlantas = false;
-				int j = 0;
-				//a sunflowers
-				while (j < slength() && !hayPlantas) {
-					hayPlantas = (s(j).vida() > 0) && (s(j).posy() == z(i).posy()-1 && s(j).posx() == z(i).posx());
-					++j;
-				}
-				if (hayPlantas) this.s(j-1).serDanado(1);
-				else {
-					hayPlantas = false;
-					j = 0;
-					//a peashooters
-					while (j < plength() && !hayPlantas) {
-						hayPlantas = (p(j).vida() > 0) && (p(j).posy() == z(i).posy()-1 && p(j).posx() == z(i).posx());
-						++j;
-					}
+			sunflowerList.danar(zombieList.posx(i), zombieList.posy(i)-1, Zombie.HARM);
+			peashooterList.danar(zombieList.posx(i), zombieList.posy(i)-1, Zombie.HARM);
+			
+			
 					
 					if (hayPlantas) this.p(j-1).serDanado(1);
 					else {					
