@@ -22,12 +22,15 @@ public class PeashooterList {
 		++this.cont;
 	}
 	
-	public void danar(int x, int y, int cant){
-		for (int i = 0; i < this.cont; ++i){
+	public boolean danar(int x, int y, int cant){
+		boolean alguien = false;
+		for (int i = 0; i < this.cont && !alguien; ++i){
 			if (this.lista[i].vida() > 0 && this.lista[i].posx() == x && this.lista[i].posy() == y){
 				this.lista[i].serDanado(cant);
+				alguien = true;
 			}
 		}
+		return alguien;
 	}
 	
 	public int posx (int pos){

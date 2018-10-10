@@ -67,9 +67,6 @@ public class Game {
 	public Zombie z (int pos){
 		return this.zombieList.lista(pos);
 	}
-	public void nextCycle() {
-		this.ciclos++;
-	}
 	
 	public void draw(){
 		System.out.println("Number of cycles: " + Integer.toString(this.ciclos));
@@ -82,49 +79,38 @@ public class Game {
 	
 	public void update() {
 
-		this.nextCycle();
+		this.ciclos++;
+		
+		//crear soles
 		int numSoles = this.sunflowerList.generarSoles();
 		this.soles.add(numSoles*Sunflower.PRODUCE_SOLES);
 		
-		//lanzar guisantes -- ¿Creo que esta ya bien?
-		for (int i = 0; i < plength(); ++i) {
-			//p(i).vida()>0
+		//lanzar guisantes
+		for (int i = 0; i < this.plength(); ++i) {
 			if(this.peashooterList.getvida(i) > 0) {
+				
+				int filaP = this.peashooterList.posx(i);
 				boolean found = false;
+				
 				for (int j = 0; j < zlength() && !found; ++j) {
-					if (this.zombieList.getvida(j)> 0 && this.peashooterList.posx(i) == this.zombieList.posx(j)) {
-						this.zombieList.danar(zombieList.posx(j), zombieList.posy(j), Peashooter.HARM);
-						//this.z(j).serDanado(Peashooter.HARM);
+					int filaZ = this.zombieList.posx(j);
+					if (this.zombieList.getvida(j)> 0 && filaP == filaZ) {
+						this.zombieList.danar(filaZ, zombieList.posy(j), Peashooter.HARM);
 						found = true;
 					}
 				}
 			}
 		}
+		
 		//zombies atacan
 		for (int i = 0; i < zlength(); ++i) {
-
-			sunflowerList.danar(zombieList.posx(i), zombieList.posy(i)-1, Zombie.HARM);
-			peashooterList.danar(zombieList.posx(i), zombieList.posy(i)-1, Zombie.HARM);
-			
-			
-					
-			/*		if (hayPlantas) this.p(j-1).serDanado(1);
-					else {					
-						hayPlantas = false;
-						j = 0;
-						//comprobar si hay zombies delante
-						while (j < zlength() && !hayPlantas) {
-							hayPlantas = (z(j).vida()> 0) && (z(j).posy() == z(i).posy()-1 && z(j).posx() == z(i).posx());
-							++j;
-						}
-						if (!hayPlantas) this.zombieList.avanza(i);
-					}
-					
-					// Game.computer
-
-				}
-			}*/
+			boolean alguien = false;
+			alguien = sunflowerList.danar(zombieList.posx(i), zombieList.posy(i)-1, Zombie.HARM);
+			if(!alguien) alguien = peashooterList.danar(zombieList.posx(i), zombieList.posy(i)-1, Zombie.HARM);
+			if(!alguien) this.zombieList.avanza(i);
 		}
+					
+		 this.computer();
 	}
 	
 	//gana el jugador si
@@ -155,7 +141,7 @@ public class Game {
 	}
 	
 	//se añaden zombies
-	public void computer() {
+	private void computer() {
 		boolean posible = false;
 		//si hay algún hueco en la columna DIMY - 1
 		for (int i = 0; i < Game.DIMX && !posible; ++i) {
