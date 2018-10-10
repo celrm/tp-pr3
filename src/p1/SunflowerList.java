@@ -37,5 +37,9 @@ public class SunflowerList {
 		return this.lista[pos].posy();
 	}
 	
+	public int getvida(int pos){
+		return this.lista[pos].vida();
+	}
+	
 }
 

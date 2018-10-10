@@ -92,13 +92,15 @@ public class Game {
 		for (int i = 0; i < slength(); ++i)
 			if(s(i).vida()>0) s(i).generarSoles();
 		
-		//lanzar guisantes
+		//lanzar guisantes -- ¿Creo que esta ya bien?
 		for (int i = 0; i < plength(); ++i) {
-			if(p(i).vida()>0) {
+			//p(i).vida()>0
+			if(this.peashooterList.getvida(i) > 0) {
 				boolean found = false;
 				for (int j = 0; j < zlength() && !found; ++j) {
-					if (z(j).vida() > 0 && p(i).posx() == z(j).posx()) {
-						this.z(j).serDanado(Peashooter.HARM);
+					if (this.zombieList.getvida(j)> 0 && this.peashooterList.posx(i) == this.zombieList.posx(j)) {
+						this.zombieList.danar(zombieList.posx(j), zombieList.posy(j), Peashooter.HARM);
+						//this.z(j).serDanado(Peashooter.HARM);
 						found = true;
 					}
 				}
@@ -106,6 +108,7 @@ public class Game {
 		}
 		//zombies atacan
 		for (int i = 0; i < zlength(); ++i) {
+
 			sunflowerList.danar(zombieList.posx(i), zombieList.posy(i)-1, Zombie.HARM);
 			peashooterList.danar(zombieList.posx(i), zombieList.posy(i)-1, Zombie.HARM);
 			

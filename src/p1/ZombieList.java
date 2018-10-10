@@ -40,4 +40,8 @@ public class ZombieList {
 	public int posy (int pos){
 		return this.lista[pos].posy();
 	}
+	
+	public int getvida(int pos){
+		return this.lista[pos].vida();
+	}
 }

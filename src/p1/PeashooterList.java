@@ -38,4 +38,8 @@ public class PeashooterList {
 		return this.lista[pos].posy();
 	}
 	
+	public int getvida(int pos){
+		return this.lista[pos].vida();
+	}
+	
 }
