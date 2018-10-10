@@ -24,7 +24,12 @@ public class ZombieList {
 		this.lista[cont] = new Zombie(x,y, juego);
 		++this.cont;
 	}
-	//public void danar(int pos){
-	//	this.lista[pos].serDanado(1);
-	//}
+	
+	public void danar(int x, int y, int cant){
+		for (int i = 0; i < this.cont; ++i){
+			if (this.lista[i].vida() > 0 && this.lista[i].posx() == x && this.lista[i].posy() == y){
+				this.lista[i].serDanado(cant);
+			}
+		}
+	}
 }

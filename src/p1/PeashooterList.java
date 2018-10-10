@@ -22,8 +22,12 @@ public class PeashooterList {
 		++this.cont;
 	}
 	
-	public void danar(int pos, int cant){
-		this.lista[pos].serDanado(cant);
+	public void danar(int x, int y, int cant){
+		for (int i = 0; i < this.cont; ++i){
+			if (this.lista[i].vida() > 0 && this.lista[i].posx() == x && this.lista[i].posy() == y){
+				this.lista[i].serDanado(cant);
+			}
+		}
 	}
 	
 }
