@@ -28,7 +28,7 @@ public class Game {
 		
 		this.zManager = new ZombieManager(this.level);
 		
-		this.ciclos = -1;
+		this.ciclos = 0;
 		this.soles = new SuncoinManager();
 	}
     
@@ -68,6 +68,17 @@ public class Game {
 		return this.zombieList.lista(pos);
 	}
 	
+	public void reset() {
+		this.sunflowerList = new SunflowerList();
+		this.peashooterList = new PeashooterList();
+		this.zombieList = new ZombieList();
+		
+		this.zManager = new ZombieManager(this.level);
+		
+		this.ciclos = 0;
+		this.soles = new SuncoinManager();		
+	}
+	
 	public void draw(){
 		System.out.println("Number of cycles: " + Integer.toString(this.ciclos));
 		System.out.println("Sun coins: " + Integer.toString(this.soles.num()));
@@ -102,15 +113,16 @@ public class Game {
 			}
 		}
 		
-		//zombies atacan
+		//zombies atacan y avanzan
 		for (int i = 0; i < zlength(); ++i) {
-			boolean alguien = false;
-			alguien = sunflowerList.danar(zombieList.posx(i), zombieList.posy(i)-1, Zombie.HARM);
-			if(!alguien) alguien = peashooterList.danar(zombieList.posx(i), zombieList.posy(i)-1, Zombie.HARM);
-			if(!alguien) this.zombieList.avanza(i);
+			if(this.zombieList.getvida(i) > 0) {
+				boolean alguien = false;
+				alguien = sunflowerList.danar(zombieList.posx(i), zombieList.posy(i)-1, Zombie.HARM);
+				if(!alguien) alguien = peashooterList.danar(zombieList.posx(i), zombieList.posy(i)-1, Zombie.HARM);
+				if(!alguien) this.zombieList.avanza(i);
+			}
 		}
-					
-		 this.computer();
+		this.anadirZombies();
 	}
 	
 	//gana el jugador si
@@ -141,7 +153,7 @@ public class Game {
 	}
 	
 	//se añaden zombies
-	private void computer() {
+	private void anadirZombies() {
 		boolean posible = false;
 		//si hay algún hueco en la columna DIMY - 1
 		for (int i = 0; i < Game.DIMX && !posible; ++i) {

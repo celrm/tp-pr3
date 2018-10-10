@@ -5,25 +5,30 @@ import java.util.Scanner;
 public class Controller {
 	private Game game;
 	private Scanner in;
-	private boolean sigoAqui; // por favor, pon un nombre más decente. he recuperado este bool para el exit
-	
-	// pintar la primera vez
+	private boolean sigoAqui;	
+	private boolean primerCiclo;
 	
 	public Controller(Game j, Scanner sc) {
 		this.game = j;
 		this.in = sc;
 		this.sigoAqui = true;
+		this.primerCiclo = true;
 	}
 	
 	public void run() {
 		boolean hasAnythingChanged = true;
 		while(!this.game.playerWins() && !this.game.zombiesWin() && this.sigoAqui){
+			if(this.primerCiclo) {
+				this.game.draw();
+				this.primerCiclo = false;
+			}
+			
+			hasAnythingChanged = this.option();
 			
 			if (hasAnythingChanged) {
 				this.game.update();
 				this.game.draw();
 			}
-			hasAnythingChanged = this.option();
 		}
 
 	    System.out.println("Game over");
@@ -66,7 +71,7 @@ public class Controller {
 		} break;
 		case "reset":
 		case "r": {
-			this.game = new Game(this.game.getRand(), this.game.getLevel()); // Game.reset
+			game.reset();
 			sol = true;
 		} break;
 		case "list":
