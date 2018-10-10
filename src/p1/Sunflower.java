@@ -25,7 +25,7 @@ public class Sunflower {
 		return this.vida;
 	}
 	
-	public void serDanado(int dano) {
+	public void danar(int dano) {
 		this.vida -= dano;
 	}
 	

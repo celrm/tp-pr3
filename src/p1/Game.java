@@ -37,12 +37,12 @@ public class Game {
   	    boolean sol = false;
   	    
   	    //no quedan zombies por salir
-          if(this.zManager.remZombies() == 0) {
+          if(this.zManager.numZombies() == 0) {
               sol = true;
               
               //y todos están muertos
               for (int i = 0; i < this.zlength() && sol; ++i)
-                  if (this.zombieList.getvida(i) > 0) sol = false;
+                  if (this.zv(i) > 0) sol = false;
           }
           return sol;
   	}
@@ -54,7 +54,7 @@ public class Game {
   	    //de entre los zombies
   	    for (int i = 0; i < this.zlength() && !sol; ++i) {
   	    	//hay uno en la columna 0
-  	        if (this.z(i).posy() == 0) sol = true;
+  	        if (this.zy(i) == 0) sol = true;
   	    }
   	    return sol;
   	}
@@ -62,47 +62,41 @@ public class Game {
   	public void draw(){
 		System.out.println("Number of cycles: " + Integer.toString(this.ciclos));
 		System.out.println("Sun coins: " + Integer.toString(this.soles.num()));
-		System.out.println("Remaining Zombies: " + Integer.toString(this.zManager.remZombies()));
+		System.out.println("Remaining Zombies: " + Integer.toString(this.zManager.numZombies()));
 
 		GamePrinter print = new GamePrinter(this, Game.DIMX, Game.DIMY);		
 		System.out.println(print.toString());
 	}
 	
-	public void update() {
-
-		this.ciclos++;
-		
+	public void update() {		
 		//crear soles
 		int numSoles = this.sunflowerList.generarSoles();
 		this.soles.add(numSoles*Sunflower.PRODUCE_SOLES);
 		
 		//lanzar guisantes
-		for (int i = 0; i < this.plength(); ++i) {
-			if(this.peashooterList.getvida(i) > 0) {
-				
-				int filaP = this.peashooterList.posx(i);
+		for (int i = 0; i < this.plength(); ++i)
+			if(this.pv(i) > 0) {
 				boolean found = false;
 				
-				for (int j = 0; j < zlength() && !found; ++j) {
-					int filaZ = this.zombieList.posx(j);
-					if (this.zombieList.getvida(j)> 0 && filaP == filaZ) {
-						this.zombieList.danar(filaZ, zombieList.posy(j), Peashooter.HARM);
+				for (int j = 0; j < this.zlength() && !found; ++j)
+					if (this.zv(j)> 0 && this.px(i) == this.zx(j)) {
+						this.zombieList.danar(this.zx(j), this.zy(j), Peashooter.HARM);
 						found = true;
 					}
-				}
 			}
-		}
 		
 		//zombies atacan y avanzan
-		for (int i = 0; i < zlength(); ++i) {
-			if(this.zombieList.getvida(i) > 0) {
+		for (int i = 0; i < this.zlength(); ++i)
+			if(this.zv(i) > 0) {
 				boolean alguien = false;
-				alguien = sunflowerList.danar(zombieList.posx(i), zombieList.posy(i)-1, Zombie.HARM);
-				if(!alguien) alguien = peashooterList.danar(zombieList.posx(i), zombieList.posy(i)-1, Zombie.HARM);
+				alguien = sunflowerList.danar(zx(i), zy(i)-1, Zombie.HARM);
+				if(!alguien) alguien = peashooterList.danar(zx(i), zy(i)-1, Zombie.HARM);
 				if(!alguien) this.zombieList.avanza(i);
 			}
-		}
+
 		this.anadirZombies();
+		
+		this.ciclos++;
 	}
 	
 	//compramos una planta
@@ -127,7 +121,7 @@ public class Game {
 				if(planta.equals("s") || planta.equals("sunflower")) {
 					//si da el dinero
 					if (this.soles.num() >= Sunflower.COSTE) {
-						this.sunflowerList.addSunflower(x, y, this);
+						this.sunflowerList.add(x, y, this);
 						this.soles.add(-Sunflower.COSTE);
 						sol = true;
 					}
@@ -138,7 +132,7 @@ public class Game {
 				else if(planta.equals("p") || planta.equals("peashooter")) {
 					//si da el dinero
 					if (this.soles.num() >= Peashooter.COSTE) {
-						this.peashooterList.addPeashooter(x, y, this);
+						this.peashooterList.add(x, y, this);
 						this.soles.add(-Peashooter.COSTE);
 						sol = true;
 					}
@@ -232,7 +226,7 @@ public class Game {
 			while (this.hayCosas(x, Game.DIMY-1));
 			
 			//y añado al zombie
-			this.zombieList.addZombie(x, Game.DIMY-1, this);
+			this.zombieList.add(x, Game.DIMY-1, this);
 	    }	
 	}
 	

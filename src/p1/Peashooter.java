@@ -22,7 +22,7 @@ public class Peashooter {
 		return this.vida;
 	}
 	
-	public void serDanado(int dano){
+	public void danar(int dano){
 		this.vida -= dano;
 	}
 	
