@@ -9,7 +9,7 @@ public class SuncoinManager {
 		this.suncoins = INISUN;
 	}
 	
-	public int num (){
+	public int num(){
 		return this.suncoins;
 	}
 	

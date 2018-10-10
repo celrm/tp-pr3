@@ -10,27 +10,27 @@ public class Peashooter {
 	public static final int HARM = 1;
 	public static final int COSTE = 50;
 	
-	
-	public Peashooter(int x, int y, Game juego){
+	public Peashooter(int x, int y, Game juego) {
 		this.x = x;
 		this.y = y;
 		this.vida = Peashooter.VIDA;
 		this.juego = juego;
 	}
 	
-	public int vida(){
-		return this.vida;
-	}
-	
-	public void danar(int dano){
+	public void danar(int dano) {
 		this.vida -= dano;
 	}
 	
-	public int posx(){
+	public int posx() {
 		return this.x;
 	}
 	
-	public int posy(){
+	public int posy() {
 		return this.y;
 	}
+	
+	public int vida() {
+		return this.vida;
+	}
+	
 }

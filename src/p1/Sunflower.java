@@ -21,23 +21,24 @@ public class Sunflower {
 		this.nacimiento = juego.getCiclos();
 	}
 	
-	public int vida() {
-		return this.vida;
+	public boolean tocaGenerar() {
+		return this.nacimiento % 2 == this.juego.getCiclos() % 2;		
 	}
-	
+		
 	public void danar(int dano) {
 		this.vida -= dano;
 	}
 	
-	public boolean tocaGenerar() {
-		return this.nacimiento % 2 == this.juego.getCiclos() % 2;		
-	}
-	
-	public int posx(){
+	public int posx() {
 		return this.x;
 	}
-	public int posy(){
+	
+	public int posy() {
 		return this.y;
+	}
+	
+	public int vida() {
+		return this.vida;
 	}
 	
 }
