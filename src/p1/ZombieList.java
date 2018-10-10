@@ -32,4 +32,12 @@ public class ZombieList {
 			}
 		}
 	}
+	
+	public int posx (int pos){
+		return this.lista[pos].posx();
+	}
+	
+	public int posy (int pos){
+		return this.lista[pos].posy();
+	}
 }
