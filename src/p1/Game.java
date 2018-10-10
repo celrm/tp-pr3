@@ -90,7 +90,7 @@ public class Game {
 		this.nextCycle();
 		// crear soles
 		for (int i = 0; i < slength(); ++i)
-			if(s(i).vida()>0) s(i).generarSoles();
+			if(this.sunflowerList.getvida(i)>0) s(i).generarSoles();//hace falta modificar funcion generarsoles
 		
 		//lanzar guisantes -- ¿Creo que esta ya bien?
 		for (int i = 0; i < plength(); ++i) {
@@ -143,7 +143,7 @@ public class Game {
             
             //y todos están muertos
             for (int i = 0; i < this.zlength() && sol; ++i)
-                if (this.z(i).vida() > 0) sol = false;
+                if (this.zombieList.getvida(i) > 0) sol = false;
         }
         return sol;
 	}
