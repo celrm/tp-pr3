@@ -84,7 +84,7 @@ public class Game {
 
 		this.nextCycle();
 		int numSoles = this.sunflowerList.generarSoles();
-		this.soles.add(numSoles);
+		this.soles.add(numSoles*Sunflower.PRODUCE_SOLES);
 		
 		//lanzar guisantes -- ¿Creo que esta ya bien?
 		for (int i = 0; i < plength(); ++i) {
