@@ -2,10 +2,9 @@ package p1;
 
 import java.util.Random;
 
-public class Game {
-	
-	public static int DIMX = 4;
-	public static int DIMY = 8;
+public class Game {	
+	public static final int DIMX = 4;
+	public static final int DIMY = 8;
 
 	private Random rand;
 	private Level level;

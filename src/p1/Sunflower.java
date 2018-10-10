@@ -6,12 +6,12 @@ public class Sunflower {
 	private int vida;
 	private Game juego;
 	
-	public static int VIDA = 1;
-	public static int HARM = 0;
-	public static int PRODUCE_SOLES = 10;
-	public static int COSTE = 20;
-	
 	private int nacimiento;
+	
+	public static final int VIDA = 1;
+	public static final int HARM = 0;
+	public static final int PRODUCE_SOLES = 10;
+	public static final int COSTE = 20;
 	
 	public Sunflower(int x, int y, Game juego) {
 		this.x = x;

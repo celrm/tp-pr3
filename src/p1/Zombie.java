@@ -5,10 +5,10 @@ public class Zombie {
 	private int y;
 	private int vida;
 	private Game juego;
-	
-	public static int VIDA = 5;
 
 	private int nacimiento;
+	
+	public static final int VIDA = 5;
 	
 	public Zombie(int x, int y, Game juego){
 		this.x = x;

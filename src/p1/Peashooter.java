@@ -6,9 +6,9 @@ public class Peashooter {
 	private int vida;
 	private Game juego;
 	
-	public static int VIDA = 3;
-	public static int HARM = 1;
-	public static int COSTE = 50;
+	public static final int VIDA = 3;
+	public static final int HARM = 1;
+	public static final int COSTE = 50;
 	
 	
 	public Peashooter(int x, int y, Game juego){

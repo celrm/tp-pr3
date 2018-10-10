@@ -3,7 +3,7 @@ package p1;
 public class SuncoinManager {
 	
 	private int suncoins;
-	public static int INISUN = 50;
+	public static final int INISUN = 50;
 	
 	public SuncoinManager(){
 		this.suncoins = INISUN;
