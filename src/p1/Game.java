@@ -195,37 +195,60 @@ public class Game {
 		return hayCosas;
 	}
 	
+	//sí, lo he buscado. si no, la excepción de parseInt es imposible de evitar.
+	private static boolean isParsable(String input){
+	    boolean parsable = true;
+	    try{
+	        Integer.parseInt(input);
+	    }catch(NumberFormatException e){
+	        parsable = false;
+	    }
+	    return parsable;
+	}
+	
 	//compramos una planta
-	public boolean addPlant(String planta, int x, int y) {
+	public boolean add(String[] words) {
 		boolean sol = false;
 		
-		//si no hay nada donde queremos colocarla
-		if(this.hayCosas(x,y)) System.out.println("There's already something there.");
-		//y si la posición está dentro del tablero
-		else if(x<0 || y<0 || x>=Game.DIMX || y>=Game.DIMY) System.out.println("Wrong position.");
+		//con los parámetros correctos
+		if (words.length != 4 || !isParsable(words[2]) || !isParsable(words[3])) System.out.println("Wrong parameters.");
 		else {
-			// si es una sunflower
-			if(planta.equals("s") || planta.equals("sunflower")) {
-				//si da el dinero
-				if (this.soles.num() >= Sunflower.COSTE) {
-					this.sunflowerList.addSunflower(x, y, this);
-					this.soles.add(-Sunflower.COSTE);
-					sol = true;
+			String planta = words[1];
+			int x = Integer.parseInt(words[2]);
+			int y = Integer.parseInt(words[3]);
+			
+			//con la posición dentro del tablero
+			if(x<0 || y<0 || x>=Game.DIMX || y>=Game.DIMY) System.out.println("Wrong position.");
+			
+			//si no hay nada donde queremos colocarla
+			else if(this.hayCosas(x,y)) System.out.println("There's already something there.");
+			
+			else {
+				// si es una sunflower
+				if(planta.equals("s") || planta.equals("sunflower")) {
+					//si da el dinero
+					if (this.soles.num() >= Sunflower.COSTE) {
+						this.sunflowerList.addSunflower(x, y, this);
+						this.soles.add(-Sunflower.COSTE);
+						sol = true;
+					}
+					else System.out.println("Not enough cash.");
 				}
-				else System.out.println("Not enough cash.");
-			}
-			//o un peashooter
-			else if(planta.equals("p") || planta.equals("peashooter")) {
-				//si da el dinero
-				if (this.soles.num() >= Peashooter.COSTE) {
-					this.peashooterList.addPeashooter(x, y, this);
-					this.soles.add(-Peashooter.COSTE);
-					sol = true;
+				
+				//o un peashooter
+				else if(planta.equals("p") || planta.equals("peashooter")) {
+					//si da el dinero
+					if (this.soles.num() >= Peashooter.COSTE) {
+						this.peashooterList.addPeashooter(x, y, this);
+						this.soles.add(-Peashooter.COSTE);
+						sol = true;
+					}
+					else System.out.println("Not enough cash.");
 				}
-				else System.out.println("Not enough cash.");
+				
+				//y si no te equivocas de planta
+				else System.out.println("Wrong plant.");
 			}
-			//y si no te equivocas de planta
-			else System.out.println("Wrong plant.");
 		}
 		return sol;
 	}

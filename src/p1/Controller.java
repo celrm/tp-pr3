@@ -5,25 +5,25 @@ import java.util.Scanner;
 public class Controller {
 	private Game game;
 	private Scanner in;
-	private boolean sigoAqui;	
-	private boolean primerCiclo;
+	private boolean exit;	
+	private boolean firstCycle;
 	
 	public Controller(Game j, Scanner sc) {
 		this.game = j;
 		this.in = sc;
-		this.sigoAqui = true;
-		this.primerCiclo = true;
+		this.exit = false;
+		this.firstCycle = true;
 	}
 	
 	public void run() {
 		boolean hasAnythingChanged = true;
-		while(!this.game.playerWins() && !this.game.zombiesWin() && this.sigoAqui){
-			if(this.primerCiclo) {
+		while(!this.game.playerWins() && !this.game.zombiesWin() && !this.exit){
+			if(this.firstCycle) {
 				this.game.draw();
-				this.primerCiclo = false;
+				this.firstCycle = false;
 			}
 			
-			hasAnythingChanged = this.option();
+			hasAnythingChanged = this.user();
 			
 			if (hasAnythingChanged) {
 				this.game.update();
@@ -32,6 +32,7 @@ public class Controller {
 		}
 
 	    System.out.println("Game over");
+	    
 		if (this.game.playerWins()) {
 		    System.out.println("Player wins!");
 		}
@@ -43,41 +44,23 @@ public class Controller {
 		}
 	}
 	
-	//sí, lo he buscado. si no, la excepción de parseInt es imposible de evitar.
-	public static boolean isParsable(String input){
-	    boolean parsable = true;
-	    try{
-	        Integer.parseInt(input);
-	    }catch(NumberFormatException e){
-	        parsable = false;
-	    }
-	    return parsable;
-	}
-	
-	private boolean option(){
+	private boolean user(){
 		boolean sol = false;
 		System.out.print("Command > ");
-		String[]words = this.in.nextLine().toLowerCase().trim().split(" ");
+		String[] words = this.in.nextLine().toLowerCase().trim().split(" ");
 
 		switch(words[0]) {
 		case "add":
-		case "a": {
-			if (words.length == 4 && isParsable(words[2]) && isParsable(words[3])) {
-				int x = Integer.parseInt(words[2]);
-				int y = Integer.parseInt(words[3]);
-				sol = this.game.addPlant(words[1], x, y);
-			}
-			else System.out.println("Wrong parameters.");
-		} break;
+		case "a": sol = this.game.add(words); break;
 		case "reset":
 		case "r": {
-			game.reset();
+			this.game.reset();
 			sol = true;
 		} break;
 		case "list":
 		case "l": this.list(); break;
 		case "exit":
-		case "e": this.sigoAqui = false; break;
+		case "e": this.exit = true; break;
 		case "help":
 		case "h": this.help(); break;
 		case "": sol = true; break;
