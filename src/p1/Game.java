@@ -67,11 +67,6 @@ public class Game {
 	public Zombie z (int pos){
 		return this.zombieList.lista(pos);
 	}
-	
-	public void cambiarSoles(int n){
-		this.soles.add(n);
-	}
-	
 	public void nextCycle() {
 		this.ciclos++;
 	}
@@ -88,9 +83,8 @@ public class Game {
 	public void update() {
 
 		this.nextCycle();
-		// crear soles
-		for (int i = 0; i < slength(); ++i)
-			if(this.sunflowerList.getvida(i)>0) s(i).generarSoles();//hace falta modificar funcion generarsoles
+		int numSoles = this.sunflowerList.generarSoles();
+		this.soles.add(numSoles);
 		
 		//lanzar guisantes -- ¿Creo que esta ya bien?
 		for (int i = 0; i < plength(); ++i) {
@@ -114,7 +108,7 @@ public class Game {
 			
 			
 					
-					if (hayPlantas) this.p(j-1).serDanado(1);
+			/*		if (hayPlantas) this.p(j-1).serDanado(1);
 					else {					
 						hayPlantas = false;
 						j = 0;
@@ -129,7 +123,7 @@ public class Game {
 					// Game.computer
 
 				}
-			}
+			}*/
 		}
 	}
 	
@@ -217,7 +211,7 @@ public class Game {
 				//si da el dinero
 				if (this.soles.num() >= Sunflower.COSTE) {
 					this.sunflowerList.addSunflower(x, y, this);
-					this.cambiarSoles(-Sunflower.COSTE);
+					this.soles.add(-Sunflower.COSTE);
 					sol = true;
 				}
 				else System.out.println("Not enough cash.");
@@ -227,7 +221,7 @@ public class Game {
 				//si da el dinero
 				if (this.soles.num() >= Peashooter.COSTE) {
 					this.peashooterList.addPeashooter(x, y, this);
-					this.cambiarSoles(-Peashooter.COSTE);
+					this.soles.add(-Peashooter.COSTE);
 					sol = true;
 				}
 				else System.out.println("Not enough cash.");

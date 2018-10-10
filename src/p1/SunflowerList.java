@@ -41,5 +41,13 @@ public class SunflowerList {
 		return this.lista[pos].vida();
 	}
 	
+	public int generarSoles() {
+		int sol = 0;
+		for (int i = 0; i < this.cont; ++i)
+			if(lista[i].vida() > 0 && lista[i].tocaGenerar()) 
+				sol++;
+		return sol;
+	}
+	
 }
 

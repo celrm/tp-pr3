@@ -29,9 +29,8 @@ public class Sunflower {
 		this.vida -= dano;
 	}
 	
-	public void generarSoles() {
-		if (this.nacimiento % 2 == this.juego.ciclos() % 2)
-			this.juego.cambiarSoles(Sunflower.PRODUCE_SOLES);
+	public boolean tocaGenerar() {
+		return this.nacimiento % 2 == this.juego.ciclos() % 2;		
 	}
 	
 	public int posx(){
