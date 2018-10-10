@@ -7,6 +7,8 @@ public class Controller {
 	private Scanner in;
 	private boolean sigoAqui; // por favor, pon un nombre más decente. he recuperado este bool para el exit
 	
+	// pintar la primera vez
+	
 	public Controller(Game j, Scanner sc) {
 		this.game = j;
 		this.in = sc;
@@ -18,23 +20,17 @@ public class Controller {
 		while(!this.game.playerWins() && !this.game.zombiesWin() && this.sigoAqui){
 			
 			if (hasAnythingChanged) {
-				this.game.nextCycle();
 				this.game.update();
 				this.game.draw();
 			}
 			hasAnythingChanged = this.option();
-			if (hasAnythingChanged) {//problema: después del reset se ejecuta el computer y entonces puede aparecer un zombie salvaje en el ciclo 0, lo cual está feo
-				this.game.computer();
-			}
 		}
 
 	    System.out.println("Game over");
 		if (this.game.playerWins()) {
-			this.game.draw();
 		    System.out.println("Player wins!");
 		}
 		else if (this.game.zombiesWin()) {
-			this.game.draw();
 		    System.out.println("Zombies win :(");
 		}
 		else {
@@ -70,7 +66,7 @@ public class Controller {
 		} break;
 		case "reset":
 		case "r": {
-			this.game = new Game(this.game.getRand(), this.game.getLevel());
+			this.game = new Game(this.game.getRand(), this.game.getLevel()); // Game.reset
 			sol = true;
 		} break;
 		case "list":

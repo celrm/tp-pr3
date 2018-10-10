@@ -86,6 +86,8 @@ public class Game {
 	}
 	
 	public void update() {
+
+		this.nextCycle();
 		// crear soles
 		for (int i = 0; i < slength(); ++i)
 			if(s(i).vida()>0) s(i).generarSoles();
@@ -133,6 +135,8 @@ public class Game {
 						}
 						if (!hayPlantas) this.zombieList.avanza(i);
 					}
+					
+					// Game.computer
 
 				}
 			}
