@@ -26,18 +26,18 @@ public class GamePrinter {
 			}
 		}
 		for (int i = 0; i < game.plength(); ++i){
-			if (game.p(i).vida() > 0){
-				board[game.p(i).posx()][game.p(i).posy()] = "P [ " + game.p(i).vida() + " ]";
+			if (game.pv(i) > 0){
+				board[game.px(i)][game.py(i)] = "P [ " + game.pv(i) + " ]";
 			}
 		}
 		for (int i = 0; i < game.slength(); ++i){
-			if (game.s(i).vida() > 0){
-				board[game.s(i).posx()][game.s(i).posy()] = "S [ " + game.s(i).vida() + " ]";
+			if (game.sv(i) > 0){
+				board[game.sx(i)][game.sy(i)] = "S [ " + game.sv(i) + " ]";
 			}
 		}
 		for (int i = 0; i < game.zlength(); ++i){
-			if (game.z(i).vida() > 0){
-				board[game.z(i).posx()][game.z(i).posy()] = "Z [ " + game.z(i).vida() + " ]";
+			if (game.zv(i) > 0){
+				board[game.zx(i)][game.zy(i)] = "Z [ " + game.zv(i) + " ]";
 			}
 		}
 	}

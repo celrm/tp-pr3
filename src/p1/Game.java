@@ -32,54 +32,34 @@ public class Game {
 		this.soles = new SuncoinManager();
 	}
     
-    public Random getRand() {
-    	return this.rand;
-    }
-    
-    public Level getLevel() {
-    	return this.level;
-    }
-	
-	public int ciclos(){
-		return this.ciclos;
-	}
-	
-	public int slength(){
-		return this.sunflowerList.length();
-	}
-	
-	public int plength(){
-		return this.peashooterList.length();
-	}
-	
-	public int zlength(){
-		return this.zombieList.length();
-	}
-	
-	public Peashooter p (int pos){
-		return this.peashooterList.lista(pos);
-	}
-	
-	public Sunflower s (int pos){
-		return this.sunflowerList.lista(pos);
-	}
-	
-	public Zombie z (int pos){
-		return this.zombieList.lista(pos);
-	}
-	
-	public void reset() {
-		this.sunflowerList = new SunflowerList();
-		this.peashooterList = new PeashooterList();
-		this.zombieList = new ZombieList();
-		
-		this.zManager = new ZombieManager(this.level);
-		
-		this.ciclos = 0;
-		this.soles = new SuncoinManager();		
-	}
-	
-	public void draw(){
+    //gana el jugador si
+  	public boolean playerWins() {
+  	    boolean sol = false;
+  	    
+  	    //no quedan zombies por salir
+          if(this.zManager.remZombies() == 0) {
+              sol = true;
+              
+              //y todos están muertos
+              for (int i = 0; i < this.zlength() && sol; ++i)
+                  if (this.zombieList.getvida(i) > 0) sol = false;
+          }
+          return sol;
+  	}
+  	
+  	//ganan los zombies si
+  	public boolean zombiesWin() {
+  	    boolean sol = false;
+  	    
+  	    //de entre los zombies
+  	    for (int i = 0; i < this.zlength() && !sol; ++i) {
+  	    	//hay uno en la columna 0
+  	        if (this.z(i).posy() == 0) sol = true;
+  	    }
+  	    return sol;
+  	}
+  	
+  	public void draw(){
 		System.out.println("Number of cycles: " + Integer.toString(this.ciclos));
 		System.out.println("Sun coins: " + Integer.toString(this.soles.num()));
 		System.out.println("Remaining Zombies: " + Integer.toString(this.zManager.remZombies()));
@@ -123,87 +103,6 @@ public class Game {
 			}
 		}
 		this.anadirZombies();
-	}
-	
-	//gana el jugador si
-	public boolean playerWins() {
-	    boolean sol = false;
-	    
-	    //no quedan zombies por salir
-        if(this.zManager.remZombies() == 0) {
-            sol = true;
-            
-            //y todos están muertos
-            for (int i = 0; i < this.zlength() && sol; ++i)
-                if (this.zombieList.getvida(i) > 0) sol = false;
-        }
-        return sol;
-	}
-	
-	//ganan los zombies si
-	public boolean zombiesWin() {
-	    boolean sol = false;
-	    
-	    //de entre los zombies
-	    for (int i = 0; i < this.zlength() && !sol; ++i) {
-	    	//hay uno en la columna 0
-	        if (this.z(i).posy() == 0) sol = true;
-	    }
-	    return sol;
-	}
-	
-	//se añaden zombies
-	private void anadirZombies() {
-		boolean posible = false;
-		//si hay algún hueco en la columna DIMY - 1
-		for (int i = 0; i < Game.DIMX && !posible; ++i) {
-			posible = !this.hayCosas(i, Game.DIMY - 1);
-		}
-		//y si toca que salga en este ciclo
-		if (posible && this.zManager.isZombieAdded()) {
-			//aleatoriamente busco una fila libre
-			int x;
-			do x = Math.abs(this.rand.nextInt() % Game.DIMX);
-			while (this.hayCosas(x, Game.DIMY-1));
-			
-			//y añado al zombie
-			this.zombieList.addZombie(x, Game.DIMY-1, this);
-	    }	
-	}
-	
-	//función auxiliar para saber si un hueco está libre
-	private boolean hayCosas(int x, int y) {
-		boolean hayCosas = false;
-		int j = 0;
-		//miramos en la lista de sunflowers
-		while (j < slength() && !hayCosas) {
-			if (s(j).vida()>0 && s(j).posx()==x && s(j).posy()==y) hayCosas = true;
-			j++;
-		}
-		j = 0;
-		//en la lista de peashooters
-		while (j < plength() && !hayCosas) {
-			if (p(j).vida()>0 && p(j).posx()==x && p(j).posy()==y) hayCosas = true;
-			j++;
-		}
-		j = 0;
-		//y en la lista de zombies
-		while (j < zlength() && !hayCosas) {
-			if (z(j).vida()>0 && z(j).posx()==x && z(j).posy()==y) hayCosas = true;
-			j++;
-		}
-		return hayCosas;
-	}
-	
-	//sí, lo he buscado. si no, la excepción de parseInt es imposible de evitar.
-	private static boolean isParsable(String input){
-	    boolean parsable = true;
-	    try{
-	        Integer.parseInt(input);
-	    }catch(NumberFormatException e){
-	        parsable = false;
-	    }
-	    return parsable;
 	}
 	
 	//compramos una planta
@@ -251,6 +150,125 @@ public class Game {
 			}
 		}
 		return sol;
+	}
+			
+	public void reset() {
+		this.sunflowerList = new SunflowerList();
+		this.peashooterList = new PeashooterList();
+		this.zombieList = new ZombieList();
+		
+		this.zManager = new ZombieManager(this.level);
+		
+		this.ciclos = 0;
+		this.soles = new SuncoinManager();		
+	}
+
+	//usado para saber frecuencia de soles y avanzar
+	public int getCiclos(){
+		return this.ciclos;
+	}
+	
+	//funciones exclusivas para GamePrinter
+	public int slength(){
+		return this.sunflowerList.length();
+	}
+	
+	public int plength(){
+		return this.peashooterList.length();
+	}
+	
+	public int zlength(){
+		return this.zombieList.length();
+	}
+	
+	public int sx (int pos){
+		return this.sunflowerList.posx(pos);
+	}
+	
+	public int sy (int pos){
+		return this.sunflowerList.posy(pos);
+	}
+	
+	public int sv (int pos){
+		return this.sunflowerList.getvida(pos);
+	}
+	
+	public int px (int pos){
+		return this.peashooterList.posx(pos);
+	}
+	
+	public int py (int pos){
+		return this.peashooterList.posy(pos);
+	}
+	
+	public int pv (int pos){
+		return this.peashooterList.getvida(pos);
+	}
+	
+	public int zx (int pos){
+		return this.zombieList.posx(pos);
+	}
+	
+	public int zy (int pos){
+		return this.zombieList.posy(pos);
+	}
+	
+	public int zv (int pos){
+		return this.zombieList.getvida(pos);
+	}
+	
+	//se añaden zombies
+	private void anadirZombies() {
+		boolean posible = false;
+		//si hay algún hueco en la columna DIMY - 1
+		for (int i = 0; i < Game.DIMX && !posible; ++i) {
+			posible = !this.hayCosas(i, Game.DIMY - 1);
+		}
+		//y si toca que salga en este ciclo
+		if (posible && this.zManager.isZombieAdded()) {
+			//aleatoriamente busco una fila libre
+			int x;
+			do x = Math.abs(this.rand.nextInt() % Game.DIMX);
+			while (this.hayCosas(x, Game.DIMY-1));
+			
+			//y añado al zombie
+			this.zombieList.addZombie(x, Game.DIMY-1, this);
+	    }	
+	}
+	
+	//función auxiliar para saber si un hueco está libre
+	private boolean hayCosas(int x, int y) {
+		boolean hayCosas = false;
+		int j = 0;
+		//miramos en la lista de sunflowers
+		while (j < slength() && !hayCosas) {
+			if (sv(j)>0 && sx(j)==x && sy(j)==y) hayCosas = true;
+			j++;
+		}
+		j = 0;
+		//en la lista de peashooters
+		while (j < plength() && !hayCosas) {
+			if (pv(j)>0 && px(j)==x && py(j)==y) hayCosas = true;
+			j++;
+		}
+		j = 0;
+		//y en la lista de zombies
+		while (j < zlength() && !hayCosas) {
+			if (zv(j)>0 && zx(j)==x && zy(j)==y) hayCosas = true;
+			j++;
+		}
+		return hayCosas;
+	}
+	
+	//sí, lo he buscado; si no, la excepción de parseInt es imposible de evitar.
+	private static boolean isParsable(String input){
+	    boolean parsable = true;
+	    try{
+	        Integer.parseInt(input);
+	    }catch(NumberFormatException e){
+	        parsable = false;
+	    }
+	    return parsable;
 	}
 
 }

@@ -16,7 +16,7 @@ public class Zombie {
 		this.y = y;
 		this.vida = Zombie.VIDA;
 		this.juego = juego;
-		this.nacimiento = juego.ciclos();
+		this.nacimiento = juego.getCiclos();
 	}
 	
 	public int vida(){
@@ -27,7 +27,7 @@ public class Zombie {
 	}
 	
 	public void avanza(){
-		if (this.nacimiento % 2 == this.juego.ciclos() % 2){
+		if (this.nacimiento % 2 == this.juego.getCiclos() % 2){
 			-- this.y;
 		}
 	}

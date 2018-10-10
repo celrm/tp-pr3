@@ -18,7 +18,7 @@ public class Sunflower {
 		this.y = y;
 		this.vida = Sunflower.VIDA;
 		this.juego = juego;
-		this.nacimiento = juego.ciclos();
+		this.nacimiento = juego.getCiclos();
 	}
 	
 	public int vida() {
@@ -30,7 +30,7 @@ public class Sunflower {
 	}
 	
 	public boolean tocaGenerar() {
-		return this.nacimiento % 2 == this.juego.ciclos() % 2;		
+		return this.nacimiento % 2 == this.juego.getCiclos() % 2;		
 	}
 	
 	public int posx(){
