@@ -6,17 +6,17 @@ public class ZombieManager {
     
 	private int numZombies;
 	private double frec;
-	private Random rnd;
+	private Random rand;
 	
 	public ZombieManager(Level level, Random rand){
 		this.numZombies = level.numZombies();
 		this.frec = level.frec();
-		this.rnd = rand;
+		this.rand = rand;
 	}
 	
 	public boolean isZombieAdded() {
 		if (this.numZombies > 0) {
-			Double d = rnd.nextDouble();
+			Double d = rand.nextDouble();
 			if (d < this.frec) {
 				this.numZombies -= 1;
 				return true;
