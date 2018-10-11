@@ -25,7 +25,7 @@ public class Controller {
 			
 			hasAnythingChanged = this.user();
 			
-			if (hasAnythingChanged) {
+			if (hasAnythingChanged && !this.firstCycle) {
 				this.game.update();
 				this.game.draw();
 			}
@@ -55,6 +55,7 @@ public class Controller {
 		case "reset":
 		case "r": {
 			this.game.reset();
+			this.firstCycle = true;
 			sol = true;
 		} break;
 		case "list":
