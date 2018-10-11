@@ -18,8 +18,8 @@ public class Game {
 	
 	private ZombieManager zManager;
 	
-    public Game(Random ran, Level n) {
-		this.rand = ran;
+    public Game(Random rand, Level n) {
+		this.rand = rand;
 		this.level = n;
 		
 		this.sunflowerList = new SunflowerList();
@@ -94,7 +94,7 @@ public class Game {
 				if(!alguien) this.zombieList.avanza(i);
 			}
 
-		this.anadirZombies();
+		this.computer();
 		
 		this.ciclos++;
 	}
@@ -103,45 +103,37 @@ public class Game {
 	public boolean add(String[] words) {
 		boolean sol = false;
 		
-		//con los parámetros correctos
-		if (words.length != 4 || !isParsable(words[2]) || !isParsable(words[3])) System.out.println("Wrong parameters.");
-		else {
-			String planta = words[1];
+		if (words.length != 4) System.out.println("Wrong parameters.");
+		else {		
 			int x = Integer.parseInt(words[2]);
 			int y = Integer.parseInt(words[3]);
 			
-			//con la posición dentro del tablero
 			if(x<0 || y<0 || x>=Game.DIMX || y>=Game.DIMY) System.out.println("Wrong position.");
-			
-			//si no hay nada donde queremos colocarla
+				
 			else if(this.hayCosas(x,y)) System.out.println("There's already something there.");
-			
 			else {
-				// si es una sunflower
-				if(planta.equals("s") || planta.equals("sunflower")) {
-					//si da el dinero
+				switch(words[1]) {
+				case "sunflower":
+				case "s": {
 					if (this.soles.num() >= Sunflower.COSTE) {
 						this.sunflowerList.add(x, y, this);
 						this.soles.add(-Sunflower.COSTE);
 						sol = true;
 					}
 					else System.out.println("Not enough cash.");
-				}
-				
-				//o un peashooter
-				else if(planta.equals("p") || planta.equals("peashooter")) {
-					//si da el dinero
+				} break;
+				case "peashooter":
+				case "p": {
 					if (this.soles.num() >= Peashooter.COSTE) {
 						this.peashooterList.add(x, y, this);
 						this.soles.add(-Peashooter.COSTE);
 						sol = true;
 					}
 					else System.out.println("Not enough cash.");
+				} break;
+				default: System.out.println("Wrong plant."); break;
 				}
-				
-				//y si no te equivocas de planta
-				else System.out.println("Wrong plant.");
-			}
+			}		
 		}
 		return sol;
 	}
@@ -212,7 +204,7 @@ public class Game {
 	}
 	
 	//se añaden zombies
-	private void anadirZombies() {
+	private void computer() {
 		boolean posible = false;
 		//si hay algún hueco en la columna DIMY - 1
 		for (int i = 0; i < Game.DIMX && !posible; ++i) {
@@ -252,17 +244,6 @@ public class Game {
 			j++;
 		}
 		return hayCosas;
-	}
-	
-	//sí, lo he buscado; si no, la excepción de parseInt es imposible de evitar.
-	private static boolean isParsable(String input){
-	    boolean parsable = true;
-	    try{
-	        Integer.parseInt(input);
-	    }catch(NumberFormatException e){
-	        parsable = false;
-	    }
-	    return parsable;
 	}
 
 }

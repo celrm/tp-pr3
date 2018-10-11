@@ -33,15 +33,14 @@ public class Controller {
 
 	    System.out.println("Game over");
 	    
-		if (this.game.playerWins()) {
+		if (this.game.playerWins())
 		    System.out.println("Player wins!");
-		}
-		else if (this.game.zombiesWin()) {
+		
+		else if (this.game.zombiesWin())
 		    System.out.println("Zombies win :(");
-		}
-		else {
+	
+		else
 		    System.out.println("Chao");
-		}
 	}
 	
 	private boolean user(){
