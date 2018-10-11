@@ -26,7 +26,7 @@ public class Game {
 		this.peashooterList = new PeashooterList();
 		this.zombieList = new ZombieList();
 		
-		this.zManager = new ZombieManager(this.level);
+		this.zManager = new ZombieManager(this.level, this.rand);
 		
 		this.ciclos = 0;
 		this.soles = new SuncoinManager();

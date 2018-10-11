@@ -8,10 +8,10 @@ public class ZombieManager {
 	private double frec;
 	private Random rnd;
 	
-	public ZombieManager(Level level){
+	public ZombieManager(Level level, Random rand){
 		this.numZombies = level.numZombies();
 		this.frec = level.frec();
-		this.rnd = new Random();
+		this.rnd = rand;
 	}
 	
 	public boolean isZombieAdded() {
