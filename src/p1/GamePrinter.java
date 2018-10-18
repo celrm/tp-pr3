@@ -27,7 +27,7 @@ public class GamePrinter {
 		
 		for(int i = 0; i < dimX; i++) {
 			for(int j = 0; j < dimY; j++) {
-				game.cell(board[i][j],i,j);
+				board[i][j] = game.cell(board[i][j],i,j);
 			}		
 		}
 	}
