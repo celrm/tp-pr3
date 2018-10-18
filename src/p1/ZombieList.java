@@ -4,13 +4,11 @@ public class ZombieList {
 	private Zombie[] lista;
 	private int cont;
 	
+	//private Sunflower getPosition(int x, int y) {}	
+	
 	public ZombieList(){
 		this.lista = new Zombie[32] ;
 		this.cont = 0;
-	}
-	
-	public int length(){
-		return this.cont;
 	}
 	
 	public void add(int x, int y, Game juego){
@@ -18,6 +16,7 @@ public class ZombieList {
 		++this.cont;
 	}
 	
+	//doDamage
 	public void danar(int x, int y, int cant){
 		for (int i = 0; i < this.cont; ++i){
 			if (this.lista[i].vida() > 0 && this.lista[i].posx() == x && this.lista[i].posy() == y){
@@ -46,7 +45,19 @@ public class ZombieList {
         }
     }
     
-    public boolean hayZombie (int x, int y){
+	public String toString(int x, int y) {
+		String sol = "";
+		boolean found = false;
+        for (int i = 0; i < this.cont && !found; ++i){
+            if (this.lista[i].posx() == x && this.lista[i].posy() == y){
+            	found = true;
+            	sol = this.lista[i].toString();
+            }
+        }
+        return sol;
+	}
+    
+    public boolean hay(int x, int y){
         boolean hay = false;
         for (int i = 0; i < this.cont && !hay; ++i){
             if (this.lista[i].posx() == x && this.lista[i].posy() == y){
@@ -54,5 +65,12 @@ public class ZombieList {
             }
         }
         return hay;
+    }
+    
+    public boolean todosMuertos() {
+    	boolean sol = true;
+    	for (int i = 0; i < this.cont && sol; ++i)
+            if (this.lista[i].vida() > 0) sol = false;
+    	return sol;
     }
 }

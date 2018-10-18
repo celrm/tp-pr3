@@ -21,27 +21,15 @@ public class GamePrinter {
  		board = new String[dimX][dimY];
 		for(int i = 0; i < dimX; i++) {
 			for(int j = 0; j < dimY; j++) {
-				board[i][j] =  space;
-				//matriz inicializada a vacíos
+				if(game.hayCosas(i, j)) {
+					board[i][j] = game.toString(i,j);
+				}
+				else board[i][j] =  space;
 			}
-		}
-		for (int i = 0; i < game.plength(); ++i){
-			if (game.pv(i) > 0){
-				board[game.px(i)][game.py(i)] = "P [ " + game.pv(i) + " ]";
-			}
-		}
-		for (int i = 0; i < game.slength(); ++i){
-			if (game.sv(i) > 0){
-				board[game.sx(i)][game.sy(i)] = "S [ " + game.sv(i) + " ]";
-			}
-		}
-		for (int i = 0; i < game.zlength(); ++i){
-			if (game.zv(i) > 0){
-				board[game.zx(i)][game.zy(i)] = "Z [ " + game.zv(i) + " ]";
-			}
+		
 		}
 	}
-	
+
 	public String toString() {
 
 		int cellSize = 7;

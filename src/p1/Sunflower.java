@@ -43,4 +43,8 @@ public class Sunflower {
 		return this.vida;
 	}
 	
+	public String toString() {
+		return "S [ " + this.vida + " ]";
+	}
+	
 }

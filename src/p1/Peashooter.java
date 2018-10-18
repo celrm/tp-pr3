@@ -42,4 +42,8 @@ public class Peashooter {
 		return this.vida;
 	}
 	
+	public String toString() {
+		return "P [ " + this.vida + " ]";
+	}
+	
 }

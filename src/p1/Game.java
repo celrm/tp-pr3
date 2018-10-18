@@ -32,32 +32,28 @@ public class Game {
 		this.soles = new SuncoinManager();
 	}
     
-    //gana el jugador si
   	public boolean playerWins() {
-  	    boolean sol = false;
-  	    
-  	    //no quedan zombies por salir
-          if(this.zManager.numZombies() == 0) {
-              sol = true;
-              
-              //y todos están muertos
-              for (int i = 0; i < this.zlength() && sol; ++i)
-                  if (this.zv(i) > 0) sol = false;
-          }
-          return sol;
+  	    return (this.zManager.numZombies() == 0) && this.zombieList.todosMuertos();
   	}
-  	
-  	//ganan los zombies si
+
   	public boolean zombiesWin() {
   	    boolean sol = false;
   	    
-  	    //de entre los zombies
-  	    for (int i = 0; i < this.zlength() && !sol; ++i) {
-  	    	//hay uno en la columna 0
-  	        if (this.zy(i) == 0) sol = true;
-  	    }
-  	    return sol;
+  	  for (int j = 0; j < Game.DIMX && !sol; ++j) {
+  		  sol = hayZombie(j,0);
+  	  }
+  	  return sol;
   	}
+  	
+  	public void update() {		
+		this.sunflowerList.update();
+		this.peashooterList.update();
+		this.zombieList.update();
+		
+		this.computer();
+		
+		this.ciclos++;
+	}
   	
   	public void draw(){
 		System.out.println("Number of cycles: " + Integer.toString(this.ciclos));
@@ -96,28 +92,17 @@ public class Game {
   		return sol;
   	}  
   	
+  	//Lo necesitamos para que no se pisen los zombies
   	public boolean hayZombie(int x, int y) {
-  		return this.zombieList.hayZombie(x,y);
-  	}  	
-	
-	public void update() {
-		//crear soles
-		
-		this.sunflowerList.update();
-		this.peashooterList.update();
-		this.zombieList.update();
-		
-		this.computer();
-		
-		this.ciclos++;
-	}
+  		return this.zombieList.hay(x,y);
+  	}
 	
 	//compramos una planta
 	public boolean add(String[] words) {
 		boolean sol = false;
 		
 		if (words.length != 4) System.out.println("Wrong parameters.");
-		else {		
+		else {
 			int x = Integer.parseInt(words[2]);
 			int y = Integer.parseInt(words[3]);
 			
@@ -162,67 +147,31 @@ public class Game {
 		this.soles = new SuncoinManager();		
 	}
 
-	//usado para saber frecuencia de soles y avanzar
+	//usado para saber frecuencia de soles y al avanzar un zombie
 	public int getCiclos(){
 		return this.ciclos;
 	}
 	
-	//funciones exclusivas para GamePrinter
-	public int slength(){
-		return this.sunflowerList.length();
-	}
-	
-	public int plength(){
-		return this.peashooterList.length();
-	}
-	
-	public int zlength(){
-		return this.zombieList.length();
-	}
-	
-	public int sx (int pos){
-		return this.sunflowerList.posx(pos);
-	}
-	
-	public int sy (int pos){
-		return this.sunflowerList.posy(pos);
-	}
-	
-	public int sv (int pos){
-		return this.sunflowerList.getvida(pos);
-	}
-	
-	public int px (int pos){
-		return this.peashooterList.posx(pos);
-	}
-	
-	public int py (int pos){
-		return this.peashooterList.posy(pos);
-	}
-	
-	public int pv (int pos){
-		return this.peashooterList.getvida(pos);
-	}
-	
-	public int zx (int pos){
-		return this.zombieList.posx(pos);
-	}
-	
-	public int zy (int pos){
-		return this.zombieList.posy(pos);
-	}
-	
-	public int zv (int pos){
-		return this.zombieList.getvida(pos);
+	public String toString(int x, int y) {
+		String sol = "";
+		if(this.sunflowerList.hay(x, y))
+			sol = this.sunflowerList.toString(x,y);
+		else if(this.peashooterList.hay(x, y))
+			sol = this.peashooterList.toString(x,y);
+		else //if(this.zombieList.hay(x, y))
+			sol = this.zombieList.toString(x,y);
+		return sol;
 	}
 	
 	//se añaden zombies
 	private void computer() {
 		boolean posible = false;
+		
 		//si hay algún hueco en la columna DIMY - 1
 		for (int i = 0; i < Game.DIMX && !posible; ++i) {
 			posible = !this.hayCosas(i, Game.DIMY - 1);
 		}
+		
 		//y si toca que salga en este ciclo
 		if (posible && this.zManager.isZombieAdded()) {
 			//aleatoriamente busco una fila libre
@@ -232,31 +181,11 @@ public class Game {
 			
 			//y añado al zombie
 			this.zombieList.add(x, Game.DIMY-1, this);
-	    }	
+	    }
 	}
 	
 	//función auxiliar para saber si un hueco está libre
-	private boolean hayCosas(int x, int y) {
-		boolean hayCosas = false;
-		int j = 0;
-		//miramos en la lista de sunflowers
-		while (j < slength() && !hayCosas) {
-			if (sv(j)>0 && sx(j)==x && sy(j)==y) hayCosas = true;
-			j++;
-		}
-		j = 0;
-		//en la lista de peashooters
-		while (j < plength() && !hayCosas) {
-			if (pv(j)>0 && px(j)==x && py(j)==y) hayCosas = true;
-			j++;
-		}
-		j = 0;
-		//y en la lista de zombies
-		while (j < zlength() && !hayCosas) {
-			if (zv(j)>0 && zx(j)==x && zy(j)==y) hayCosas = true;
-			j++;
-		}
-		return hayCosas;
+	public boolean hayCosas(int x, int y) {
+		return (this.sunflowerList.hay(x, y) || this.peashooterList.hay(x, y) || this.hayZombie(x, y));
 	}
-
 }

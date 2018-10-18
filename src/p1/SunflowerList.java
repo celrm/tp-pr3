@@ -58,4 +58,16 @@ public class SunflowerList {
         }
         return hay;
     }
+    
+    public String toString(int x, int y) {
+		String sol = "";
+		boolean found = false;
+        for (int i = 0; i < this.cont && !found; ++i){
+            if (this.lista[i].posx() == x && this.lista[i].posy() == y){
+            	found = true;
+            	sol = this.lista[i].toString();
+            }
+        }
+        return sol;
+	}
 }
