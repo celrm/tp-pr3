@@ -56,4 +56,14 @@ public class SunflowerList {
             }
         }
     }
+    
+    public boolean hay(int x, int y){
+       boolean hay = false;
+        for (int i = 0; i < this.cont && !hay; ++i){
+            if (this.lista[i].posx() == x && this.lista[i].posy() == y){
+                hay = true;
+            }
+        }
+        return hay;
+    }
 }
