@@ -22,7 +22,7 @@ public class Peashooter {
 	}
 	
 	public void update() {
-		if ((this.nacimiento % CICLOS == this.juego.getCiclos() % CICLOS) && (this.nacimiento != this.juego.getCiclos()))
+		if ((this.nacimiento % CICLOS == this.juego.getCiclos() % CICLOS))
 			this.juego.peashooterAction(x, y);
 	}
 	
