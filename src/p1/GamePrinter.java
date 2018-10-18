@@ -21,12 +21,14 @@ public class GamePrinter {
  		board = new String[dimX][dimY];
 		for(int i = 0; i < dimX; i++) {
 			for(int j = 0; j < dimY; j++) {
-				if(game.hayCosas(i, j)) {
-					board[i][j] = game.toString(i,j);
-				}
-				else board[i][j] =  space;
-			}
+				board[i][j] =  space;
+			}		
+		}
 		
+		for(int i = 0; i < dimX; i++) {
+			for(int j = 0; j < dimY; j++) {
+				game.cell(board[i][j],i,j);
+			}		
 		}
 	}
 

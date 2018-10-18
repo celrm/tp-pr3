@@ -31,11 +31,11 @@ public class Zombie {
 		this.vida -= dano;
 	}
 	
-	public int posx() {
+	public int x() {
 		return this.x;
 	}
 	
-	public int posy() {
+	public int y() {
 		return this.y;
 	}
 	

@@ -152,15 +152,14 @@ public class Game {
 		return this.ciclos;
 	}
 	
-	public String toString(int x, int y) {
-		String sol = "";
+	//para gameprinter, modifica str si hay algo en alguna lista
+	public void cell(String str, int x, int y) {
 		if(this.sunflowerList.hay(x, y))
-			sol = this.sunflowerList.toString(x,y);
+			str = this.sunflowerList.toString(x,y);
 		else if(this.peashooterList.hay(x, y))
-			sol = this.peashooterList.toString(x,y);
-		else //if(this.zombieList.hay(x, y))
-			sol = this.zombieList.toString(x,y);
-		return sol;
+			str = this.peashooterList.toString(x,y);
+		else if(this.zombieList.hay(x, y))
+			str = this.zombieList.toString(x,y);
 	}
 	
 	//se añaden zombies
@@ -185,7 +184,7 @@ public class Game {
 	}
 	
 	//función auxiliar para saber si un hueco está libre
-	public boolean hayCosas(int x, int y) {
+	private boolean hayCosas(int x, int y) {
 		return (this.sunflowerList.hay(x, y) || this.peashooterList.hay(x, y) || this.zombieList.hay(x, y));
 	}
 }
