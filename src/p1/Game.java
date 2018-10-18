@@ -71,7 +71,7 @@ public class Game {
   	public void peashooterAction(int x, int y) {
   		boolean found = false;
 		for (int j = y+1; j < Game.DIMY && !found; ++j) {
-			if (hayZombie(x, j)) {
+			if (this.zombieList.hay(x, j)) {
 	  			this.zombieList.danar(x,j,Peashooter.HARM);
 	  			found = true;
 			}
@@ -186,6 +186,6 @@ public class Game {
 	
 	//función auxiliar para saber si un hueco está libre
 	public boolean hayCosas(int x, int y) {
-		return (this.sunflowerList.hay(x, y) || this.peashooterList.hay(x, y) || this.hayZombie(x, y));
+		return (this.sunflowerList.hay(x, y) || this.peashooterList.hay(x, y) || this.zombieList.hay(x, y));
 	}
 }

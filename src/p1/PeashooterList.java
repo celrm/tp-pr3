@@ -9,25 +9,58 @@ public class PeashooterList {
 		this.cont = 0;
 	}
 	
-	public int length(){
-		return this.cont;
-	}	
-	
 	public void add(int x, int y, Game juego){
 		this.lista[cont] = new Peashooter(x,y, juego);
 		++this.cont;
 	}
 	
-	public boolean danar(int x, int y, int cant){
-		boolean alguien = false;
-		for (int i = 0; i < this.cont && !alguien; ++i){
+	private Peashooter getPosition(int x, int y) {
+		boolean found = false;
+		Peashooter p = null;
+		for (int i = 0; i < this.cont && !found; ++i){
 			if (this.lista[i].vida() > 0 && this.lista[i].posx() == x && this.lista[i].posy() == y){
-				this.lista[i].danar(cant);
-				alguien = true;
+				p = this.lista[i];
+				found = true;
 			}
 		}
-		return alguien;
+		return p;
 	}
+	
+	public int getIndex(int x, int y) {
+		boolean found = false;
+		int i = 0;
+		while (i < this.cont && !found){
+			if (this.lista[i].vida() > 0 && this.lista[i].posx() == x && this.lista[i].posy() == y)
+				found = true;
+			else ++i;
+		}
+		if (found) return i;
+		else return -1;
+	}
+	
+	public void danar(int x, int y, int cant){
+		Peashooter p = getPosition(x,y);
+		if(p != null) p.danar(cant);
+	}
+	
+	public boolean hay(int x, int y){
+        return getPosition(x,y) != null;
+    }
+    
+    public void update(){
+        for (int i = 0; i < this.cont; ++i){
+            if (this.getvida(i)> 0){
+                this.lista[i].update();
+            }
+        }
+    }
+    
+	public String toString(int x, int y) {
+		String sol = "";		
+		if(this.hay(x, y)) 
+			sol = this.lista[this.getIndex(x, y)].toString();
+        return sol;
+	}    
 	
 	public int posx(int pos){
 		return this.lista[pos].posx();
@@ -39,34 +72,5 @@ public class PeashooterList {
 	
 	public int getvida(int pos){
 		return this.lista[pos].vida();
-	}
-    
-    public void update(){
-        for (int i = 0; i < this.cont; ++i){
-            if (this.getvida(i)> 0){
-                this.lista[i].update();
-            }
-        }
-    }
-    public boolean hay(int x, int y){
-        boolean hay = false;
-        for (int i = 0; i < this.cont && !hay; ++i){
-            if (this.lista[i].vida() > 0 && this.lista[i].posx() == x && this.lista[i].posy() == y){
-                hay = true;
-            }
-        }
-        return hay;
-    }
-    
-    public String toString(int x, int y) {
-		String sol = "";
-		boolean found = false;
-        for (int i = 0; i < this.cont && !found; ++i){
-            if (this.lista[i].vida() > 0 && this.lista[i].posx() == x && this.lista[i].posy() == y){
-            	found = true;
-            	sol = this.lista[i].toString();
-            }
-        }
-        return sol;
 	}
 }
