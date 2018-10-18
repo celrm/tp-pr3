@@ -39,5 +39,13 @@ public class PeashooterList {
 	
 	public int getvida(int pos){
 		return this.lista[pos].vida();
-	}	
+	}
+    
+    public void update(){
+        for (int i = 0; i < this.cont; ++i){
+            if (this.getvida(i)> 0){
+                this.lista[i].update();
+            }
+        }
+    }
 }

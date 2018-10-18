@@ -50,4 +50,22 @@ public class ZombieList {
 	public int getvida(int pos){
 		return this.lista[pos].vida();
 	}
+    
+    public void update(){
+        for (int i = 0; i < this.cont; ++i){
+            if (this.getvida(i)> 0){
+                this.lista[i].update();
+            }
+        }
+    }
+    
+    public boolean hayZombie (int x, int y){
+        boolean hay = false;
+        for (int i = 0; i < this.cont && !hay; ++i){
+            if (this.lista[i].posx() == x && this.lista[i].posy() == y){
+                hay = true;
+            }
+        }
+        return hay;
+    }
 }
