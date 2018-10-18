@@ -17,6 +17,13 @@ public class Peashooter {
 		this.juego = juego;
 	}
 	
+	public void update() {
+		this.juego.peashooterAction(x, y);
+		
+		//if(this.juego.hayZombie(this.x, this.y+1))
+			//this.vida -= Zombie.HARM;
+	}
+	
 	public void danar(int dano) {
 		this.vida -= dano;
 	}

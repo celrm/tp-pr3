@@ -10,6 +10,7 @@ public class Zombie {
 	
 	public static final int VIDA = 5;
 	public static final int HARM = 1;
+	public static final int CICLOS = 2;
 	
 	public Zombie(int x, int y, Game juego) {
 		this.x = x;
@@ -19,11 +20,13 @@ public class Zombie {
 		this.nacimiento = juego.getCiclos();
 	}
 	
-	public void avanza() {
-		if (this.nacimiento % 2 == this.juego.getCiclos() % 2) {
-			-- this.y;
-		}
-	}	
+	public void update() {
+		if ((this.nacimiento % CICLOS == this.juego.getCiclos() % CICLOS) && (this.nacimiento != this.juego.getCiclos()))
+			--this.y;
+		
+		//if(this.juego.hayZombie(this.x, this.y+1))
+			//this.vida -= Zombie.HARM;
+	}
 
 	public void danar(int dano) {
 		this.vida -= dano;

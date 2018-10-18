@@ -67,11 +67,28 @@ public class Game {
 		GamePrinter print = new GamePrinter(this, Game.DIMX, Game.DIMY);		
 		System.out.println(print.toString());
 	}
+  	
+  	public void sunflowerAction() {
+  		this.soles.add(Sunflower.PRODUCE_SOLES);
+  	}
+  	
+  	public void peashooterAction(int x, int y) {
+  		boolean found = false;
+		for (int j = y+1; j < Game.DIMY && !found; ++j) {
+			if (hayZombie(x, j)) {}
+		}
+  	}
+  	
+  	public boolean hayZombie(int x, int y) {
+  		return this.zombieList.hayZombie(x,y);
+  	}  	
 	
-	public void update() {		
+	public void update() {
 		//crear soles
-		int numSoles = this.sunflowerList.generarSoles();
-		this.soles.add(numSoles*Sunflower.PRODUCE_SOLES);
+		
+		this.sunflowerList.update();
+		this.peashooterList.update();
+		this.zombieList.update();
 		
 		//lanzar guisantes
 		for (int i = 0; i < this.plength(); ++i)

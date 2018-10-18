@@ -12,6 +12,7 @@ public class Sunflower {
 	public static final int HARM = 0;
 	public static final int PRODUCE_SOLES = 10;
 	public static final int COSTE = 20;
+	public static final int CICLOS = 2;
 	
 	public Sunflower(int x, int y, Game juego) {
 		this.x = x;
@@ -21,13 +22,14 @@ public class Sunflower {
 		this.nacimiento = juego.getCiclos();
 	}
 	
-	public boolean tocaGenerar() {
-		return (this.nacimiento % 2 == this.juego.getCiclos() % 2) && (this.nacimiento != this.juego.getCiclos());		
-	}
+	public void update() {
+		if ((this.nacimiento % CICLOS == this.juego.getCiclos() % CICLOS) && (this.nacimiento != this.juego.getCiclos()))
+			this.juego.sunflowerAction();
 		
-	public void danar(int dano) {
-		this.vida -= dano;
+		if(this.juego.hayZombie(this.x, this.y+1))
+			this.vida -= Zombie.HARM;
 	}
+	
 	
 	public int posx() {
 		return this.x;
