@@ -25,11 +25,11 @@ public class Sunflower {
 	public void update() {
 		if ((this.nacimiento % CICLOS == this.juego.getCiclos() % CICLOS) && (this.nacimiento != this.juego.getCiclos()))
 			this.juego.sunflowerAction();
-		
-		if(this.juego.hayZombie(this.x, this.y+1))
-			this.vida -= Zombie.HARM;
 	}
 	
+	public void danar(int dano) {
+		this.vida -= dano;
+	}	
 	
 	public int posx() {
 		return this.x;

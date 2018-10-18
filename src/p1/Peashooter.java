@@ -6,22 +6,24 @@ public class Peashooter {
 	private int vida;
 	private Game juego;
 	
+	private int nacimiento;
+	
 	public static final int VIDA = 3;
 	public static final int HARM = 1;
 	public static final int COSTE = 50;
+	public static final int CICLOS = 1;
 	
 	public Peashooter(int x, int y, Game juego) {
 		this.x = x;
 		this.y = y;
 		this.vida = Peashooter.VIDA;
 		this.juego = juego;
+		this.nacimiento = juego.getCiclos();
 	}
 	
 	public void update() {
-		this.juego.peashooterAction(x, y);
-		
-		//if(this.juego.hayZombie(this.x, this.y+1))
-			//this.vida -= Zombie.HARM;
+		if ((this.nacimiento % CICLOS == this.juego.getCiclos() % CICLOS) && (this.nacimiento != this.juego.getCiclos()))
+			this.juego.peashooterAction(x, y);
 	}
 	
 	public void danar(int dano) {

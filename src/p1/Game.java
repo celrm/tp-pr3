@@ -75,9 +75,26 @@ public class Game {
   	public void peashooterAction(int x, int y) {
   		boolean found = false;
 		for (int j = y+1; j < Game.DIMY && !found; ++j) {
-			if (hayZombie(x, j)) {}
+			if (hayZombie(x, j)) {
+	  			this.zombieList.danar(x,j,Peashooter.HARM);
+	  			found = true;
+			}
 		}
   	}
+  	
+  	public boolean zombieAction(int x, int y) {
+  		boolean sol;
+  		if(this.sunflowerList.hay(x,y-1)) {
+  			this.sunflowerList.danar(x,y-1,Zombie.HARM);
+  			sol = true;
+  		}
+  		else if(this.peashooterList.hay(x,y-1)) {
+  			this.peashooterList.danar(x,y-1,Zombie.HARM);
+			sol = true;
+		}
+  		else sol = false;
+  		return sol;
+  	}  
   	
   	public boolean hayZombie(int x, int y) {
   		return this.zombieList.hayZombie(x,y);
@@ -90,27 +107,6 @@ public class Game {
 		this.peashooterList.update();
 		this.zombieList.update();
 		
-		//lanzar guisantes
-		for (int i = 0; i < this.plength(); ++i)
-			if(this.pv(i) > 0) {
-				boolean found = false;
-				
-				for (int j = 0; j < this.zlength() && !found; ++j)
-					if (this.zv(j)> 0 && this.px(i) == this.zx(j)) {
-						this.zombieList.danar(this.zx(j), this.zy(j), Peashooter.HARM);
-						found = true;
-					}
-			}
-		
-		//zombies atacan y avanzan
-		for (int i = 0; i < this.zlength(); ++i)
-			if(this.zv(i) > 0) {
-				boolean alguien = false;
-				alguien = sunflowerList.danar(zx(i), zy(i)-1, Zombie.HARM);
-				if(!alguien) alguien = peashooterList.danar(zx(i), zy(i)-1, Zombie.HARM);
-				if(!alguien) this.zombieList.avanza(i);
-			}
-
 		this.computer();
 		
 		this.ciclos++;

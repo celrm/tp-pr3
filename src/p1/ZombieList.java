@@ -9,19 +9,6 @@ public class ZombieList {
 		this.cont = 0;
 	}
 	
-	public void avanza (int pos){
-		boolean alguien = false;
-		
-		int zx = lista[pos].posx();
-		int zy = lista[pos].posy() - 1;
-		
-		for(int i = 0; i < this.cont && !alguien; ++i) {
-			alguien = (lista[i].posx() == zx) && (lista[i].posy() == zy);
-		}
-		
-		if(!alguien) this.lista[pos].avanza();
-	}
-	
 	public int length(){
 		return this.cont;
 	}

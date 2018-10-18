@@ -9,14 +9,6 @@ public class SunflowerList {
 		this.cont = 0;
 	}
 	
-	public int generarSoles() {
-		int sol = 0;
-		for (int i = 0; i < this.cont; ++i)
-			if(lista[i].vida() > 0 && lista[i].tocaGenerar()) 
-				sol++;
-		return sol;
-	}	
-	
 	public int length(){
 		return this.cont;
 	}
@@ -52,7 +44,7 @@ public class SunflowerList {
     public void update(){
         for (int i = 0; i < this.cont; ++i){
             if (this.getvida(i) > 0){
-                this.lista[i].update;
+                this.lista[i].update();
             }
         }
     }
