@@ -50,7 +50,7 @@ public class Controller {
 
 		switch(words[0]) {
 		case "add":
-		case "a": sol = this.game.add(words); break;
+		case "a": sol = this.add(words); break;
 		case "reset":
 		case "r": {
 			this.game.reset();
@@ -65,6 +65,21 @@ public class Controller {
 		case "h": this.help(); break;
 		case "": sol = true; break;
 		default: System.out.println("Wrong command."); break;
+		}
+		return sol;
+	}
+	
+	private boolean add(String[] words) {
+		boolean sol = false;
+		
+		if (words.length != 4) System.out.println("Wrong parameters.");
+		else {
+			int x = Integer.parseInt(words[2]);
+			int y = Integer.parseInt(words[3]);
+			
+			if(x<0 || y<0 || x>=Game.DIMX || y>=Game.DIMY) System.out.println("Wrong position.");
+
+			else sol = this.game.addPlant(words[1], x, y);
 		}
 		return sol;
 	}
