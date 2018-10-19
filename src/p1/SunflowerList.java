@@ -56,6 +56,9 @@ public class SunflowerList {
     }
     
 	public String toString(int x, int y) {
-		return this.lista[this.getIndex(x, y)].toString();
+		if (this.hay(x, y)){
+			return this.lista[this.getIndex(x, y)].toString();
+		}
+		return "";
 	}
 }

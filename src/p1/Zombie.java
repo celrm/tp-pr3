@@ -44,7 +44,10 @@ public class Zombie {
 	}
 	
 	public String toString() {
-		return "Z [ " + this.vida + " ]";
+		if (this.vida > 0){
+			return "Z [ " + this.vida + " ]";
+		}
+		return "";
 	}
 	
 }

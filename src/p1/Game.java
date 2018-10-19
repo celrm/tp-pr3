@@ -153,13 +153,9 @@ public class Game {
 	}
 	
 	//para gameprinter, modifica str si hay algo en alguna lista
-	public String cell(String str, int x, int y) {
-		if(this.sunflowerList.hay(x, y))
-			str = this.sunflowerList.toString(x,y);
-		else if(this.peashooterList.hay(x, y))
-			str = this.peashooterList.toString(x,y);
-		else if(this.zombieList.hay(x, y))
-			str = this.zombieList.toString(x,y);
+	public String cell(int x, int y) {
+		String str = "";
+		str = this.sunflowerList.toString(x,y) + this.peashooterList.toString(x,y) + this.zombieList.toString(x,y);
 		return str;
 	}
 	

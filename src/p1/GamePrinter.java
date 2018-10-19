@@ -21,13 +21,13 @@ public class GamePrinter {
  		board = new String[dimX][dimY];
 		for(int i = 0; i < dimX; i++) {
 			for(int j = 0; j < dimY; j++) {
-				board[i][j] =  space;
+				board[i][j] = space;
 			}		
 		}
 		
 		for(int i = 0; i < dimX; i++) {
 			for(int j = 0; j < dimY; j++) {
-				board[i][j] = game.cell(board[i][j],i,j);
+				board[i][j] += game.cell(i,j);
 			}		
 		}
 	}
