@@ -26,7 +26,7 @@ public class SunflowerList {
 		return s;
 	}
 	
-	public int getIndex(int x, int y) {
+	private int getIndex(int x, int y) {
 		boolean found = false;
 		int i = 0;
 		while (i < this.cont && !found){
