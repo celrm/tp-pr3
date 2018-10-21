@@ -23,8 +23,8 @@ public class PlantsVsZombies {
 		Controller controlador = new Controller(juego, sc);
 
 		System.out.println("Level: " + args[0].toUpperCase());
-
 		System.out.println("Random seed used: " + Long.toString(seed));
+		
 		controlador.run();
 
 	}

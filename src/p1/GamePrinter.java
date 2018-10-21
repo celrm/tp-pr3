@@ -27,7 +27,7 @@ public class GamePrinter {
 		
 		for(int i = 0; i < dimX; i++) {
 			for(int j = 0; j < dimY; j++) {
-				String s = game.cell(i,j);
+				String s = game.toString(i,j);
 				if(!s.equals("")) 
 					board[i][j] = s;
 			}		

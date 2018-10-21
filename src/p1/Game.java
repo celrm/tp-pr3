@@ -150,7 +150,7 @@ public class Game {
 	}
 	
 	//para gameprinter, modifica str si hay algo en alguna lista
-	public String cell(int x, int y) {
+	public String toString(int x, int y) {
 		String str = "";
 		str = this.sunflowerList.toString(x,y) + this.peashooterList.toString(x,y) + this.zombieList.toString(x,y);
 		return str;

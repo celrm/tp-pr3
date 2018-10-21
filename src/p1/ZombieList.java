@@ -49,9 +49,7 @@ public class ZombieList {
 	
 	public void update(){
         for (int i = 0; i < this.cont; ++i){
-            if (this.lista[i].vida() > 0){
                 this.lista[i].update();
-            }
         }
     }
     

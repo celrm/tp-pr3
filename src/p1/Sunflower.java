@@ -23,8 +23,10 @@ public class Sunflower {
 	}
 	
 	public void update() {
-		if ((this.nacimiento % CICLOS == this.juego.getCiclos() % CICLOS) && (this.nacimiento != this.juego.getCiclos()))
-			this.juego.sunflowerAction();
+		boolean toca = (this.nacimiento % CICLOS == this.juego.getCiclos() % CICLOS);
+		boolean noPrimerCiclo = (this.nacimiento != this.juego.getCiclos());
+		if (this.vida > 0 && noPrimerCiclo && toca)
+			this.juego.peashooterAction(x, y);
 	}
 	
 	public void danar(int dano) {

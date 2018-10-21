@@ -20,11 +20,14 @@ public class Zombie {
 		this.nacimiento = juego.getCiclos();
 	}
 	
-	public void update() {		
-		boolean attac = this.juego.zombieAction(x, y);
-		boolean tocaAvanzar = (this.nacimiento % CICLOS == this.juego.getCiclos() % CICLOS) && (this.nacimiento != this.juego.getCiclos());
-		if (!attac && !this.juego.hayZombie(x, y-1) && tocaAvanzar)
-			--this.y;
+	public void update() {
+		if(this.vida > 0) {
+			boolean toca = (this.nacimiento % CICLOS == this.juego.getCiclos() % CICLOS);
+			boolean noPrimerCiclo = (this.nacimiento != this.juego.getCiclos());
+			boolean haAtacado = this.juego.zombieAction(x, y);
+			if (!haAtacado && !this.juego.hayZombie(x, y-1) && noPrimerCiclo && toca)
+				--this.y;
+		}
 	}
 
 	public void danar(int dano) {
