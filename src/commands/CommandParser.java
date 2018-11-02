@@ -1,6 +1,6 @@
 package commands;
 
-import p2.Controller;
+import play.Controller;
 
 // Clase utilidad: todos sus métodos son estáticos
 public class CommandParser {

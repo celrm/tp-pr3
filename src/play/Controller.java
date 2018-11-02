@@ -1,4 +1,4 @@
-package p2;
+package play;
 
 import java.util.Scanner;
 
@@ -18,7 +18,7 @@ public class Controller {
 		this.scanner = sc;
 		this.exit = false;
 		this.noPrint = true;
-	}
+	} 
 	
 	public void run() {
 		while (!game.isFinished() && !exit) {

@@ -1,7 +1,7 @@
 package commands;
 
 import logic.Game;
-import p2.Controller;
+import play.Controller;
 
 public abstract class Command {
 

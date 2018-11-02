@@ -1,4 +1,4 @@
-package p2;
+package play;
 
 import java.util.Random;
 import java.util.Scanner;
