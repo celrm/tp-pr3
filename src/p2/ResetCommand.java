@@ -3,7 +3,7 @@ package p2;
 public class ResetCommand extends NoParamsCommand{
 
 	public ResetCommand() {
-		super("reset", "[R]eset", "reset game");
+		super("reset", "[R]eset", "Starts a new game.");
 	}
 
 	@Override

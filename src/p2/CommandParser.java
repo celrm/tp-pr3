@@ -12,7 +12,7 @@ public class CommandParser {
 		new UpdateCommand(),
 	};
 	
-	static public Command parseCommand(String[] words, Controller controller) {
+	public static Command parseCommand(String[] words, Controller controller) {
 		Command com = null;
 		
 		for (Command item : availableCommands) {
@@ -21,5 +21,18 @@ public class CommandParser {
 		
 		// Si es null no se va a pintar el tablero
 		return com;
+	}
+	
+	// Lo usa HelpCommand
+	public static String commandHelp() {
+		String str = null;
+		// TODO StringBuilder?
+		
+		for (Command item : availableCommands) {
+			str += item.helpText() + "\n";
+		}
+		
+		// Si es null no se va a pintar el tablero
+		return str;
 	}
 }

@@ -12,9 +12,10 @@ public abstract class NoParamsCommand extends Command {
 	
 	@Override
 	public Command parse(String[] commandWords, Controller controller) {
-		return null;
-		// TODO Auto-generated method stub
+		if(commandWords[0].equals(this.commandText))
+			return this;
 		
+		else return null;		
 	}
 
 }

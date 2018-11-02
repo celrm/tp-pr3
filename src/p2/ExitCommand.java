@@ -3,7 +3,7 @@ package p2;
 public class ExitCommand extends NoParamsCommand{
 
 	public ExitCommand() {
-		super("exit", "[E]xit", "exit game");
+		super("exit", "[E]xit", "Terminates the program.");
 	}
 
 	@Override

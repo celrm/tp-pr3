@@ -3,13 +3,12 @@ package p2;
 public class ListCommand extends NoParamsCommand{
 
 	public ListCommand() {
-		super("list", "[L]", "show list");
+		super("list", "[L]ist", "Prints the list of available plants.");
 	}
 
 	@Override
-	public void execute(Game game, Controller controller) {
-		// Usar PlantFactory.listOfAvailablePlants
-		// execute se implementa invocando algún método con el objeto game pasado como parámetro y ejecutando alguna acción más.
-		
+	public void execute(Game game, Controller controller) {		
+		System.out.println(PlantFactory.listOfAvilablePlants());
+		controller.setNoPrintGameState();
 	}
 }

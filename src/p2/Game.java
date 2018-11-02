@@ -2,6 +2,12 @@ package p2;
 
 import java.util.Random;
 
+import p1.PeashooterList;
+import p1.SuncoinManager;
+import p1.SunflowerList;
+import p1.ZombieList;
+import p1.ZombieManager;
+
 public class Game {
 	public static final int DIMX = 4;
 	public static final int DIMY = 8;
@@ -9,44 +15,52 @@ public class Game {
 	private Random rand;
 	private Level level;
 
-	private List list;
+	// TODO listas: como en pr1?
+	private PlantList plantList;
+	private ZombieList zombieList;
 
 	private int ciclos;
 	private SuncoinManager soles;
 
+	// TODO sigue habiendo esta caca?
 	private ZombieManager zManager;
 
-  public Game(Random rand, Level n) {
+	public Game(Random rand, Level n) {
 		this.rand = rand;
 		this.level = n;
-
-		this.sunflowerList = new SunflowerList();
-		this.peashooterList = new PeashooterList();
+		
+		this.plantList = new PlantList();
 		this.zombieList = new ZombieList();
-
+		
 		this.zManager = new ZombieManager(this.level, this.rand);
-
+		
 		this.ciclos = 0;
 		this.soles = new SuncoinManager();
+		
 	}
-
-	public void addPlantToGame(Plant plant, int x, int y) {
+	
+	// Lo usa addC
+	public boolean addPlantToGame(Plant plant, int x, int y) {
+		boolean sol = false;
 		if(this.game.hayCosas(x,y))
 			System.out.println("There's already something there.");
 		else if (this.soles.num() >= Sunflower.COSTE) {
-			this.list.add(plant,x, y, this);
+			this.plantList.add(plant,x, y, this);
 			this.soles.add(-Sunflower.COSTE);
+			sol = true;
 		}
 		else System.out.println("Not enough cash.");
+		return sol;
 	}
-
+	
+	// Lo usa Controller
 	public boolean isFinished() {
 		return playerWins() || zombiesWin();
 	}
 
 	private boolean playerWins() {
 		//si no hay zombies por salir y están todos muertos
-  	    boolean sol = this.zManager.numZombies() == 0) && this.zombieList.todosMuertos();
+  	    boolean sol = this.zManager.numZombies() == 0 && this.zombieList.todosMuertos();
 		
 		if(sol)
 			System.out.println("You win!");
@@ -66,13 +80,47 @@ public class Game {
   		
 		return sol;
   	}
+	
+	// Lo llama Controller
+	public void draw(){
+		System.out.println("Number of cycles: " + Integer.toString(this.ciclos));
+		System.out.println("Sun coins: " + Integer.toString(this.soles.num()));
+		System.out.println("Remaining Zombies: " + Integer.toString(this.zManager.numZombies()));
 
+		GamePrinter print = new GamePrinter(this, Game.DIMX, Game.DIMY);
+		System.out.println(print.toString());
+	}
 
+	// Lo llama updateC
+	public void update() {
+		this.plantList.update();
+		this.zombieList.update();
 
+		this.computer();
 
+		this.ciclos++;
+	}
 
+	private void computer() {
+		//se añaden zombies
+		boolean posible = false;
 
+		//si hay algún hueco en la columna DIMY - 1
+		for (int i = 0; i < Game.DIMX && !posible; ++i) {
+			posible = !this.hayCosas(i, Game.DIMY - 1);
+		}
 
+		//y si toca que salga en este ciclo
+		if (posible && this.zManager.isZombieAdded()) {
+			//aleatoriamente busco una fila libre
+			int x;
+			do x = Math.abs(this.rand.nextInt() % Game.DIMX);
+			while (this.hayCosas(x, Game.DIMY-1));
+
+			//y añado al zombie
+			this.zombieList.add(x, Game.DIMY-1, this);
+		}
+	}
 
 
 
@@ -87,24 +135,9 @@ public class Game {
 
   	
 
-  	public void update() {
-		this.sunflowerList.update();
-		this.peashooterList.update();
-		this.zombieList.update();
+  	
 
-		this.computer();
-
-		this.ciclos++;
-	}
-
-  	public void draw(){
-		System.out.println("Number of cycles: " + Integer.toString(this.ciclos));
-		System.out.println("Sun coins: " + Integer.toString(this.soles.num()));
-		System.out.println("Remaining Zombies: " + Integer.toString(this.zManager.numZombies()));
-
-		GamePrinter print = new GamePrinter(this, Game.DIMX, Game.DIMY);
-		System.out.println(print.toString());
-	}
+  	
 
   	public void sunflowerAction() {
   		//añade los soles que le tocan
@@ -174,26 +207,7 @@ public class Game {
 		return str;
 	}
 
-	//se añaden zombies
-	private void computer() {
-		boolean posible = false;
-
-		//si hay algún hueco en la columna DIMY - 1
-		for (int i = 0; i < Game.DIMX && !posible; ++i) {
-			posible = !this.hayCosas(i, Game.DIMY - 1);
-		}
-
-		//y si toca que salga en este ciclo
-		if (posible && this.zManager.isZombieAdded()) {
-			//aleatoriamente busco una fila libre
-			int x;
-			do x = Math.abs(this.rand.nextInt() % Game.DIMX);
-			while (this.hayCosas(x, Game.DIMY-1));
-
-			//y añado al zombie
-			this.zombieList.add(x, Game.DIMY-1, this);
-	    }
-	}
+	
 
 	//función auxiliar para saber si un hueco está libre
 	private boolean hayCosas(int x, int y) {

@@ -1,13 +1,8 @@
 package p2;
 
-public abstract class Plant {
-  private String name;
-
-  public Plant(String name) {
-    this.name = name;
-  }
-
-  public String getName(){
-    return this.name;
-  }
+public abstract class Plant extends GameObject {
+	  
+	public Plant(String name, int x, int y) {
+	    super(name, x, y);
+	}
 }

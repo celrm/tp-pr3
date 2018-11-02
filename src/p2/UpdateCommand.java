@@ -3,7 +3,7 @@ package p2;
 public class UpdateCommand extends NoParamsCommand {
 
 	public UpdateCommand() {
-		super("update", "[U]pdate", "update game");
+		super("", "[none]", "Skips cycle.");
 	}
 
 	@Override
