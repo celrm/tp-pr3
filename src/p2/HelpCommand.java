@@ -9,7 +9,7 @@ public class HelpCommand extends Command {
 	}
 
 	@Override
-	void execute(Game game, Controller controller) {
+	public void execute(Game game, Controller controller) {
 		// TODO Auto-generated method stub
 		
 	}
