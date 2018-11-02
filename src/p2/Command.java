@@ -1,7 +1,7 @@
 package p2;
 
 public abstract class Command {
-	private String commandText;
+	protected final String commandText;
 	private String commandTextMsg;
 	private String helpTextMsg;
 
@@ -10,12 +10,17 @@ public abstract class Command {
 		this.commandTextMsg = commandTextMsg;
 		this.helpTextMsg = helpTextMsg;
 	}
-
-	abstract void execute();
 	
-	abstract void parse();
+//	Some commands may generate an error in the execute or parse methods.
+//	In the absence of exceptions , they must the tell the controller not to print the board
+	
+
+	public abstract void execute(Game game, Controller controller);
+	
+	public abstract Command parse(String[] commandWords, Controller
+	controller);
 
 	public String helpText() {
-		return this.helpTextMsg;
+		return " " + commandText + ": " + this.helpTextMsg;
 	}
 }
