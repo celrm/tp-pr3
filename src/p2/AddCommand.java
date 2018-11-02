@@ -16,27 +16,6 @@ public class AddCommand extends Command {
 	public void execute(Game game, Controller controller) {
 		Plant plant = PlantFactory.getPlant(plantName);
 		game.addPlantToGame(plant, x, y);
-//		if(this.game.hayCosas(x,y)) System.out.println("There's already something there.");
-//		else switch(plant) {
-//			case "sunflower":
-//			case "s": {
-//				if (this.soles.num() >= Sunflower.COSTE) {
-//					this.sunflowerList.add(x, y, this);
-//					this.soles.add(-Sunflower.COSTE);
-//				}
-//				else System.out.println("Not enough cash.");
-//			} break;
-//			case "peashooter":
-//			case "p": {
-//				if (this.soles.num() >= Peashooter.COSTE) {
-//					this.peashooterList.add(x, y, this);
-//					this.soles.add(-Peashooter.COSTE);
-//					sol = true;
-//				}
-//				else System.out.println("Not enough cash.");
-//			} break;
-//			default: System.out.println("Wrong plant."); break;
-//			}
 	}
 
 	@Override
