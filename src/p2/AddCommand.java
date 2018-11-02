@@ -1,12 +1,9 @@
 package p2;
 
 public class AddCommand extends Command {
-	private String commandText = "add";
-	private String commandTextMsg = "[A]dd";
-	private String helpTextMsg = "add flower";
 	
 	public AddCommand() {
-		super(commandText, commandTextMsg, helpTextMsg);
+		super("add", "[A]dd", "add flower");
 	}
 
 	@Override
