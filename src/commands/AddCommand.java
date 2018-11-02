@@ -17,7 +17,6 @@ public class AddCommand extends Command {
 		this.y = y;
 	}
 	
-	// TODO mira no sé qué coño quiere
 	@Override
 	public void execute(Game game, Controller controller) {
 		Plant plant = PlantFactory.getPlant(plantName);

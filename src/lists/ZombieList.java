@@ -3,6 +3,7 @@ package lists;
 import logic.Game;
 import objects.Zombie;
 
+// TODO todo
 public class ZombieList {
 	private Zombie[] lista;
 	private int cont;

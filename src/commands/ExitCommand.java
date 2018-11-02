@@ -11,7 +11,7 @@ public class ExitCommand extends NoParamsCommand{
 
 	@Override
 	public void execute(Game game, Controller controller) {
-		// execute se implementa invocando algún método con el objeto game pasado como parámetro y ejecutando alguna acción más.
-		
+		// TODO quién coño hace esto, game o controller
+		controller.exit();
 	}
 }

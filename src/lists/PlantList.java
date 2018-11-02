@@ -3,6 +3,7 @@ package lists;
 import logic.Game;
 import objects.Plant;
 
+// TODO todo
 public class PlantList {
 	private Plant[] lista;
 	private int cont;
@@ -12,14 +13,14 @@ public class PlantList {
 		this.cont = 0;
 	}
 	
-	public void add(int x, int y, Game juego){
+	public void add(Plant plant, int x, int y, Game juego){
 		this.lista[cont] = new Plant(x,y, juego);
 		++this.cont;
 	}
 	
-	private Zombie getPosition(int x, int y) {
+	private Plant getPosition(int x, int y) {
 		boolean found = false;
-		Zombie z = null;
+		Plant z = null;
 		for (int i = 0; i < this.cont && !found; ++i){
 			if (this.lista[i].vida() > 0 && this.lista[i].x() == x && this.lista[i].y() == y){
 				z = this.lista[i];
@@ -42,7 +43,7 @@ public class PlantList {
 	}
 	
 	public void danar(int x, int y, int cant){
-		Zombie z = getPosition(x,y);
+		Plant z = getPosition(x,y);
 		if(z != null) z.danar(cant);
 	}
 	

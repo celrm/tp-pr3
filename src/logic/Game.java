@@ -2,6 +2,8 @@ package logic;
 
 import java.util.Random;
 
+import objects.Plant;
+import printers.GamePrinter;
 import lists.PlantList;
 import lists.ZombieList;
 
@@ -12,14 +14,11 @@ public class Game {
 	private Random rand;
 	private Level level;
 
-	// TODO listas: como en pr1?
 	private PlantList plantList;
 	private ZombieList zombieList;
 
 	private int ciclos;
 	private SuncoinManager soles;
-
-	// TODO sigue habiendo esta caca?
 	private ZombieManager zManager;
 
 	public Game(Random rand, Level n) {
@@ -36,21 +35,24 @@ public class Game {
 		
 	}
 	
-	// Lo usa addC
+	// Lo llama addC
 	public boolean addPlantToGame(Plant plant, int x, int y) {
 		boolean sol = false;
-		if(this.game.hayCosas(x,y))
+		if(this.hayCosas(x,y))
 			System.out.println("There's already something there.");
-		else if (this.soles.num() >= Sunflower.COSTE) {
-			this.plantList.add(plant,x, y, this);
-			this.soles.add(-Sunflower.COSTE);
+		
+		// TODO en PlantFactory igual problema
+		else if (this.soles.num() >= plant.cost) {
+			this.plantList.add(plant, x, y, this);
+			this.soles.add(-plant.cost);
 			sol = true;
 		}
+		
 		else System.out.println("Not enough cash.");
 		return sol;
 	}
 	
-	// Lo usa Controller
+	// Lo llama Controller
 	public boolean isFinished() {
 		return playerWins() || zombiesWin();
 	}
@@ -66,8 +68,9 @@ public class Game {
   	}
 
 	private boolean zombiesWin() {
-  		boolean sol = false;
   	    //recorre la primera columna hasta que encuentra un zombie
+  		boolean sol = false;
+  		
   		for (int j = 0; j < Game.DIMX && !sol; ++j) {
   			sol = this.zombieList.hay(j,0);
   		}
@@ -86,16 +89,6 @@ public class Game {
 
 		GamePrinter print = new GamePrinter(this, Game.DIMX, Game.DIMY);
 		System.out.println(print.toString());
-	}
-
-	// Lo llama updateC
-	public void update() {
-		this.plantList.update();
-		this.zombieList.update();
-
-		this.computer();
-
-		this.ciclos++;
 	}
 
 	private void computer() {
@@ -118,15 +111,34 @@ public class Game {
 			this.zombieList.add(x, Game.DIMY-1, this);
 		}
 	}
+	
+	// Lo llama resetC
+		public void reset() {
+			this.plantList = new PlantList();
+			this.zombieList = new ZombieList();
+
+			this.zManager = new ZombieManager(this.level, this.rand);
+
+			this.ciclos = 0;
+			this.soles = new SuncoinManager();
+		}
+
+	// Lo llama updateC
+	public void update() {
+		this.plantList.update();
+		this.zombieList.update();
+		
+		this.computer();
+		this.ciclos++;
+	}
 
 
 
 
 
 
-
-
-
+	
+	
 
 
 
@@ -134,7 +146,7 @@ public class Game {
 
   	
 
-  	
+	// TODO actions  	
 
   	public void sunflowerAction() {
   		//añade los soles que le tocan
@@ -169,28 +181,26 @@ public class Game {
   		else sol = false;
   		return sol;
   	}
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
 
   	//Lo necesitamos public para que no se pisen los zombies
   	public boolean hayZombie(int x, int y) {
   		return this.zombieList.hay(x,y);
   	}
-
-	//en controller, compramos una planta
-	public boolean addPlant(String plant, int x, int y) {
-
-	}
-
-	//en controller
-	public void reset() {
-		this.sunflowerList = new SunflowerList();
-		this.peashooterList = new PeashooterList();
-		this.zombieList = new ZombieList();
-
-		this.zManager = new ZombieManager(this.level, this.rand);
-
-		this.ciclos = 0;
-		this.soles = new SuncoinManager();
-	}
 
 	//usado para saber frecuencias de acciones en plantas y zombies
 	public int getCiclos(){
@@ -200,14 +210,12 @@ public class Game {
 	//para gameprinter, modifica str si hay algo en alguna lista
 	public String toString(int x, int y) {
 		String str = "";
-		str = this.sunflowerList.toString(x,y) + this.peashooterList.toString(x,y) + this.zombieList.toString(x,y);
+		str = this.plantList.toString(x,y) + this.zombieList.toString(x,y);
 		return str;
 	}
 
-	
-
 	//función auxiliar para saber si un hueco está libre
 	private boolean hayCosas(int x, int y) {
-		return (this.sunflowerList.hay(x, y) || this.peashooterList.hay(x, y) || this.zombieList.hay(x, y));
+		return (this.plantList.hay(x, y) || this.zombieList.hay(x, y));
 	}
 }

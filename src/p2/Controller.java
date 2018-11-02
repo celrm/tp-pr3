@@ -49,4 +49,8 @@ public class Controller {
 			this.game.draw();
 		}
 	}
+	
+	public void exit() {
+		this.exit = true;
+	}
 }

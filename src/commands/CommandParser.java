@@ -34,7 +34,6 @@ public class CommandParser {
 			str += item.helpText() + "\n";
 		}
 		
-		// Si es null no se va a pintar el tablero
 		return str;
 	}
 }
