@@ -10,12 +10,12 @@ public class ExitCommand extends Command{
 
 	@Override
 	public void execute(Game game, Controller controller) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	@Override
-	public void parse(String[] commandWords, Controller controller) {
+	public Command parse(String[] commandWords, Controller controller) {
 		// TODO Auto-generated method stub
 		
 	}

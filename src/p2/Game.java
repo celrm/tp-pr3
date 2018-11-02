@@ -40,43 +40,52 @@ public class Game {
 		else System.out.println("Not enough cash.");
 	}
 
+	public boolean isFinished() {
+		return playerWins() || zombiesWin();
+	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  	public boolean playerWins() {
-  		//si no hay zombies por salir y están todos muertos
-  	    return (this.zManager.numZombies() == 0) && this.zombieList.todosMuertos();
+	private boolean playerWins() {
+		//si no hay zombies por salir y están todos muertos
+  	    boolean sol = this.zManager.numZombies() == 0) && this.zombieList.todosMuertos();
+		
+		if(sol)
+			System.out.println("You win!");
+  		
+		return sol;
   	}
 
-  	public boolean zombiesWin() {
+	private boolean zombiesWin() {
   		boolean sol = false;
   	    //recorre la primera columna hasta que encuentra un zombie
   		for (int j = 0; j < Game.DIMX && !sol; ++j) {
   			sol = this.zombieList.hay(j,0);
   		}
-  		return sol;
+  		
+  		if(sol)
+			System.out.println("Zombies win :(");
+  		
+		return sol;
   	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  	
 
   	public void update() {
 		this.sunflowerList.update();

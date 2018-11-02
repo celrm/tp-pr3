@@ -15,7 +15,7 @@ public class HelpCommand extends Command {
 	}
 
 	@Override
-	void parse(String[] commandWords, Controller controller) {
+	public Command parse(String[] commandWords, Controller controller) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -15,7 +15,7 @@ public class ResetCommand extends Command{
 	}
 
 	@Override
-	public void parse(String[] commandWords, Controller controller) {
+	public Command parse(String[] commandWords, Controller controller) {
 		// TODO Auto-generated method stub
 		
 	}

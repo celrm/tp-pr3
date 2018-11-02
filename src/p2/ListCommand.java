@@ -11,11 +11,12 @@ public class ListCommand extends Command{
 	@Override
 	public void execute(Game game, Controller controller) {
 		// TODO Auto-generated method stub
+		// Usar PlantFactory.listOfAvailablePlants
 		
 	}
 
 	@Override
-	public void parse(String[] commandWords, Controller controller) {
+	public Command parse(String[] commandWords, Controller controller) {
 		// TODO Auto-generated method stub
 		
 	}

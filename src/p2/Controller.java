@@ -12,9 +12,9 @@ public class Controller {
 	
 	public Controller(Game j, Scanner sc) {
 		this.game = j;
-		this.in = sc;
+		this.scanner = sc;
 		this.exit = false;
-		this.firstCycle = true;
+//		this.firstCycle = true;
 	}
 	
 	public void run() {
@@ -29,15 +29,15 @@ public class Controller {
 			if (command != null) {
 				command.execute(game, this);
 			}
+			
 			else {
 				System.err.println(unknownCommandMsg);
 				setNoPrintGameState();
 			}
 		}
 	}
-	setNoPrintGameState();
 	
-	private boolean add(String[] words) {
+	private void setNoPrintGameState() {
 		
 	}
 	
