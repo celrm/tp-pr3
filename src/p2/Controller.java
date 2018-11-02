@@ -2,6 +2,10 @@ package p2;
 
 import java.util.Scanner;
 
+import logic.Game;
+import commands.Command;
+import commands.CommandParser;
+
 public class Controller {
 	private Game game;
 	private Scanner scanner;

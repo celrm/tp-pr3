@@ -3,6 +3,9 @@ package p2;
 import java.util.Random;
 import java.util.Scanner;
 
+import logic.Game;
+import logic.Level;
+
 public class PlantsVsZombies {
 
 	public static void main(String[] args) {
