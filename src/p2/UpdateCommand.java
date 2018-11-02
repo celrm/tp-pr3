@@ -9,13 +9,13 @@ public class UpdateCommand extends Command {
 	}
 
 	@Override
-	void execute(Game game, Controller controller) {
+	public void execute(Game game, Controller controller) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	void parse(String[] commandWords, Controller controller) {
+	public void parse(String[] commandWords, Controller controller) {
 		// TODO Auto-generated method stub
 		
 	}
