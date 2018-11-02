@@ -3,8 +3,8 @@ package p2;
 import java.util.Scanner;
 
 public class Controller {
-//	private Game game;
-//	private Scanner in;
+	private Game game;
+	private Scanner scanner;
 	private boolean exit;	
 //	private boolean firstCycle;
 	
@@ -38,18 +38,7 @@ public class Controller {
 	setNoPrintGameState();
 	
 	private boolean add(String[] words) {
-		boolean sol = false;
 		
-		if (words.length != 4) System.out.println("Wrong parameters.");
-		else {
-			int x = Integer.parseInt(words[2]);
-			int y = Integer.parseInt(words[3]);
-			
-			if(x<0 || y<0 || x>=Game.DIMX || y>=Game.DIMY) System.out.println("Wrong position.");
-
-			else sol = this.game.addPlant(words[1], x, y);
-		}
-		return sol;
 	}
 	
 	private void list() {

@@ -9,13 +9,13 @@ public class ResetCommand extends Command{
 	}
 
 	@Override
-	void execute() {
+	void execute(Game game, Controller controller) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	void parse() {
+	void parse(String[] commandWords, Controller controller) {
 		// TODO Auto-generated method stub
 		
 	}
