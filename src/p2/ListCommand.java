@@ -1,25 +1,15 @@
 package p2;
 
-public class ListCommand extends Command{
+public class ListCommand extends NoParamsCommand{
 
-	public ListCommand(String commandText, String commandTextMsg,
-			String helpTextMsg) {
-		super(commandText, commandTextMsg, helpTextMsg);
-		// TODO Auto-generated constructor stub
+	public ListCommand() {
+		super("list", "[L]", "show list");
 	}
 
 	@Override
 	public void execute(Game game, Controller controller) {
-		// TODO Auto-generated method stub
 		// Usar PlantFactory.listOfAvailablePlants
+		// execute se implementa invocando algún método con el objeto game pasado como parámetro y ejecutando alguna acción más.
 		
 	}
-
-	@Override
-	public Command parse(String[] commandWords, Controller controller) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-
 }

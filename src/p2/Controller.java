@@ -15,6 +15,7 @@ public class Controller {
 		this.scanner = sc;
 		this.exit = false;
 //		this.firstCycle = true;
+		this.noPrint = true;
 	}
 	
 	public void run() {
@@ -38,8 +39,16 @@ public class Controller {
 	}
 	
 	private void setNoPrintGameState() {
-		
+		this.noPrint = true;
 	}
+	
+	private void printGame() {
+		if (!this.noPrint) {
+			//Pintar el tablero
+		}
+	}
+	
+	
 	
 	private void list() {
 		System.out.println("[S]unflower: Cost: " + Integer.toString(Sunflower.COSTE) + " suncoins Harm: " + Integer.toString(Sunflower.HARM));
