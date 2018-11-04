@@ -30,7 +30,8 @@ public class AddCommand extends Command {
 		// TODO preguntar por la primera letra
 		if(commandWords[0] != this.commandText || commandWords[0] != this.commandText.split("\\s+")[0])
 			return null;
-
+		
+		// TODO aquí va a sacar wrong command también
 		if (commandWords.length != 4) {
 			System.out.println("Wrong parameters.");
 			return null;

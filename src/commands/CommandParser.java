@@ -16,9 +16,10 @@ public class CommandParser {
 	
 	public static Command parseCommand(String[] words, Controller controller) {
 		Command com = null;
-		
+
 		for (Command item : availableCommands) {
-			com = item.parse(words, controller);
+			if(com==null)
+				com = item.parse(words, controller);
 		}
 		
 		// Si es null no se va a pintar el tablero
