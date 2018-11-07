@@ -18,7 +18,7 @@ public class ZombieFactory {
 			return z;
 		}
 		
-		public static String listOfAvilablePlants() {
+		public static String listOfAvailableZombies() {
 			String sol = "";
 			for (Zombie item : availableZombies) {
 				sol += item.getName() + "\n";

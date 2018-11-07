@@ -12,7 +12,7 @@ public class ListCommand extends NoParamsCommand{
 
 	@Override
 	public void execute(Game game, Controller controller) {		
-		System.out.println(PlantFactory.listOfAvilablePlants());
+		System.out.println(PlantFactory.listOfAvailablePlants());
 		controller.setNoPrintGameState();
 	}
 }
