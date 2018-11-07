@@ -2,8 +2,6 @@ package factories;
 
 import objects.Zombie;
 
-// Dónde va addZombie?
-// puedes crear una factoría y un nuevo comando addZombie
 public class ZombieFactory {
 		private static Zombie[] availableZombies = {
 			new ZombieComun();

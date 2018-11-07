@@ -19,7 +19,6 @@ public class PlantFactory {
 			return p;
 		}
 		
-		// TODO cost y harm constantes, atributos, métodos, what.
 		public static String listOfAvailablePlants() {
 			String sol = "";
 			for (Plant item : availablePlants) {

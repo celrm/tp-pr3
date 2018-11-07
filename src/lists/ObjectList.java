@@ -10,6 +10,10 @@ public class ObjectList {
 		this.lista = new GameObject[10];
 		this.cont = 0;
 	}
+
+	public int getCont() {
+		return this.cont;
+	}
 	
 	public void add(GameObject object){
 		this.lista[cont] = object;
@@ -78,12 +82,4 @@ public class ObjectList {
 		}
 		return "";
 	}
-
-	
-    public boolean todosMuertos() {
-    	boolean sol = true;
-    	for (int i = 0; i < this.cont && sol; ++i)
-            if (this.lista[i].getVida() > 0) sol = false;
-    	return sol;
-    }
 }

@@ -2,6 +2,7 @@ package logic;
 
 import java.util.Random;
 
+import factories.ZombieFactory;
 import objects.Plant;
 import printers.GamePrinter;
 import lists.ObjectList;
@@ -42,9 +43,9 @@ public class Game {
 		if(this.hayCosas(x,y))
 			System.out.println("There's already something there.");
 		
-		// TODO en PlantFactory igual problema
 		else if (this.soles.num() >= plant.getCost()) {
-			this.plantList.add(plant, x, y, this);
+			
+			this.plantList.add(plant);
 			this.soles.add(-plant.getCost());
 			sol = true;
 		}
@@ -60,7 +61,7 @@ public class Game {
 
 	private boolean playerWins() {
 		//si no hay zombies por salir y están todos muertos
-  	    boolean sol = this.zManager.numZombies() == 0 && this.zombieList.todosMuertos();
+  	    boolean sol = this.zManager.numZombies() == 0 && this.zombieList.getCont() == 0;
 		
 		if(sol)
 			System.out.println("You win!");
@@ -82,26 +83,18 @@ public class Game {
 		return sol;
   	}
 
-	private void computer() {
-		//se añaden zombies
-		boolean posible = false;
-		
-		//hay que añadir el tipo de zombie aleatorio
+	private void computer() {		
+		// Tipo de zombie aleatorio
+		int tipo = Math.abs(this.rand.nextInt() % ZombieFactory.listOfAvailableZombies().length());
 
-		//si hay algún hueco en la columna DIMY - 1
-		for (int i = 0; i < Game.DIMX && !posible; ++i) {
-			posible = !this.hayCosas(i, Game.DIMY - 1);
-		}
-
-		//y si toca que salga en este ciclo
-		if (posible && this.zManager.isZombieAdded()) {
-			//aleatoriamente busco una fila libre
-			int x;
-			do x = Math.abs(this.rand.nextInt() % Game.DIMX);
-			while (this.hayCosas(x, Game.DIMY-1));
-
-			//y añado al zombie
-			this.zombieList.add(x, Game.DIMY-1, this);
+		// Si toca que salga en este ciclo
+		if (this.zManager.isZombieAdded()) {
+			// Fila aleatoria
+			int x = Math.abs(this.rand.nextInt() % Game.DIMX);
+			
+			Zombie zombie = new Zombie();
+			//x, Game.DIMY-1
+			this.zombieList.add(zombie);
 		}
 	}
 	
