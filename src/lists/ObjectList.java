@@ -1,35 +1,34 @@
 package lists;
 
 import logic.Game;
-import objects.Plant;
-import factories.PlantFactory;
+import objects.GameObject;
 
-// TODO todo
-public class PlantList {
-	private Plant[] lista;
+public class ObjectList {
+	private GameObject[] lista;
 	private int cont;
 	
-	public PlantList(){
-		this.lista = new Plant[32] ;
+	public ObjectList(){
+		this.lista = new GameObject[32];
 		this.cont = 0;
 	}
 	
-	public void add(Plant plant, int x, int y, Game juego){
-		this.lista[cont] = new Plant(x,y, juego);
+	public void add(String name, int x, int y){
+		this.lista[cont] = new GameObject(name, x,y);
 		++this.cont;
 	}
-	
-	private Plant getPosition(int x, int y) {
+
+	private Object getPosition(int x, int y){
 		boolean found = false;
-		Plant z = null;
+		Object o = null;
 		for (int i = 0; i < this.cont && !found; ++i){
 			if (this.lista[i].vida() > 0 && this.lista[i].x() == x && this.lista[i].y() == y){
-				z = this.lista[i];
+				o = this.lista[i];
 				found = true;
 			}
 		}
-		return z;
+		return o;
 	}
+	
 	
 	public int getIndex(int x, int y) {
 		boolean found = false;
@@ -44,18 +43,32 @@ public class PlantList {
 	}
 	
 	public void danar(int x, int y, int cant){
-		Plant z = getPosition(x,y);
-		if(z != null) z.danar(cant);
+		Object o = getPosition(x,y);
+		if(o != null) o.danar(cant);
 	}
 	
 	public boolean hay(int x, int y){
         return getPosition(x,y) != null;
     }
 	
+	private void remove(){
+		int vivo = 0;
+		for (int i = 0; i < this.cont; ++i){
+			if (this.lista[i].vida()>0){
+				this.lista[vivo] = this.lista[i];
+				++vivo;
+			}
+		}
+		this.cont = vivo;
+
+	}
+	
 	public void update(){
         for (int i = 0; i < this.cont; ++i){
                 this.lista[i].update();
         }
+        this.remove();        
+        
     }
     
 	public String toString(int x, int y) {
@@ -64,4 +77,12 @@ public class PlantList {
 		}
 		return "";
 	}
+
+	
+    public boolean todosMuertos() {
+    	boolean sol = true;
+    	for (int i = 0; i < this.cont && sol; ++i)
+            if (this.lista[i].vida() > 0) sol = false;
+    	return sol;
+    }
 }
