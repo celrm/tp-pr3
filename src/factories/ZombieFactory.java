@@ -1,12 +1,15 @@
 package factories;
 
 import objects.Zombie;
+import objects.ZombieCaracubo;
+import objects.ZombieComun;
+import objects.ZombieDeportista;
 
 public class ZombieFactory {
 		private static Zombie[] availableZombies = {
-			new ZombieComun();
-			new ZombieDeportista();
-			new ZombieCaracubo();
+			new ZombieComun(null, 0, 0, 0, 0, 0),
+			new ZombieDeportista(null, 0, 0, 0, 0, 0),
+			new ZombieCaracubo(null, 0, 0, 0, 0, 0)
 		};
 		
 		public static Zombie getZombie(String zombieName){

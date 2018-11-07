@@ -1,13 +1,17 @@
 package factories;
 
 import objects.Plant;
+import objects.Nuez;
+import objects.Peashooter;
+import objects.Petacereza;
+import objects.Sunflower;
 
 public class PlantFactory {
 		private static Plant[] availablePlants = {
-			new Sunflower();
-			new Peashooter();
-			new Petacereza();
-			new Nuez();
+			new Sunflower(null, 0, 0, 0, 0, 0),
+			new Peashooter(null, 0, 0, 0, 0, 0),
+			new Petacereza(null, 0, 0, 0, 0, 0),
+			new Nuez(null, 0, 0, 0, 0, 0)
 		};
 		
 		public static Plant getPlant(String plantName){
