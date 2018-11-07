@@ -27,6 +27,8 @@ public class PrintModeCommand extends Command {
 		case "d": p = new DebugPrinter(game, Game.DIMX, Game.DIMY);
 		}
 		controller.setPrinter(p);
+		controller.printGame();
+		controller.setNoPrintGameState();
 	}
 
 	@Override

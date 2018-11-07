@@ -23,7 +23,8 @@ public class PlantFactory {
 		public static String listOfAvailablePlants() {
 			String sol = "";
 			for (Plant item : availablePlants) {
-				sol += item.getName() + ": Cost: " + Integer.toString(item.cost) + " suncoins Harm: " + Integer.toString(item.harm) + "\n";
+				sol += item.getName() + ": Cost: " + Integer.toString(item.getCost()) + " suncoins";
+				sol += " Harm: " + Integer.toString(item.getHarm()) + "\n";
 			}
 			return sol;
 		}

@@ -23,7 +23,9 @@ public class ZombieFactory {
 		public static String listOfAvailableZombies() {
 			String sol = "";
 			for (Zombie item : availableZombies) {
-				sol += item.getName() + "\n";
+				sol += item.getName() + ": Speed: " + Integer.toString(item.getSpeed());
+				sol += " Harm: " + Integer.toString(item.getHarm()); 
+				sol += " Life: " + Integer.toString(item.getVida()) + "\n";
 			}
 			return sol;
 		}

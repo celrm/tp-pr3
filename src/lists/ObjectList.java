@@ -1,6 +1,5 @@
 package lists;
 
-import logic.Game;
 import objects.GameObject;
 
 public class ObjectList {
@@ -8,20 +7,22 @@ public class ObjectList {
 	private int cont;
 	
 	public ObjectList(){
-		this.lista = new GameObject[32];
+		this.lista = new GameObject[10];
 		this.cont = 0;
 	}
 	
-	public void add(String name, int x, int y){
-		this.lista[cont] = new GameObject(name, x,y);
+	public void add(GameObject object){
+		this.lista[cont] = object;
 		++this.cont;
 	}
+	
+	// TODO resize
 
-	private Object getPosition(int x, int y){
+	private GameObject getPosition(int x, int y){
 		boolean found = false;
-		Object o = null;
+		GameObject o = null;
 		for (int i = 0; i < this.cont && !found; ++i){
-			if (this.lista[i].vida() > 0 && this.lista[i].x() == x && this.lista[i].y() == y){
+			if (this.lista[i].getVida() > 0 && this.lista[i].x() == x && this.lista[i].y() == y){
 				o = this.lista[i];
 				found = true;
 			}
@@ -34,7 +35,7 @@ public class ObjectList {
 		boolean found = false;
 		int i = 0;
 		while (i < this.cont && !found){
-			if (this.lista[i].vida() > 0 && this.lista[i].x() == x && this.lista[i].y() == y)
+			if (this.lista[i].getVida() > 0 && this.lista[i].x() == x && this.lista[i].y() == y)
 				found = true;
 			else ++i;
 		}
@@ -43,7 +44,7 @@ public class ObjectList {
 	}
 	
 	public void danar(int x, int y, int cant){
-		Object o = getPosition(x,y);
+		GameObject o = getPosition(x,y);
 		if(o != null) o.danar(cant);
 	}
 	
@@ -54,7 +55,7 @@ public class ObjectList {
 	private void remove(){
 		int vivo = 0;
 		for (int i = 0; i < this.cont; ++i){
-			if (this.lista[i].vida()>0){
+			if (this.lista[i].getVida()>0){
 				this.lista[vivo] = this.lista[i];
 				++vivo;
 			}
@@ -82,7 +83,7 @@ public class ObjectList {
     public boolean todosMuertos() {
     	boolean sol = true;
     	for (int i = 0; i < this.cont && sol; ++i)
-            if (this.lista[i].vida() > 0) sol = false;
+            if (this.lista[i].getVida() > 0) sol = false;
     	return sol;
     }
 }

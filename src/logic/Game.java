@@ -4,6 +4,7 @@ import java.util.Random;
 
 import objects.Plant;
 import printers.GamePrinter;
+import lists.ObjectList;
 import lists.PlantList;
 import lists.ZombieList;
 
@@ -14,8 +15,8 @@ public class Game {
 	private Random rand;
 	private Level level;
 
-	private PlantList plantList;
-	private ZombieList zombieList;
+	private ObjectList plantList;
+	private ObjectList zombieList;
 
 	private int ciclos;
 	private SuncoinManager soles;
@@ -25,8 +26,8 @@ public class Game {
 		this.rand = rand;
 		this.level = n;
 		
-		this.plantList = new PlantList();
-		this.zombieList = new ZombieList();
+		this.plantList = new ObjectList();
+		this.zombieList = new ObjectList();
 		
 		this.zManager = new ZombieManager(this.level, this.rand);
 		
@@ -42,9 +43,9 @@ public class Game {
 			System.out.println("There's already something there.");
 		
 		// TODO en PlantFactory igual problema
-		else if (this.soles.num() >= plant.cost) {
+		else if (this.soles.num() >= plant.getCost()) {
 			this.plantList.add(plant, x, y, this);
-			this.soles.add(-plant.cost);
+			this.soles.add(-plant.getCost());
 			sol = true;
 		}
 		
@@ -80,20 +81,12 @@ public class Game {
   		
 		return sol;
   	}
-	
-	// Lo llama Controller
-	public void draw(){
-		System.out.println("Number of cycles: " + Integer.toString(this.ciclos));
-		System.out.println("Sun coins: " + Integer.toString(this.soles.num()));
-		System.out.println("Remaining Zombies: " + Integer.toString(this.zManager.numZombies()));
-
-		GamePrinter print = new GamePrinter(this, Game.DIMX, Game.DIMY);
-		System.out.println(print.toString());
-	}
 
 	private void computer() {
 		//se añaden zombies
 		boolean posible = false;
+		
+		//hay que añadir el tipo de zombie aleatorio
 
 		//si hay algún hueco en la columna DIMY - 1
 		for (int i = 0; i < Game.DIMX && !posible; ++i) {
@@ -114,8 +107,8 @@ public class Game {
 	
 	// Lo llama resetC
 		public void reset() {
-			this.plantList = new PlantList();
-			this.zombieList = new ZombieList();
+			this.plantList = new ObjectList();
+			this.zombieList = new ObjectList();
 
 			this.zManager = new ZombieManager(this.level, this.rand);
 
