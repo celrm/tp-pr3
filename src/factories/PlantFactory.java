@@ -8,18 +8,19 @@ import objects.Sunflower;
 
 public class PlantFactory {
 		private static Plant[] availablePlants = {
-			new Sunflower(null, 0, 0, 0, 0, 0),
-			new Peashooter(null, 0, 0, 0, 0, 0),
-			new Petacereza(null, 0, 0, 0, 0, 0),
-			new Nuez(null, 0, 0, 0, 0, 0)
+			new Sunflower(0,0),
+			new Peashooter(0, 0),
+			new Petacereza(0, 0),
+			new Nuez(0, 0)
 		};
 		
-		public static Plant getPlant(String plantName){
+		public static Plant getPlant(String plantName,int x, int y){
 			Plant p = null;
 			for (Plant item : availablePlants) {
 				if(plantName.equals(item.getName()))
 					p = item;
 			}
+			p.setPosition(x, y);
 			return p;
 		}
 		

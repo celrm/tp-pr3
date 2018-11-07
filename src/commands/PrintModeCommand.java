@@ -5,8 +5,6 @@ import play.Controller;
 import printers.DebugPrinter;
 import printers.GamePrinter;
 import printers.ReleasePrinter;
-import objects.Plant;
-import factories.PlantFactory;
 
 public class PrintModeCommand extends Command {
 	private String mode;
@@ -42,7 +40,10 @@ public class PrintModeCommand extends Command {
 			System.out.println("Wrong parameters.");
 			return null;
 		}
-
+		if(commandWords[1] != "debug" || commandWords[1] != "d" || commandWords[1] != "release" || commandWords[1] != "r"){
+			System.out.print("Printmode doesn't exists");
+			return null;
+		}
 		Command com = new PrintModeCommand(commandWords[1]);
 		return com;
 	}

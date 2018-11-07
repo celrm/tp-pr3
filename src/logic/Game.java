@@ -4,10 +4,10 @@ import java.util.Random;
 
 import factories.ZombieFactory;
 import objects.Plant;
+import objects.Zombie;
 import printers.GamePrinter;
 import lists.ObjectList;
-import lists.PlantList;
-import lists.ZombieList;
+
 
 public class Game {
 	public static final int DIMX = 4;
@@ -54,6 +54,17 @@ public class Game {
 		return sol;
 	}
 	
+	public boolean addZombieToGame(Zombie zombie, int x, int y) {
+		boolean sol = false;
+		if(this.hayCosas(x,y))
+			System.out.println("There's already something there.");
+		
+			this.zombieList.add(zombie);
+			sol = true;
+
+		return sol;
+	}
+	
 	// Lo llama Controller
 	public boolean isFinished() {
 		return playerWins() || zombiesWin();
@@ -85,15 +96,16 @@ public class Game {
 
 	private void computer() {		
 		// Tipo de zombie aleatorio
-		int tipo = Math.abs(this.rand.nextInt() % ZombieFactory.listOfAvailableZombies().length());
+		int tipo = Math.abs(this.rand.nextInt() % ZombieFactory.numZombies());
 
+		//Problema? el game accede a la factory
+		
 		// Si toca que salga en este ciclo
 		if (this.zManager.isZombieAdded()) {
 			// Fila aleatoria
 			int x = Math.abs(this.rand.nextInt() % Game.DIMX);
-			
-			Zombie zombie = new Zombie();
-			//x, Game.DIMY-1
+			String zombieName = ZombieFactory.zombieName(tipo);
+			Zombie zombie = ZombieFactory.getZombie(zombieName, x, DIMY-1);
 			this.zombieList.add(zombie);
 		}
 	}
@@ -109,7 +121,7 @@ public class Game {
 			this.soles = new SuncoinManager();
 		}
 
-	// Lo llama updateC
+	// Lo llama updateC -- tiene tambien que llamarse cada ciclo no?
 	public void update() {
 		this.plantList.update();
 		this.zombieList.update();

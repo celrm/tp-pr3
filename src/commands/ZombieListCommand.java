@@ -2,7 +2,6 @@ package commands;
 
 import logic.Game;
 import play.Controller;
-import factories.PlantFactory;
 import factories.ZombieFactory;
 
 public class ZombieListCommand extends NoParamsCommand{

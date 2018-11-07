@@ -3,9 +3,9 @@ package objects;
 public abstract class GameObject {
 	protected final String name;
 	protected final String nameMsg;
-	private final int x;
-	private final int y;
-	private final int vida;
+	private int x;
+	private int y;
+	private int vida;
 	private final int harm;
 	
 	public GameObject(String name, String nameMsg, int x, int y, int vida, int harm) {
@@ -48,5 +48,10 @@ public abstract class GameObject {
 	public void danar(int cant) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void setPosition(int x, int y){
+		this.x = x;
+		this.y = y;
 	}
 }

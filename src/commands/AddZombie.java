@@ -1,34 +1,35 @@
 package commands;
 
+//ESTE COMANDO SE AÑADORIA PARA DEPURAR
 import logic.Game;
 import play.Controller;
-import objects.Plant;
-import factories.PlantFactory;
+import objects.Zombie;
+import factories.ZombieFactory;
 
-public class AddCommand extends Command {
-	private String plantName;
+public class AddZombie extends Command {
+	private String zombieName;
 	private int x;
 	private int y;
 
-	public AddCommand(String plant, int x, int y) {
-		super("add", "[A]dd <plant> <x> <y>", "Adds a plant in position x, y.");
-		this.plantName = plant;
+	public AddZombie(String zombie, int x, int y) {
+		super("zombie", "[Z]ombie <zombie> <x> <y>", "Adds a zombie in position x, y.");
+		this.zombieName = zombie;
 		this.x = x;
 		this.y = y;
 	}
 	
 	@Override
 	public void execute(Game game, Controller controller) {
-		//he cambiado el getPlant de modo que la planta que devuelva ya contenga la posicion que deseamos
-		Plant plant = PlantFactory.getPlant(plantName, x, y);
+		Zombie zombie = ZombieFactory.getZombie(zombieName, x, y);
 		boolean executed = false;
-		if (plant != null){
-			executed = game.addPlantToGame(plant, x, y);
+		if (zombie != null){
+			executed = game.addZombieToGame(zombie, x, y);
 		}
-		else System.out.println("Plant doesn't exist");
+		else System.out.println("Zombie doesn't exist");
 		if(!executed)
 			controller.setNoPrintGameState();
 	}
+	
 
 	@Override
 	public Command parse(String[] commandWords, Controller controller) {
@@ -45,13 +46,12 @@ public class AddCommand extends Command {
 		int x = Integer.parseInt(commandWords[2]);
 		int y = Integer.parseInt(commandWords[3]);
 
-		// El -1 para el glitch
-		if(x<0 || y<0 || x>=Game.DIMX || y>=Game.DIMY-1) {
+		if(x<0 || y<0 || x>=Game.DIMX || y>=Game.DIMY) {
 			System.out.println("Wrong position.");
 			return null;
 		}
 
-		Command com = new AddCommand(commandWords[1], x, y);
+		Command com = new AddZombie(commandWords[1], x, y);
 		return com;
 	}
 }
