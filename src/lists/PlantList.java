@@ -2,6 +2,7 @@ package lists;
 
 import logic.Game;
 import objects.Plant;
+import factories.PlantFactory;
 
 // TODO todo
 public class PlantList {
