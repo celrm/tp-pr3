@@ -10,7 +10,7 @@ public class CommandParser {
 		new HelpCommand(),
 		new ExitCommand(),
 		new ListCommand(),
-		new PrintModeCommand(),
+		new PrintModeCommand(null),
 		new ResetCommand(),
 		new UpdateCommand(),
 		new ZombieListCommand(),

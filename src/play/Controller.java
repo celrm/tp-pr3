@@ -2,6 +2,8 @@ package play;
 
 import java.util.Scanner;
 
+import printers.GamePrinter;
+import printers.ReleasePrinter;
 import logic.Game;
 import commands.Command;
 import commands.CommandParser;
@@ -10,7 +12,7 @@ public class Controller {
 	private Game game;
 	private Scanner scanner;
 	private boolean exit;
-	private GamePrinter gamePrinter;
+	private GamePrinter gamePrinter = new ReleasePrinter(game, Game.DIMX, Game.DIMY);
 	
 	private boolean noPrint;
 	
@@ -45,8 +47,8 @@ public class Controller {
 		this.noPrint = true;
 	}
 	
-	public void setPrinter(Mode mode) {
-		this.gamePrinter = new ;
+	public void setPrinter(GamePrinter print) {
+		this.gamePrinter = print;
 	}
 	
 	public void printGame() {

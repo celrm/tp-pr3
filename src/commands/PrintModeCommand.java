@@ -2,20 +2,31 @@ package commands;
 
 import logic.Game;
 import play.Controller;
+import printers.DebugPrinter;
+import printers.GamePrinter;
+import printers.ReleasePrinter;
 import objects.Plant;
 import factories.PlantFactory;
 
 public class PrintModeCommand extends Command {
-	private Mode mode;
-
-	public PrintModeCommand(Mode mode) {
+	private String mode;
+	
+	public PrintModeCommand(String mode) {
 		super("printmode", "[P]rintMode <mode>", "change print mode [Release|Debug]");
 		this.mode = mode;
 	}
 	
+	// Mejorar con lo de la herencia y eso
 	@Override
 	public void execute(Game game, Controller controller) {
-		
+		GamePrinter p = null;
+		switch(mode) {
+		case "release":
+		case "r": p = new ReleasePrinter(game, Game.DIMX, Game.DIMY);
+		case "debug":
+		case "d": p = new DebugPrinter(game, Game.DIMX, Game.DIMY);
+		}
+		controller.setPrinter(p);
 	}
 
 	@Override
@@ -30,11 +41,7 @@ public class PrintModeCommand extends Command {
 			return null;
 		}
 
-		switch(commandWords[1]) {
-		case 
-		}
-
-		Command com = new PrintModeCommand(mode);
+		Command com = new PrintModeCommand(commandWords[1]);
 		return com;
 	}
 }
