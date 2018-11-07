@@ -30,13 +30,12 @@ public class CommandParser {
 	
 	// Lo usa HelpCommand
 	public static String commandHelp() {
-		String str = null;
-		// TODO StringBuilder?
-		
+		//stringbuilder (creo)
+		StringBuilder strb = new StringBuilder();
 		for (Command item : availableCommands) {
-			str += item.helpText() + "\n";
+			strb.append(item.helpText() + "\n");
 		}
-		
+		String str = strb.toString();		
 		return str;
 	}
 }
