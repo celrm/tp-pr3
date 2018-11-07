@@ -4,6 +4,7 @@ import java.util.Random;
 
 import factories.ZombieFactory;
 import objects.Plant;
+import objects.Sunflower;
 import objects.Zombie;
 import printers.GamePrinter;
 import lists.ObjectList;
