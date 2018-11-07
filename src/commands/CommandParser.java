@@ -8,10 +8,12 @@ public class CommandParser {
 	private static Command[] availableCommands = {
 		new AddCommand(null, 0, 0),
 		new HelpCommand(),
-		new ResetCommand(),
 		new ExitCommand(),
 		new ListCommand(),
+		new PrintModeCommand(),
+		new ResetCommand(),
 		new UpdateCommand(),
+		new ZombieListCommand(),
 	};
 	
 	public static Command parseCommand(String[] words, Controller controller) {

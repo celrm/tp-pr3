@@ -4,7 +4,10 @@ import objects.Plant;
 
 public class PlantFactory {
 		private static Plant[] availablePlants = {
-			
+			new Sunflower();
+			new Peashooter();
+			new Petacereza();
+			new Nuez();
 		};
 		
 		public static Plant getPlant(String plantName){

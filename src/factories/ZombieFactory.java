@@ -6,7 +6,9 @@ import objects.Zombie;
 // puedes crear una factoría y un nuevo comando addZombie
 public class ZombieFactory {
 		private static Zombie[] availableZombies = {
-			
+			new ZombieComun();
+			new ZombieDeportista();
+			new ZombieCaracubo();
 		};
 		
 		public static Zombie getZombie(String zombieName){
@@ -25,4 +27,6 @@ public class ZombieFactory {
 			}
 			return sol;
 		}
+		
+		
 }

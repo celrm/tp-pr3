@@ -10,6 +10,7 @@ public class Controller {
 	private Game game;
 	private Scanner scanner;
 	private boolean exit;
+	private GamePrinter gamePrinter;
 	
 	private boolean noPrint;
 	
@@ -44,9 +45,13 @@ public class Controller {
 		this.noPrint = true;
 	}
 	
-	private void printGame() {
-		if (!this.noPrint) {
-			this.game.draw();
+	public void setPrinter(Mode mode) {
+		this.gamePrinter = new ;
+	}
+	
+	public void printGame() {
+		if(!noPrint) {
+		System.out.println(gamePrinter.printGame(game));
 		}
 	}
 	

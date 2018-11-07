@@ -2,7 +2,7 @@ package printers;
 
 import logic.Game;
 
-public class GamePrinter {
+public interface GamePrinter {
 	int dimX; 
 	int dimY;
 	String[][] board;
