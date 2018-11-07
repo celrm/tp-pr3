@@ -2,13 +2,15 @@ package objects;
 
 public abstract class GameObject {
 	protected final String name;
+	protected final String nameMsg;
 	private final int x;
 	private final int y;
 	private final int vida;
 	private final int harm;
 	
-	public GameObject(String name, int x, int y, int vida, int harm) {
+	public GameObject(String name, String nameMsg, int x, int y, int vida, int harm) {
 		this.name = name;
+		this.nameMsg = nameMsg;
 		this.x = x;
 		this.y = y;
 		this.vida = vida;
