@@ -24,11 +24,12 @@ public class PlantFactory {
 		}
 		
 		public static String listOfAvailablePlants() {
-			String sol = "";
+			StringBuilder sol = new StringBuilder();
 			for (Plant item : availablePlants) {
-				sol += item.getName() + ": Cost: " + Integer.toString(item.getCost()) + " suncoins";
-				sol += " Harm: " + Integer.toString(item.getHarm()) + "\n";
+				sol.append(item.getName()).append(":");
+				sol.append(" Cost: ").append(Integer.toString(item.getCost())).append(" suncoins");
+				sol.append(" Harm: ").append(Integer.toString(item.getHarm())).append("\n");
 			}
-			return sol;
+			return sol.toString();
 		}
 }

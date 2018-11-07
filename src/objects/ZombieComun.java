@@ -4,9 +4,8 @@ import objects.Zombie;
 
 public class ZombieComun extends Zombie {
 
-	public ZombieComun(String name, int x, int y, int vida, int harm, int speed) {
-		super(name, x, y, vida, harm, speed);
-		// TODO Auto-generated constructor stub
+	public ZombieComun(int x, int y) {
+		super("[Z]ombie comun", x, y, 5, 1, 2);
 	}
 
 }

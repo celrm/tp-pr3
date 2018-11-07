@@ -2,8 +2,8 @@ package objects;
 
 public class Peashooter extends Plant {
 
-	public Peashooter(String name, int x, int y, int vida, int harm, int cost) {
-		super(name, x, y, vida, harm, cost);
+	public Peashooter(int x, int y) {
+		super("[P]eashooter", x, y, 5, 1, 50);
 		
 	}
 

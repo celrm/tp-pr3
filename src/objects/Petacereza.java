@@ -2,8 +2,8 @@ package objects;
 
 public class Petacereza extends Plant {
 
-	public Petacereza(String name, int x, int y, int vida, int harm, int cost) {
-		super(name, x, y, vida, harm, cost);
+	public Petacereza(int x, int y) {
+		super("Peta[c]ereza", x, y, 2, 10, 50);
 		
 	}
 

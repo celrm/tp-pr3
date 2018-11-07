@@ -7,9 +7,9 @@ import objects.ZombieDeportista;
 
 public class ZombieFactory {
 		private static Zombie[] availableZombies = {
-			new ZombieComun(null, 0, 0, 0, 0, 0),
-			new ZombieDeportista(null, 0, 0, 0, 0, 0),
-			new ZombieCaracubo(null, 0, 0, 0, 0, 0)
+			new ZombieComun(0, 0),
+			new ZombieDeportista(0, 0),
+			new ZombieCaracubo(0, 0)
 		};
 		
 		public static Zombie getZombie(String zombieName){
@@ -22,13 +22,14 @@ public class ZombieFactory {
 		}
 		
 		public static String listOfAvailableZombies() {
-			String sol = "";
+			StringBuilder sol = new StringBuilder();
 			for (Zombie item : availableZombies) {
-				sol += item.getName() + ": Speed: " + Integer.toString(item.getSpeed());
-				sol += " Harm: " + Integer.toString(item.getHarm()); 
-				sol += " Life: " + Integer.toString(item.getVida()) + "\n";
+				sol.append(item.getName()).append(":");
+				sol.append(" Speed: ").append(Integer.toString(item.getSpeed()));
+				sol.append(" Harm: ").append(Integer.toString(item.getHarm())); 
+				sol.append(" Life: ").append(Integer.toString(item.getVida())).append("\n");
 			}
-			return sol;
+			return sol.toString();
 		}
 		
 		
