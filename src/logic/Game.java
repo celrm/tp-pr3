@@ -145,57 +145,46 @@ public class Game {
 
   	
 
-	// TODO actions  	
+	// TODO actions
 
-  	public void sunflowerAction() {
+  	public void generarSoles() {
   		//añade los soles que le tocan
   		this.soles.add(Sunflower.PRODUCE_SOLES);
   	}
-
-  	public void peashooterAction(int x, int y) {
+  	
+  	public void disparar(Plant p,int x, int y) {
   		boolean found = false;
-  		//recorre la fila en la que está peashooter
+  		//recorre la fila en la que está p
 		for (int j = y+1; j < Game.DIMY && !found; ++j) {
 			//y si hay un zombie lo daña, y deja de buscar
 			if (this.zombieList.hay(x, j)) {
-	  			this.zombieList.danar(x,j,Peashooter.HARM);
+	  			this.zombieList.danar(x,j,p.getHarm());
 	  			found = true;
 			}
 		}
   	}
+  	
+  	public void explotar(Plant p) {
+  		for(int i = p.x()-1; i <= p.x() + 1; ++i)
+  			for(int j = p.y()-1; j <= p.y() + 1; ++j) {
+  				boolean dentro = !(i<0 || j<0 || i>=Game.DIMX || j>=Game.DIMY);
+  				if(dentro && this.zombieList.hay(i,j))
+  		  			this.zombieList.danar(i,j,p.getHarm());
+  			}
+  	}
 
-  	public boolean zombieAction(int x, int y) {
+  	public boolean zombieAction(Zombie z,int x, int y) {
   		boolean sol;
   		//si tiene S delante, lo ataca
-  		if(this.sunflowerList.hay(x,y-1)) {
-  			this.sunflowerList.danar(x,y-1,Zombie.HARM);
+  		if(this.plantList.hay(x,y-1)) {
+  			this.plantList.danar(x,y-1,z.getHarm());
   			sol = true;
   		}
-  		//si no, si tiene P delante, lo ataca
-  		else if(this.peashooterList.hay(x,y-1)) {
-  			this.peashooterList.danar(x,y-1,Zombie.HARM);
-			sol = true;
-		}
   		//si no, no ha atacado a nadie
   		else sol = false;
   		return sol;
   	}
   	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-
   	//Lo necesitamos public para que no se pisen los zombies
   	public boolean hayZombie(int x, int y) {
   		return this.zombieList.hay(x,y);
