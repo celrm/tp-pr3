@@ -8,10 +8,10 @@ import objects.Sunflower;
 
 public class PlantFactory {
 		private static Plant[] availablePlants = {
-			new Sunflower(0,0),
-			new Peashooter(0, 0),
-			new Petacereza(0, 0),
-			new Nuez(0, 0)
+			new Sunflower(0,0,null),
+			new Peashooter(0, 0,null),
+			new Petacereza(0, 0,null),
+			new Nuez(0, 0,null)
 		};
 		
 		public static Plant getPlant(String plantName,int x, int y){

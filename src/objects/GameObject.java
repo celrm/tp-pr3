@@ -1,5 +1,7 @@
 package objects;
 
+import logic.Game;
+
 public abstract class GameObject {
 	protected final String name;
 	protected final String nameMsg;
@@ -7,14 +9,16 @@ public abstract class GameObject {
 	private int y;
 	private int vida;
 	private final int harm;
+	private Game game;
 	
-	public GameObject(String name, String nameMsg, int x, int y, int vida, int harm) {
+	public GameObject(String name, String nameMsg, int x, int y, int vida, int harm, Game game) {
 		this.name = name;
 		this.nameMsg = nameMsg;
 		this.x = x;
 		this.y = y;
 		this.vida = vida;
 		this.harm = harm;
+		this.game = game;
 	}
 	
 	// TODO no sé si va esto o no. no sé si protected o no
@@ -23,13 +27,11 @@ public abstract class GameObject {
 	}
 
 	public int x() {
-		// TODO Auto-generated method stub
-		return 0;
+		return x;
 	}
 
 	public int y() {
-		// TODO Auto-generated method stub
-		return 0;
+		return y;
 	}
 
 	public int getHarm() {

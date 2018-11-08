@@ -13,8 +13,9 @@ public class Controller {
 	private Scanner scanner;
 	private boolean exit;
 	private GamePrinter gamePrinter = new ReleasePrinter(game, Game.DIMX, Game.DIMY);
-	
-	private boolean noPrint;
+	private final String unknownCommandMsg = "Unkown command";
+	private final String prompt = "Command > ";
+;	private boolean noPrint;
 	
 	public Controller(Game j, Scanner sc) {
 		this.game = j;
@@ -28,7 +29,7 @@ public class Controller {
 			printGame();
 			noPrint = false;
 			
-//			System.out.print(prompt);
+			System.out.print(prompt);
 			String[] words = scanner.nextLine().toLowerCase().trim().split("\\s+");
 			Command command = CommandParser.parseCommand(words, this);
 			
@@ -37,7 +38,7 @@ public class Controller {
 			}
 			
 			else {
-//				System.err.println(unknownCommandMsg);
+				System.err.println(unknownCommandMsg);
 				setNoPrintGameState();
 			}
 		}

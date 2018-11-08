@@ -7,9 +7,9 @@ import objects.ZombieDeportista;
 
 public class ZombieFactory {
 		private static Zombie[] availableZombies = {
-			new ZombieComun(0, 0),
-			new ZombieDeportista(0, 0),
-			new ZombieCaracubo(0, 0)
+			new ZombieComun(0, 0, null),
+			new ZombieDeportista(0, 0, null),
+			new ZombieCaracubo(0, 0, null)
 		};
 		
 		public static Zombie getZombie(String zombieName, int x, int y){
