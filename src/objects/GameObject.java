@@ -5,13 +5,15 @@ import logic.Game;
 public abstract class GameObject {
 	protected final String name;
 	protected final String nameMsg;
-	private int x;
-	private int y;
+	protected int x;
+	protected int y;
 	private int vida;
+	protected Game game;
 	private final int harm;
-	private Game game;
+	protected final int nacimiento;
+	protected final int speed;
 	
-	public GameObject(String name, String nameMsg, int x, int y, int vida, int harm, Game game) {
+	public GameObject(String name, String nameMsg, int x, int y, int vida, int harm, Game game, int speed) {
 		this.name = name;
 		this.nameMsg = nameMsg;
 		this.x = x;
@@ -19,6 +21,8 @@ public abstract class GameObject {
 		this.vida = vida;
 		this.harm = harm;
 		this.game = game;
+		this.nacimiento = game.getCiclos();
+		this.speed = speed;
 	}
 	
 	// TODO no sé si va esto o no. no sé si protected o no
@@ -43,12 +47,11 @@ public abstract class GameObject {
 	}
 
 	public void update() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	public void danar(int cant) {
-		// TODO Auto-generated method stub
+		this.vida -=cant;
 		
 	}
 	

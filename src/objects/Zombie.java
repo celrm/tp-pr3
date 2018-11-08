@@ -3,11 +3,8 @@ package objects;
 import logic.Game;
 
 public abstract class Zombie extends GameObject {
-  private final int speed;
-  
-	public Zombie(String name, String nameMsg, int x, int y, int vida, int harm, int speed, Game game) {
-	    super(name, nameMsg, x, y, vida, harm, game);
-	    this.speed = speed;
+	public Zombie(String name, String nameMsg, int x, int y, int vida, int harm, Game game, int speed) {
+	    super(name, nameMsg, x, y, vida, harm, game, speed);
 	}
 
 	public int getSpeed() {
@@ -15,7 +12,12 @@ public abstract class Zombie extends GameObject {
 	}
 	
 	public void update() {
-		
+		boolean toca = (this.nacimiento % speed == this.game.getCiclos() % speed);
+		boolean noPrimerCiclo = (this.nacimiento != this.game.getCiclos());
+		boolean haAtacado = this.game.zombieAction(this, this.x, this.y);
+		if (!haAtacado && !this.game.hayZombie(x, y-1) && noPrimerCiclo && toca){
+			--this.y;
+		}
 	}
 }
 
