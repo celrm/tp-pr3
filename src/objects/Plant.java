@@ -16,7 +16,6 @@ public abstract class Plant extends GameObject {
 	}
 	
 	public void update() {
-		boolean toca = (this.nacimiento % speed == this.game.getCiclos() % speed);
 	}
 	
 }
