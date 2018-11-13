@@ -12,20 +12,19 @@ public class ZombieFactory {
 			new ZombieCaracubo(0, 0, null)
 		};
 		
-		public static Zombie getZombie(String zombieName, int x, int y){
+		public static Zombie getZombie(String zombieName){
 			Zombie z = null;
 			for (Zombie item : availableZombies) {
 				if(zombieName.equals(item.getName()))
 					z = item;
 			}
-			z.setPosition(x,y);
 			return z;
 		}
 		
 		public static String listOfAvailableZombies() {
 			StringBuilder sol = new StringBuilder();
 			for (Zombie item : availableZombies) {
-				sol.append(item.getName()).append(":");
+				sol.append(item.getNameMsg()).append(":");
 				sol.append(" Speed: ").append(Integer.toString(item.getSpeed()));
 				sol.append(" Harm: ").append(Integer.toString(item.getHarm())); 
 				sol.append(" Life: ").append(Integer.toString(item.getVida())).append("\n");
@@ -45,6 +44,7 @@ public class ZombieFactory {
 		}
 		
 		//una puta mierda de funcion, como la de arriba pero no se me ocurria otra manera 
+		@SuppressWarnings("unused")
 		public static int numZombies(){
 			int sol = 0;
 			for (Zombie item : availableZombies) {

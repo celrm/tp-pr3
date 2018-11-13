@@ -23,6 +23,6 @@ public abstract class Command {
 	public abstract Command parse(String[] commandWords, Controller controller);
 
 	public String helpText() {
-		return " " + commandTextMsg + ": " + this.helpTextMsg;
+		return commandTextMsg + ": " + this.helpTextMsg;
 	}
 }

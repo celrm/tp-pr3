@@ -12,8 +12,8 @@ public class Controller {
 	private Game game;
 	private Scanner scanner;
 	private boolean exit;
-	private GamePrinter gamePrinter = new ReleasePrinter(game, Game.DIMX, Game.DIMY);
-	private final String unknownCommandMsg = "Unkown command";
+	private GamePrinter gamePrinter;
+	private final String unknownCommandMsg = "Unknown command";
 	private final String prompt = "Command > ";
 ;	private boolean noPrint;
 	
@@ -21,13 +21,14 @@ public class Controller {
 		this.game = j;
 		this.scanner = sc;
 		this.exit = false;
-		this.noPrint = true;
+		this.noPrint = false;
+		this.gamePrinter = new ReleasePrinter(j, Game.DIMX, Game.DIMY);
 	} 
 	
 	public void run() {
 		while (!game.isFinished() && !exit) {
 			printGame();
-			noPrint = false;
+			noPrint = true;
 			
 			System.out.print(prompt);
 			String[] words = scanner.nextLine().toLowerCase().trim().split("\\s+");
@@ -45,7 +46,7 @@ public class Controller {
 	}
 	
 	public void setNoPrintGameState() {
-		this.noPrint = true;
+		this.noPrint = false;
 	}
 	
 	public void setPrinter(GamePrinter print) {
@@ -53,7 +54,7 @@ public class Controller {
 	}
 	
 	public void printGame() {
-		if(!noPrint) {
+		if(noPrint) {
 		System.out.println(gamePrinter.printGame(game));
 		}
 	}

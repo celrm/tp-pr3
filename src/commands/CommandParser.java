@@ -6,13 +6,13 @@ import play.Controller;
 public class CommandParser {
 	
 	private static Command[] availableCommands = {
+		new UpdateCommand(),
 		new AddCommand(null, 0, 0),
 		new HelpCommand(),
 		new ExitCommand(),
 		new ListCommand(),
 		new PrintModeCommand(null),
 		new ResetCommand(),
-		new UpdateCommand(),
 		new ZombieListCommand(),
 	};
 	

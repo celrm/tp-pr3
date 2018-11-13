@@ -105,7 +105,9 @@ public class Game {
 			// Fila aleatoria
 			int x = Math.abs(this.rand.nextInt() % Game.DIMX);
 			String zombieName = ZombieFactory.zombieName(tipo);
-			Zombie zombie = ZombieFactory.getZombie(zombieName, x, DIMY-1);
+			Zombie zombie = ZombieFactory.getZombie(zombieName);
+			zombie.setPosition(x, DIMY-1);
+			zombie.setGame(this);
 			this.zombieList.add(zombie);
 		}
 	}

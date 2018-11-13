@@ -4,13 +4,13 @@ import logic.Game;
 
 public abstract class GameObject {
 	protected final String name;
-	protected final String nameMsg;
+	private final String nameMsg;
 	protected int x;
 	protected int y;
 	private int vida;
 	protected Game game;
 	private final int harm;
-	protected final int nacimiento;
+	protected int nacimiento;
 	protected final int speed;
 	
 	public GameObject(String name, String nameMsg, int x, int y, int vida, int harm, Game game, int speed) {
@@ -21,7 +21,7 @@ public abstract class GameObject {
 		this.vida = vida;
 		this.harm = harm;
 		this.game = game;
-		this.nacimiento = game.getCiclos();
+		this.nacimiento = 0;
 		this.speed = speed;
 	}
 	
@@ -58,5 +58,14 @@ public abstract class GameObject {
 	public void setPosition(int x, int y){
 		this.x = x;
 		this.y = y;
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
+		this.nacimiento = game.getCiclos();
+	}
+
+	public String getNameMsg() {
+		return nameMsg;
 	}
 }

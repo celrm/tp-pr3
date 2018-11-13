@@ -1,9 +1,11 @@
 package commands;
 
-//ESTE COMANDO SE AÑADORIA PARA DEPURAR
+//ESTE COMANDO SE AÑADIRÍA PARA DEPURAR
 import logic.Game;
 import play.Controller;
+import objects.Plant;
 import objects.Zombie;
+import factories.PlantFactory;
 import factories.ZombieFactory;
 
 public class AddZombie extends Command {
@@ -20,7 +22,10 @@ public class AddZombie extends Command {
 	
 	@Override
 	public void execute(Game game, Controller controller) {
-		Zombie zombie = ZombieFactory.getZombie(zombieName, x, y);
+		Zombie zombie = ZombieFactory.getZombie(zombieName);
+		zombie.setPosition(x, y);
+		zombie.setGame(game);
+		
 		boolean executed = false;
 		if (zombie != null){
 			executed = game.addZombieToGame(zombie, x, y);
@@ -33,8 +38,8 @@ public class AddZombie extends Command {
 
 	@Override
 	public Command parse(String[] commandWords, Controller controller) {
-		// TODO preguntar por la primera letra
-		if(commandWords[0] != this.commandText || commandWords[0] != this.commandText.split("\\s+")[0])
+		boolean primeraletra = commandWords[0].equals(this.commandText.substring(0, 1));
+		if(!commandWords[0].equals(this.commandText) && !primeraletra)
 			return null;
 		
 		// TODO aquí va a sacar wrong command también
@@ -46,12 +51,13 @@ public class AddZombie extends Command {
 		int x = Integer.parseInt(commandWords[2]);
 		int y = Integer.parseInt(commandWords[3]);
 
-		if(x<0 || y<0 || x>=Game.DIMX || y>=Game.DIMY) {
+		// El -1 para el glitch
+		if(x<0 || y<0 || x>=Game.DIMX || y>=Game.DIMY-1) {
 			System.out.println("Wrong position.");
 			return null;
 		}
 
-		Command com = new AddZombie(commandWords[1], x, y);
+		Command com = new AddCommand(commandWords[1], x, y);
 		return com;
 	}
 }

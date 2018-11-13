@@ -25,7 +25,7 @@ public class ReleasePrinter implements GamePrinter {
 		}
 			
 		for(int i = 0; i < dimX; i++) {
-			for(int j = 0; j < dimY; j++) {
+			for(int j = 0; j < dimY; j++) {				
 				String s = game.toString(i,j);
 				if(!s.equals("")) 
 					board[i][j] = s;
@@ -35,6 +35,8 @@ public class ReleasePrinter implements GamePrinter {
 
 	@Override
 	public String printGame(Game game) {
+		
+		encodeGame(game);
 
 		int cellSize = 7;
 		int marginSize = 2;

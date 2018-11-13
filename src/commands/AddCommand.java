@@ -19,10 +19,12 @@ public class AddCommand extends Command {
 	
 	@Override
 	public void execute(Game game, Controller controller) {
-		//he cambiado el getPlant de modo que la planta que devuelva ya contenga la posicion que deseamos
-		Plant plant = PlantFactory.getPlant(plantName, x, y);
+		Plant plant = PlantFactory.getPlant(plantName);
+		
 		boolean executed = false;
 		if (plant != null){
+			plant.setPosition(x, y);
+			plant.setGame(game);
 			executed = game.addPlantToGame(plant, x, y);
 			game.update();
 		}
@@ -33,8 +35,8 @@ public class AddCommand extends Command {
 
 	@Override
 	public Command parse(String[] commandWords, Controller controller) {
-		// TODO preguntar por la primera letra
-		if(commandWords[0] != this.commandText || commandWords[0] != this.commandText.split("\\s+")[0])
+		boolean primeraletra = commandWords[0].equals(this.commandText.substring(0, 1));
+		if(!commandWords[0].equals(this.commandText) && !primeraletra)
 			return null;
 		
 		// TODO aquí va a sacar wrong command también

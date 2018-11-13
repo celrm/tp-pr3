@@ -14,7 +14,8 @@ public abstract class NoParamsCommand extends Command {
 	
 	@Override
 	public Command parse(String[] commandWords, Controller controller) {
-		if(commandWords[0].equals(this.commandText))
+		boolean primeraletra = commandWords[0].equals(this.commandText.substring(0, 1));
+		if(commandWords[0].equals(this.commandText) || primeraletra)
 			return this;
 		
 		else return null;		

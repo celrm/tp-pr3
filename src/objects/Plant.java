@@ -5,10 +5,12 @@ import logic.Game;
 public abstract class Plant extends GameObject {
 
 	private final int cost;
+	private final String symbol;
 	
-	public Plant(String name, String nameMsg, int x, int y, int vida, int harm, int cost, Game game, int speed) {
+	public Plant(String name, String symbol, String nameMsg, int x, int y, int vida, int harm, int cost, Game game, int speed) {
 	    super(name, nameMsg, x, y, vida, harm, game, speed);
 	    this.cost = cost;
+	    this.symbol = symbol;
 	}
 
 	public int getCost() {
@@ -16,6 +18,10 @@ public abstract class Plant extends GameObject {
 	}
 	
 	public void update() {
+	}
+
+	public String getSymbol() {
+		return symbol;
 	}
 	
 }
