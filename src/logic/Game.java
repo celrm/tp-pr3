@@ -133,7 +133,13 @@ public class Game {
 	}
 
 
-
+	public String cabezera() {
+		StringBuilder str = new StringBuilder();
+		str.append("Number of cycles: ").append(Integer.toString(this.ciclos));
+		str.append("\nSun coins: ").append(Integer.toString(this.soles.num()));
+		str.append("\nRemaining Zombies: ").append(Integer.toString(this.zManager.numZombies()));
+		return str.toString();
+	}
 
 
 

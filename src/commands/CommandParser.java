@@ -18,7 +18,6 @@ public class CommandParser {
 	
 	public static Command parseCommand(String[] words, Controller controller) {
 		Command com = null;
-
 		for (Command item : availableCommands) {
 			if(com==null)
 				com = item.parse(words, controller);

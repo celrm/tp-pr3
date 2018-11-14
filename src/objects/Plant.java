@@ -24,4 +24,8 @@ public abstract class Plant extends GameObject {
 		return symbol;
 	}
 	
+	public String toString(){
+		return symbol.toUpperCase() + " [ " + this.getVida() + " ]";
+	}
+	
 }

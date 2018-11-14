@@ -55,6 +55,7 @@ public class Controller {
 	
 	public void printGame() {
 		if(noPrint) {
+		System.out.println(game.cabezera());
 		System.out.println(gamePrinter.printGame(game));
 		}
 	}

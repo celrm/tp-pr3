@@ -35,8 +35,7 @@ public class AddCommand extends Command {
 
 	@Override
 	public Command parse(String[] commandWords, Controller controller) {
-		boolean primeraletra = commandWords[0].equals(this.commandText.substring(0, 1));
-		if(!commandWords[0].equals(this.commandText) && !primeraletra)
+		if(!commandWords[0].equals(this.commandText) && !commandWords[0].equals(this.commandText.substring(0, 1)))
 			return null;
 		
 		// TODO aquí va a sacar wrong command también

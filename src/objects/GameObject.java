@@ -25,6 +25,8 @@ public abstract class GameObject {
 		this.speed = speed;
 	}
 	
+	public abstract String toString();
+	
 	// TODO no sé si va esto o no. no sé si protected o no
 	public String getName() {
 	    return this.name;

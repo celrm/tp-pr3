@@ -19,5 +19,9 @@ public abstract class Zombie extends GameObject {
 			--this.y;
 		}
 	}
+	
+	public String toString(){
+		return "Z [ " + this.getVida() + " ]";
+	}
 }
 

@@ -15,8 +15,9 @@ public class UpdateCommand extends NoParamsCommand {
 	}
 	
 	public Command parse(String[] commandWords, Controller controller) {
-		if(commandWords.length == 0)
+		if(commandWords[0].equals(this.commandText)) {
 			return this;
-		else return null;
+		}
+		else return null;		
 	}
 }
