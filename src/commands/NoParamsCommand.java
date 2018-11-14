@@ -1,6 +1,5 @@
 package commands;
 
-import factories.PlantFactory;
 import logic.Game;
 import play.Controller;
 

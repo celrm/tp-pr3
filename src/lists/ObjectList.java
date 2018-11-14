@@ -20,7 +20,7 @@ public class ObjectList {
 		++this.cont;
 	}
 	
-	// TODO resize
+	// TODO resize-->> en remove es donde habria que llamarlo no???
 
 	private GameObject getPosition(int x, int y){
 		boolean found = false;

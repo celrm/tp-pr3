@@ -24,6 +24,7 @@ public class AddCommand extends Command {
 		boolean executed = false;
 		if (plant != null){
 			executed = game.addPlantToGame(plant, x, y);
+			//No tendría mas sentido que solo se actualizase solo si se ha ejecutado???
 			game.update();
 		}
 		else System.out.println("Plant doesn't exist");

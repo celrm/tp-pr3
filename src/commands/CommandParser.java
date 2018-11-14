@@ -29,7 +29,6 @@ public class CommandParser {
 	
 	// Lo usa HelpCommand
 	public static String commandHelp() {
-		//stringbuilder (creo)
 		StringBuilder strb = new StringBuilder();
 		for (Command item : availableCommands) {
 			strb.append(item.helpText() + "\n");
