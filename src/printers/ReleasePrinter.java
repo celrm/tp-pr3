@@ -2,7 +2,8 @@ package printers;
 
 import logic.Game;
 
-public class ReleasePrinter extends BoardPrinter {
+public class ReleasePrinter extends BoardPrinter implements GamePrinter
+{
 	String[][] board;
 	final String space = " ";
 	
