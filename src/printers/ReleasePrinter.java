@@ -4,11 +4,10 @@ import logic.Game;
 
 public class ReleasePrinter extends BoardPrinter {
 
-	
 	public ReleasePrinter(Game game) {
-		encodeGame(game);
 		boardX = Game.DIMX;
 		boardY = Game.DIMY;
+		cellsize = 7;
 	}
 
 	@Override
@@ -30,7 +29,7 @@ public class ReleasePrinter extends BoardPrinter {
 	}
 	
 	
-	public String cabezera(Game game) {
+	public String cabecera(Game game) {
 		StringBuilder str = new StringBuilder();
 		str.append("Number of cycles: ").append(Integer.toString(game.getCiclos()));
 		str.append("\nSun coins: ").append(Integer.toString(game.getSoles()));
