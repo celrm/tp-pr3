@@ -15,14 +15,14 @@ public class Controller {
 	private BoardPrinter gamePrinter;
 	private final String unknownCommandMsg = "Unknown command";
 	private final String prompt = "Command > ";
-;	private boolean dontPrint;
+	private boolean dontPrint;
 	
 	public Controller(Game j, Scanner sc) {
 		this.game = j;
 		this.scanner = sc;
 		this.exit = false;
 		this.dontPrint = false;
-		this.gamePrinter = new ReleasePrinter(j, Game.DIMX, Game.DIMY);
+		this.gamePrinter = new ReleasePrinter(j);
 	} 
 	
 	public void run() {
@@ -55,7 +55,7 @@ public class Controller {
 	
 	public void printGame() {
 		if(!dontPrint) {
-		System.out.println(game.cabezera());
+		System.out.println();
 		System.out.println(gamePrinter.printGame(game));
 		}
 	}
@@ -63,4 +63,5 @@ public class Controller {
 	public void exit() {
 		this.exit = true;
 	}
+	
 }

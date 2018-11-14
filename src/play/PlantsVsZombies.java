@@ -21,7 +21,7 @@ public class PlantsVsZombies {
 		default: level = Level.EASY; break;
 		}
 
-		Game juego = new Game(rnd, level);
+		Game juego = new Game(rnd, level, seed);
 		Scanner sc = new Scanner(System.in);
 		Controller controlador = new Controller(juego, sc);
 
@@ -31,6 +31,7 @@ public class PlantsVsZombies {
 		controlador.run();
 
 	}
+	
 
 }
 

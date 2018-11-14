@@ -1,5 +1,7 @@
 package printers;
 
-public interface GamePrinter {
+import logic.Game;
 
+public interface GamePrinter {
+	String printGame(Game game);
 }

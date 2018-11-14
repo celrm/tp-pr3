@@ -20,9 +20,9 @@ public class PrintModeCommand extends Command {
 		BoardPrinter p = null;
 		switch(mode) {
 		case "release":
-		case "r": p = new ReleasePrinter(game, Game.DIMX, Game.DIMY);
+		case "r": p = new ReleasePrinter(game);
 		case "debug":
-		case "d": p = new DebugPrinter(game, Game.DIMX, Game.DIMY);
+		case "d": p = new DebugPrinter(game);
 		}
 		controller.setPrinter(p);
 		controller.printGame();

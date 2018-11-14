@@ -15,7 +15,8 @@ public class Game {
 
 	private Random rand;
 	private Level level;
-
+	public long seed;
+	
 	private ObjectList plantList;
 	private ObjectList zombieList;
 
@@ -23,9 +24,10 @@ public class Game {
 	private SuncoinManager soles;
 	private ZombieManager zManager;
 
-	public Game(Random rand, Level n) {
+	public Game(Random rand, Level n, long seed) {
 		this.rand = rand;
 		this.level = n;
+		this.seed  = seed;
 		
 		this.plantList = new ObjectList();
 		this.zombieList = new ObjectList();
@@ -137,22 +139,8 @@ public class Game {
 		this.ciclos++;
 	}
 
-
-	public String cabezera() {
-		StringBuilder str = new StringBuilder();
-		str.append("Number of cycles: ").append(Integer.toString(this.ciclos));
-		str.append("\nSun coins: ").append(Integer.toString(this.soles.num()));
-		str.append("\nRemaining Zombies: ").append(Integer.toString(this.zManager.numZombies()));
-		return str.toString();
-	}
-
-
-
 	
 	
-
-
-
   	
 
   	
@@ -228,5 +216,17 @@ public class Game {
 	
 	public int get_tot(){
 		return plantList.getCont() + zombieList.getCont();
+	}
+	
+	public int getSoles(){
+		return this.soles.num();
+	}
+	
+	public int remZombies(){
+		return this.zManager.numZombies();
+	}
+	
+	public long seed(){
+		return seed;
 	}
 }
