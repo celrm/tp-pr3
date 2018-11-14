@@ -3,9 +3,7 @@ package commands;
 //ESTE COMANDO SE AÑADIRÍA PARA DEPURAR
 import logic.Game;
 import play.Controller;
-import objects.Plant;
 import objects.Zombie;
-import factories.PlantFactory;
 import factories.ZombieFactory;
 
 public class AddZombie extends Command {
@@ -23,8 +21,6 @@ public class AddZombie extends Command {
 	@Override
 	public void execute(Game game, Controller controller) {
 		Zombie zombie = ZombieFactory.getZombie(zombieName);
-		zombie.setPosition(x, y);
-		zombie.setGame(game);
 		
 		boolean executed = false;
 		if (zombie != null){

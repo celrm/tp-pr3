@@ -2,7 +2,7 @@ package play;
 
 import java.util.Scanner;
 
-import printers.GamePrinter;
+import printers.BoardPrinter;
 import printers.ReleasePrinter;
 import logic.Game;
 import commands.Command;
@@ -12,23 +12,23 @@ public class Controller {
 	private Game game;
 	private Scanner scanner;
 	private boolean exit;
-	private GamePrinter gamePrinter;
+	private BoardPrinter gamePrinter;
 	private final String unknownCommandMsg = "Unknown command";
 	private final String prompt = "Command > ";
-;	private boolean noPrint;
+;	private boolean dontPrint;
 	
 	public Controller(Game j, Scanner sc) {
 		this.game = j;
 		this.scanner = sc;
 		this.exit = false;
-		this.noPrint = false;
+		this.dontPrint = false;
 		this.gamePrinter = new ReleasePrinter(j, Game.DIMX, Game.DIMY);
 	} 
 	
 	public void run() {
 		while (!game.isFinished() && !exit) {
 			printGame();
-			noPrint = true;
+			dontPrint = false;
 			
 			System.out.print(prompt);
 			String[] words = scanner.nextLine().toLowerCase().trim().split("\\s+");
@@ -46,15 +46,15 @@ public class Controller {
 	}
 	
 	public void setNoPrintGameState() {
-		this.noPrint = false;
+		this.dontPrint = true;
 	}
 	
-	public void setPrinter(GamePrinter print) {
+	public void setPrinter(BoardPrinter print) {
 		this.gamePrinter = print;
 	}
 	
 	public void printGame() {
-		if(noPrint) {
+		if(!dontPrint) {
 		System.out.println(game.cabezera());
 		System.out.println(gamePrinter.printGame(game));
 		}

@@ -2,63 +2,29 @@ package printers;
 
 import logic.Game;
 
-public class ReleasePrinter implements GamePrinter {
-	int dimX; 
-	int dimY;
+public class ReleasePrinter extends BoardPrinter {
 	String[][] board;
 	final String space = " ";
 	
 	public ReleasePrinter(Game game, int dimX, int dimY) {
-		this.dimX = dimX;
-		this.dimY = dimY;
-		
 		encodeGame(game);
 	}
 
 	@Override
 	public void encodeGame(Game game) {
-	 	board = new String[dimX][dimY];
-		for(int i = 0; i < dimX; i++) {
-			for(int j = 0; j < dimY; j++) {
+	 	board = new String[Game.DIMX][Game.DIMY];
+		for(int i = 0; i < Game.DIMX; i++) {
+			for(int j = 0; j < Game.DIMY; j++) {
 				board[i][j] = space;
 			}		
 		}
 			
-		for(int i = 0; i < dimX; i++) {
-			for(int j = 0; j < dimY; j++) {				
+		for(int i = 0; i < Game.DIMX; i++) {
+			for(int j = 0; j < Game.DIMY; j++) {				
 				String s = game.toString(i,j);
 				if(!s.equals("")) 
 					board[i][j] = s;
 			}		
 		}
 	}
-
-	@Override
-	public String printGame(Game game) {
-		
-		encodeGame(game);
-
-		int cellSize = 7;
-		int marginSize = 2;
-		String vDelimiter = "|";
-		String hDelimiter = "-";
-		
-		String rowDelimiter = MyStringUtils.repeat(hDelimiter, (dimY * (cellSize + 1)) - 1);
-		String margin = MyStringUtils.repeat(space, marginSize);
-		String lineDelimiter = String.format("%n%s%s%n", margin + space, rowDelimiter);
-		
-		StringBuilder str = new StringBuilder();
-		
-		str.append(lineDelimiter);
-		
-		for(int i=0; i<dimX; i++) {
-				str.append(margin).append(vDelimiter);
-				for (int j=0; j<dimY; j++) {
-					str.append( MyStringUtils.centre(board[i][j], cellSize)).append(vDelimiter);
-				}
-				str.append(lineDelimiter);
-		}
-		return str.toString();
-	}
-
 }

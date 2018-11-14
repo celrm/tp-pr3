@@ -23,8 +23,6 @@ public class AddCommand extends Command {
 		
 		boolean executed = false;
 		if (plant != null){
-			plant.setPosition(x, y);
-			plant.setGame(game);
 			executed = game.addPlantToGame(plant, x, y);
 			game.update();
 		}

@@ -3,7 +3,7 @@ package commands;
 import logic.Game;
 import play.Controller;
 import printers.DebugPrinter;
-import printers.GamePrinter;
+import printers.BoardPrinter;
 import printers.ReleasePrinter;
 
 public class PrintModeCommand extends Command {
@@ -17,7 +17,7 @@ public class PrintModeCommand extends Command {
 	// Mejorar con lo de la herencia y eso
 	@Override
 	public void execute(Game game, Controller controller) {
-		GamePrinter p = null;
+		BoardPrinter p = null;
 		switch(mode) {
 		case "release":
 		case "r": p = new ReleasePrinter(game, Game.DIMX, Game.DIMY);

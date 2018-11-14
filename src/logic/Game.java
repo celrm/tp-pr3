@@ -44,7 +44,8 @@ public class Game {
 			System.out.println("There's already something there.");
 		
 		else if (this.soles.num() >= plant.getCost()) {
-			
+			plant.setPosition(x, y);
+			plant.setGame(this);
 			this.plantList.add(plant);
 			this.soles.add(-plant.getCost());
 			sol = true;
@@ -59,8 +60,12 @@ public class Game {
 		if(this.hayCosas(x,y))
 			System.out.println("There's already something there.");
 		
+		else {
+			zombie.setPosition(x, y);
+			zombie.setGame(this);
 			this.zombieList.add(zombie);
 			sol = true;
+		}
 
 		return sol;
 	}
