@@ -14,8 +14,8 @@ public class DebugPrinter extends BoardPrinter implements GamePrinter{
 	@Override
 	public void encodeGame(Game game) {
 		
-		board = new String[game.gettot()];
-		for (int i = 0; i < game.gettot(); ++i){
+		board = new String[game.get_tot()];
+		for (int i = 0; i < game.get_tot(); ++i){
 			board[i] = space;
 		}
 	 	/*board = new String[Game.DIMX][Game.DIMY];

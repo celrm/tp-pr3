@@ -218,4 +218,8 @@ public class Game {
 	private boolean hayCosas(int x, int y) {
 		return (this.plantList.hay(x, y) || this.zombieList.hay(x, y));
 	}
+	
+	public int get_tot(){
+		return plantList.getCont() + zombieList.getCont();
+	}
 }
