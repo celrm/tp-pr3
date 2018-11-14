@@ -10,6 +10,7 @@ public class Nuez extends Plant {
 	}
 	
 	public void update() {
+		// Ser patata
 	}
 
 }

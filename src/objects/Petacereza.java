@@ -12,7 +12,10 @@ public class Petacereza extends Plant {
 	public void update() {
 		boolean toca = this.nacimiento % this.speed == super.game.getCiclos() % this.speed;
 		boolean noPrimerCiclo = (this.nacimiento != this.game.getCiclos());
-		if (toca && noPrimerCiclo) game.explotar(this);
+		if (toca && noPrimerCiclo) {
+			game.explotar(this);
+			this.danar(this.getVida());
+		}
 	}
 
 }
