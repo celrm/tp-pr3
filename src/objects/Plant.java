@@ -27,5 +27,7 @@ public abstract class Plant extends GameObject {
 	public String toString(){
 		return symbol.toUpperCase() + " [ " + this.getVida() + " ]";
 	}
-	
+	public String toStringDebug(){
+		return symbol.toUpperCase() + "[l:" + this.getVida() + ",x:" + this.x + ",y:" + this.y + ",t:" + (speed - ((this.game.getCiclos() - this.nacimiento) % speed)) +"]";
+	}
 }

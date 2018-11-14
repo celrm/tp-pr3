@@ -15,22 +15,20 @@ public class DebugPrinter extends BoardPrinter implements GamePrinter{
 	public void encodeGame(Game game) {
 		
 		board = new String[game.get_tot()];
-		for (int i = 0; i < game.get_tot(); ++i){
-			board[i] = space;
+		int i = 0;
+		int x = 0;
+		int y = 0;
+		while (i < game.get_tot()){
+			boolean found = false;
+			while (y < Game.DIMY && !found ){
+				String s = game.toStringDebug(x,y);
+				if(!s.equals("")) {
+					board[i] = s;
+					++i;
+				}
+				else ++y;
+			}
 		}
-	 	/*board = new String[Game.DIMX][Game.DIMY];
-		for(int i = 0; i < Game.DIMX; i++) {
-			for(int j = 0; j < Game.DIMY; j++) {
-				board[i][j] = space;
-			}		
-		}
-			
-		for(int i = 0; i < Game.DIMX; i++) {
-			for(int j = 0; j < Game.DIMY; j++) {
-				String s = game.toString(i,j);
-				if(!s.equals("")) 
-					board[i][j] = s;
-			}		
-		}*/
+		
 	}
 }

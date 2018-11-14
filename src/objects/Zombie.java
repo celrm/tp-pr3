@@ -23,5 +23,9 @@ public abstract class Zombie extends GameObject {
 	public String toString(){
 		return "Z [ " + this.getVida() + " ]";
 	}
+	
+	public String toStringDebug(){
+		return "Z[l:" + this.getVida() + ",x:" + this.x + ",y:" + this.y + ",t:" + (speed - ((this.game.getCiclos() - this.nacimiento) % speed)) +"]";
+	}
 }
 

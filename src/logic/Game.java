@@ -213,6 +213,13 @@ public class Game {
 		str = this.plantList.toString(x,y) + this.zombieList.toString(x,y);
 		return str;
 	}
+	
+	//para DebugPrinter
+	public String toStringDebug(int x, int y) {
+		String str = "";
+		str = this.plantList.toStringDebug(x,y) + this.zombieList.toStringDebug(x,y);
+		return str;
+	}
 
 	//función auxiliar para saber si un hueco está libre
 	private boolean hayCosas(int x, int y) {

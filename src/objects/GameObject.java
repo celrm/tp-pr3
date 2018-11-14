@@ -26,7 +26,7 @@ public abstract class GameObject {
 	}
 	
 	public abstract String toString();
-	
+	public abstract String toStringDebug();
 	// TODO no sé si va esto o no. no sé si protected o no
 	public String getName() {
 	    return this.name;
