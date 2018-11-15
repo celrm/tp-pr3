@@ -152,32 +152,32 @@ public class Game {
   		this.soles.add(Sunflower.PRODUCE_SOLES);
   	}
   	
-  	public void disparar(Plant p,int x, int y) {
+  	public void disparar(int x, int y, int harm) {
   		boolean found = false;
   		//recorre la fila en la que está p
 		for (int j = y+1; j < Game.DIMY && !found; ++j) {
 			//y si hay un zombie lo daña, y deja de buscar
 			if (this.zombieList.hay(x, j)) {
-	  			this.zombieList.danar(x,j,p.getHarm());
+	  			this.zombieList.danar(x,j,harm);
 	  			found = true;
 			}
 		}
   	}
   	
-  	public void explotar(Plant p) {
-  		for(int i = p.x()-1; i <= p.x() + 1; ++i)
-  			for(int j = p.y()-1; j <= p.y() + 1; ++j) {
+  	public void explotar(int x, int y, int harm) {
+  		for(int i = x-1; i <= x + 1; ++i)
+  			for(int j = y-1; j <= y + 1; ++j) {
   				boolean dentro = !(i<0 || j<0 || i>=Game.DIMX || j>=Game.DIMY);
   				if(dentro && this.zombieList.hay(i,j))
-  		  			this.zombieList.danar(i,j,p.getHarm());
+  		  			this.zombieList.danar(i,j,harm);
   			}
   	}
 
-  	public boolean zombieAction(Zombie z,int x, int y) {
+  	public boolean zombieAction(int harm,int x, int y) {
   		boolean sol;
   		//si tiene S delante, lo ataca
   		if(this.plantList.hay(x,y-1)) {
-  			this.plantList.danar(x,y-1,z.getHarm());
+  			this.plantList.danar(x,y-1, harm);
   			sol = true;
   		}
   		//si no, no ha atacado a nadie

@@ -10,7 +10,7 @@ public class Peashooter extends Plant {
 	
 	public void update() {
 		boolean toca = this.nacimiento % this.speed == this.game.getCiclos() % this.speed;
-		if (toca) this.game.disparar(this,x, y);
+		if (toca) this.game.disparar(this.x, this.y, this.harm);
 	}
 
 }
