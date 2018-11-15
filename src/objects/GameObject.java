@@ -2,7 +2,7 @@ package objects;
 
 import logic.Game;
 
-public abstract class GameObject {
+public abstract class GameObject implements Cloneable {
 	protected final String name;
 	private final String nameMsg;
 	protected int x;
@@ -20,6 +20,16 @@ public abstract class GameObject {
 		this.harm = harm;
 		this.nacimiento = 0;
 		this.speed = speed;
+	}
+	
+	public Object clone() {
+		try {
+			return super.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	public abstract String toString();

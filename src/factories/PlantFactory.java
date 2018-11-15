@@ -13,14 +13,16 @@ public class PlantFactory {
 			new Petacereza(),
 			new Nuez()
 		};
-		
+		// TODO la he liado con el clone		
 		public static Plant getPlant(String plantName){
 			Plant p = null;
 			for (Plant item : availablePlants) {
 				if(plantName.equals(item.getName()) || plantName.equals(item.getSymbol()))
 					p = item;
 			}
-			return p.clone();
+			if (p != null)
+			return (Plant) p.clone();
+			else return null;
 		}
 		
 		public static String listOfAvailablePlants() {
