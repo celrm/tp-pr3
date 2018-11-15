@@ -41,7 +41,7 @@ public class DebugPrinter extends BoardPrinter{
 		str.append("Number of cycles: ").append(Integer.toString(game.getCiclos()));
 		str.append("\nSun coins: ").append(Integer.toString(game.getSoles()));
 		str.append("\nRemaining Zombies: ").append(game.remZombies());
-		str.append("\nLevel: ").append(game.remZombies());
+		str.append("\nLevel: ").append(game.getLevelName());
 		str.append("\nSeed: ").append(game.seed());
 		str.append("\n");
 		return str.toString();

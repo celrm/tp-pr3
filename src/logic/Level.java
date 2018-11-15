@@ -21,5 +21,16 @@ public enum  Level{
 		}
 		return num;
 	}
+	
+	public String toString(){
+		String str;
+		switch(this){
+		case EASY: str = "EASY"; break;
+		case HARD:  str = "HARD" ; break;
+		case INSANE: str = "INSANE"; break;
+		default: str = "EASY"; break;
+		}
+		return str;
+	}
 }
 

@@ -229,4 +229,8 @@ public class Game {
 	public long seed(){
 		return seed;
 	}
+	
+	public String getLevelName(){
+		return this.level.toString();
+	}
 }

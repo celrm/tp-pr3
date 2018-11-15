@@ -40,7 +40,7 @@ public abstract class BoardPrinter implements GamePrinter {
 	}
 	
 	public String printGame(Game game){
-			//encodeGame(game); ya lo hace boardToString
+			//encodeGame(game); ya lo hace boardToString //PERO HACE FALTA CADA VEZ QUE SE VAYA A PINTAR NO??????????
 			String cabecera = cabecera(game);
 			String tablero = boardToString(game);
 			return cabecera+tablero;
