@@ -43,6 +43,15 @@ public class Controller {
 				setNoPrintGameState();
 			}
 		}
+		if (!exit){
+			printGame();
+			if (game.quienGana()){
+				System.out.println("You win!");
+			}
+			else{
+				System.out.println("Zombies win :(");
+			}
+		}
 	}
 	
 	public void setNoPrintGameState() {

@@ -24,6 +24,8 @@ public class Game {
 	private SuncoinManager soles;
 	private ZombieManager zManager;
 
+	private boolean gana;
+	
 	public Game(Random rand, Level n, long seed) {
 		this.rand = rand;
 		this.level = n;
@@ -36,6 +38,8 @@ public class Game {
 		
 		this.ciclos = 0;
 		this.soles = new SuncoinManager();
+		
+		this.gana = false;
 		
 	}
 	
@@ -82,7 +86,8 @@ public class Game {
   	    boolean sol = this.zManager.numZombies() == 0 && this.zombieList.getCont() == 0;
 		
 		if(sol)
-			System.out.println("You win!");
+			gana = true;
+		//System.out.println("You win!");
   		
 		return sol;
   	}
@@ -95,8 +100,8 @@ public class Game {
   			sol = this.zombieList.hay(j,0);
   		}
   		
-  		if(sol)
-			System.out.println("Zombies win :(");
+  		//if(sol)
+		//	System.out.println("Zombies win :(");
   		
 		return sol;
   	}
@@ -232,5 +237,9 @@ public class Game {
 	
 	public String getLevelName(){
 		return this.level.toString();
+	}
+	
+	public boolean quienGana(){
+		return this.gana;
 	}
 }
