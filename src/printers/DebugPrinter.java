@@ -2,30 +2,31 @@ package printers;
 
 import logic.Game;
 
-// TODO todo
 public class DebugPrinter extends BoardPrinter{
 	
 	public DebugPrinter(Game game) {
-		encodeGame(game);
-		boardX = game.get_tot();
-		boardY = 1;
+		boardX = 1;
+		boardY = game.get_tot();
+		cellsize = 25;
 	}
 
 	@Override
 	public void encodeGame(Game game) {
+		boardY = game.get_tot();
 		
 		board = new String[boardX][boardY];
-		int i = 0;
+		int index = 0;
 		int x = 0;
 		int y = 0;
-		while (i < boardX){
+		
+		while (index < boardY){
 			boolean found = false;
 			while (y < Game.DIMY && !found ){
 				String s = game.toStringDebug(x,y);
 				if(!s.equals("")) {
 					found = true;
-					board[i][boardY] = s;
-					++i;
+					board[0][index] = s;
+					++index;
 				}
 				++y;
 			}
@@ -37,7 +38,7 @@ public class DebugPrinter extends BoardPrinter{
 		
 	}
 
-	public String cabezera(Game game) {
+	public String cabecera(Game game) {
 		StringBuilder str = new StringBuilder();
 		str.append("Number of cycles: ").append(Integer.toString(game.getCiclos()));
 		str.append("\nSun coins: ").append(Integer.toString(game.getSoles()));

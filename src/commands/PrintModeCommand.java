@@ -32,7 +32,7 @@ public class PrintModeCommand extends Command {
 	@Override
 	public Command parse(String[] commandWords, Controller controller) {
 		// TODO preguntar por la primera letra
-		if(commandWords[0] != this.commandText || commandWords[0] != this.commandText.split("\\s+")[0])
+		if(!commandWords[0].equals(this.commandText) && !commandWords[0].equals(this.commandText.substring(0, 1)))
 			return null;
 		
 		// TODO aquí va a sacar wrong command también
@@ -40,8 +40,12 @@ public class PrintModeCommand extends Command {
 			System.out.println("Wrong parameters.");
 			return null;
 		}
-		if(commandWords[1] != "debug" || commandWords[1] != "d" || commandWords[1] != "release" || commandWords[1] != "r"){
-			System.out.print("Printmode doesn't exists");
+		boolean debug = commandWords[1].equals("debug");
+		boolean d = commandWords[1].equals("d");
+		boolean release = commandWords[1].equals("release");
+		boolean r = commandWords[1].equals("r");		
+		if(!debug && !d && !release && !r){
+			System.out.print("Printmode doesn't exist");
 			return null;
 		}
 		Command com = new PrintModeCommand(commandWords[1]);

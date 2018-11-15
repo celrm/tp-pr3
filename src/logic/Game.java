@@ -202,7 +202,7 @@ public class Game {
 		return str;
 	}
 	
-	//para DebugPrinter
+	//para DebugPrinter 
 	public String toStringDebug(int x, int y) {
 		String str = "";
 		str = this.plantList.toStringDebug(x,y) + this.zombieList.toStringDebug(x,y);

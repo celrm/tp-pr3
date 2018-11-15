@@ -1,7 +1,6 @@
 /commands/
+/lists/
 /objects/
-/factories/
-/logic/
 /play/
 /printers/
-/lists/
+/logic/

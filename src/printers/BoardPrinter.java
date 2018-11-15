@@ -7,15 +7,16 @@ public abstract class BoardPrinter implements GamePrinter {
 	String[][] board;
 	protected int boardX;
 	protected int boardY;
+	protected int cellsize;
 	
 	abstract void encodeGame(Game game);
-	abstract String cabezera(Game game);
+	abstract String cabecera(Game game);
 
 	public String boardToString(Game game) {
 		
 		encodeGame(game);
 
-		int cellSize = 7;
+		int cellSize = cellsize;
 		int marginSize = 2;
 		String vDelimiter = "|";
 		String hDelimiter = "-";
@@ -39,9 +40,9 @@ public abstract class BoardPrinter implements GamePrinter {
 	}
 	
 	public String printGame(Game game){
-			encodeGame(game);
-			String cabezera = cabezera(game);
+			//encodeGame(game); ya lo hace boardToString
+			String cabecera = cabecera(game);
 			String tablero = boardToString(game);
-			return cabezera+tablero;
+			return cabecera+tablero;
 	}
 }
