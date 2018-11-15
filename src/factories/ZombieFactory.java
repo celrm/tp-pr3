@@ -18,7 +18,7 @@ public class ZombieFactory {
 				if(zombieName.equals(item.getName()))
 					z = item;
 			}
-			return z;
+			return z.clone();
 		}
 		
 		public static String listOfAvailableZombies() {

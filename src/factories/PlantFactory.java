@@ -20,7 +20,7 @@ public class PlantFactory {
 				if(plantName.equals(item.getName()) || plantName.equals(item.getSymbol()))
 					p = item;
 			}
-			return p;
+			return p.clone();
 		}
 		
 		public static String listOfAvailablePlants() {
