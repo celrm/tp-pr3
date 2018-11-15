@@ -31,7 +31,6 @@ public class PrintModeCommand extends Command {
 
 	@Override
 	public Command parse(String[] commandWords, Controller controller) {
-		// TODO preguntar por la primera letra
 		if(!commandWords[0].equals(this.commandText) && !commandWords[0].equals(this.commandText.substring(0, 1)))
 			return null;
 		
