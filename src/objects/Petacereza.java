@@ -1,11 +1,10 @@
 package objects;
 
-import logic.Game;
 
 public class Petacereza extends Plant {
 
-	public Petacereza(int x, int y, Game game) {
-		super("petacereza", "c", "Peta[c]ereza", x, y, 2, 10, 50, game,2);
+	public Petacereza() {
+		super("petacereza", "c", "Peta[c]ereza", 2, 10, 50, 2);
 		
 	}
 	
@@ -13,7 +12,7 @@ public class Petacereza extends Plant {
 		boolean toca = this.nacimiento % this.speed == super.game.getCiclos() % this.speed;
 		boolean noPrimerCiclo = (this.nacimiento != this.game.getCiclos());
 		if (toca && noPrimerCiclo) {
-			game.explotar(this);
+			this.game.explotar(this);
 			this.danar(this.getVida());
 		}
 	}

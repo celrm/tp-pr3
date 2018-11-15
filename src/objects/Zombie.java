@@ -1,10 +1,8 @@
 package objects;
 
-import logic.Game;
-
 public abstract class Zombie extends GameObject {
-	public Zombie(String name, String nameMsg, int x, int y, int vida, int harm, Game game, int speed) {
-	    super(name, nameMsg, x, y, vida, harm, game, speed);
+	public Zombie(String name, String nameMsg, int vida, int harm, int speed) {
+	    super(name, nameMsg, vida, harm, speed);
 	}
 
 	public int getSpeed() {
@@ -25,7 +23,13 @@ public abstract class Zombie extends GameObject {
 	}
 	
 	public String toStringDebug(){
-		return "Z[l:" + this.getVida() + ",x:" + this.x + ",y:" + this.y + ",t:" + (speed - ((this.game.getCiclos() - this.nacimiento) % speed)) +"]";
+		StringBuilder str = new StringBuilder();
+		str.append("Z[l:").append(this.getVida());
+		str.append(",x:").append(this.x);
+		str.append(",y:").append(this.y);
+		str.append(",t:").append(speed - ((this.game.getCiclos() - this.nacimiento) % speed));
+		str.append("]");
+		return str.toString();
 	}
 }
 

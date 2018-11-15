@@ -13,14 +13,11 @@ public abstract class GameObject {
 	protected int nacimiento;
 	protected final int speed;
 	
-	public GameObject(String name, String nameMsg, int x, int y, int vida, int harm, Game game, int speed) {
+	public GameObject(String name, String nameMsg, int vida, int harm, int speed) {
 		this.name = name;
 		this.nameMsg = nameMsg;
-		this.x = x;
-		this.y = y;
 		this.vida = vida;
 		this.harm = harm;
-		this.game = game;
 		this.nacimiento = 0;
 		this.speed = speed;
 	}

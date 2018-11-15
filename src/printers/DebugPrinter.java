@@ -12,8 +12,6 @@ public class DebugPrinter extends BoardPrinter{
 
 	@Override
 	public void encodeGame(Game game) {
-		boardY = game.get_tot();
-		
 		board = new String[boardX][boardY];
 		int index = 0;
 		int x = 0;

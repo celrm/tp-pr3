@@ -7,9 +7,9 @@ import objects.ZombieDeportista;
 
 public class ZombieFactory {
 		private static Zombie[] availableZombies = {
-			new ZombieComun(0, 0, null),
-			new ZombieDeportista(0, 0, null),
-			new ZombieCaracubo(0, 0, null)
+			new ZombieComun(),
+			new ZombieDeportista(),
+			new ZombieCaracubo()
 		};
 		
 		public static Zombie getZombie(String zombieName){
@@ -42,9 +42,7 @@ public class ZombieFactory {
 			}
 			return sol;
 		}
-		
-		//una puta mierda de funcion, como la de arriba pero no se me ocurria otra manera 
-		@SuppressWarnings("unused")
+
 		public static int numZombies(){
 			return availableZombies.length;
 

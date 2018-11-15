@@ -1,14 +1,13 @@
 package objects;
 
-import logic.Game;
 
 public abstract class Plant extends GameObject {
 
 	private final int cost;
 	private final String symbol;
 	
-	public Plant(String name, String symbol, String nameMsg, int x, int y, int vida, int harm, int cost, Game game, int speed) {
-	    super(name, nameMsg, x, y, vida, harm, game, speed);
+	public Plant(String name, String symbol, String nameMsg, int vida, int harm, int cost, int speed) {
+	    super(name, nameMsg, vida, harm, speed);
 	    this.cost = cost;
 	    this.symbol = symbol;
 	}
@@ -28,6 +27,12 @@ public abstract class Plant extends GameObject {
 		return symbol.toUpperCase() + " [ " + this.getVida() + " ]";
 	}
 	public String toStringDebug(){
-		return symbol.toUpperCase() + "[l:" + this.getVida() + ",x:" + this.x + ",y:" + this.y + ",t:" + (speed - ((this.game.getCiclos() - this.nacimiento) % speed)) +"]";
+		StringBuilder str = new StringBuilder();
+		str.append(symbol.toUpperCase()).append("[l:").append(this.getVida());
+		str.append(",x:").append(this.x);
+		str.append(",y:").append(this.y);
+		str.append(",t:").append(speed - ((this.game.getCiclos() - this.nacimiento) % speed));
+		str.append("]");
+		return str.toString();
 	}
 }

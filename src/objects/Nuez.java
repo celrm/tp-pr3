@@ -1,11 +1,9 @@
 package objects;
 
-import logic.Game;
-
 public class Nuez extends Plant {
 
-	public Nuez(int x, int y, Game game) {
-		super("nuez", "n", "[N]uez", x, y, 10, 0, 50, game, 0);
+	public Nuez() {
+		super("nuez", "n", "[N]uez", 10, 0, 50, 0);
 		
 	}
 	
