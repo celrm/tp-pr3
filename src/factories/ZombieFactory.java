@@ -46,10 +46,7 @@ public class ZombieFactory {
 		//una puta mierda de funcion, como la de arriba pero no se me ocurria otra manera 
 		@SuppressWarnings("unused")
 		public static int numZombies(){
-			int sol = 0;
-			for (Zombie item : availableZombies) {
-				++sol;
-			}
-			return sol;
+			return availableZombies.length;
+
 		}
 }
