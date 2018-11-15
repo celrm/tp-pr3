@@ -144,13 +144,6 @@ public class Game {
 		this.ciclos++;
 	}
 
-	
-	
-  	
-
-  	
-
-	// TODO actions
 
   	public void generarSoles() {
   		//añade los soles que le tocan
