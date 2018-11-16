@@ -16,11 +16,21 @@ public class ObjectList {
 	}
 	
 	public void add(GameObject object){
+		if (this.cont == this.lista.length){
+			this.resize();
+		}
 		this.lista[cont] = object;
 		++this.cont;
 	}
 	
-	// TODO resize-->> en remove es donde habria que llamarlo no???
+	private void resize(){
+		GameObject[] aux = this.lista;
+		this.lista = new GameObject[aux.length * 2];
+		for (int i = 0; i < aux.length; ++i){
+			this.lista[i] = aux[i];
+		}
+	}
+	
 
 	private GameObject getPosition(int x, int y){
 		boolean found = false;
