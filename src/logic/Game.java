@@ -230,6 +230,10 @@ public class Game {
 	public int numPlantas(){
 		return plantList.getCont();
 	}
+
+	public int numZombies(){
+		return zombieList.getCont();
+	}
 	
 	public int getSoles(){
 		return this.soles.num();
