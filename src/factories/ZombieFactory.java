@@ -15,11 +15,11 @@ public class ZombieFactory {
 		public static Zombie getZombie(String zombieName){
 			Zombie z = null;
 			switch(zombieName) {
-			case "zcomun":
+			case "zombie comun":
 			case "zco": z = new ZombieComun(); break;
-			case "zdeportista":
+			case "zombie deportista":
 			case "zd": z = new ZombieDeportista(); break;
-			case "zcaracubo":
+			case "zombie caracubo":
 			case "zca": z = new ZombieCaracubo(); break;		
 			}
 			return z;

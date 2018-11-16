@@ -14,7 +14,7 @@ public class PlantFactory {
 			new Nuez()
 		};
 		// TODO la he liado con el clone		
-		public static Plant getPlant(String plantName){
+		public static Plant getPlant(String plantName) {
 			Plant p = null;
 			switch(plantName) {
 			case "sunflower":

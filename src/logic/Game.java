@@ -107,20 +107,29 @@ public class Game {
   	}
 
 	private void computer() {		
-		// Tipo de zombie aleatorio
-		int tipo = Math.abs(this.rand.nextInt() % ZombieFactory.numZombies());
-
-		//Problema? el game accede a la factory
+		boolean posible = false;		
+		//si hay algún hueco en la columna DIMY - 1
+		for (int i = 0; i < Game.DIMX && !posible; ++i)
+			posible = !this.hayCosas(i, Game.DIMY - 1);
 		
-		// Si toca que salga en este ciclo
-		if (this.zManager.isZombieAdded()) {
+		//y si toca que salga en este ciclo
+		if (posible && this.zManager.isZombieAdded()) {
 			// Fila aleatoria
-			int x = Math.abs(this.rand.nextInt() % Game.DIMX);
+			int x;
+			do x = Math.abs(this.rand.nextInt() % Game.DIMX);
+			while (this.hayCosas(x, Game.DIMY-1));
+			
+			// Tipo de zombie aleatorio
+			int tipo = Math.abs(this.rand.nextInt() % ZombieFactory.numZombies());
 			String zombieName = ZombieFactory.zombieName(tipo);
 			Zombie zombie = ZombieFactory.getZombie(zombieName);
-			zombie.setPosition(x, DIMY-1);
-			zombie.setGame(this);
-			this.zombieList.add(zombie);
+			
+			//y añado al zombie
+			if (zombie != null) {
+				zombie.setPosition(x, DIMY-1);
+				zombie.setGame(this);
+				this.zombieList.add(zombie);
+			}
 		}
 	}
 	
