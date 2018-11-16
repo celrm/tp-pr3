@@ -14,13 +14,15 @@ public class ZombieFactory {
 		// TODO la he liado con el clone
 		public static Zombie getZombie(String zombieName){
 			Zombie z = null;
-			for (Zombie item : availableZombies) {
-				if(zombieName.equals(item.getName()))
-					z = item;
+			switch(zombieName) {
+			case "zcomun":
+			case "zco": z = new ZombieComun(); break;
+			case "zdeportista":
+			case "zd": z = new ZombieDeportista(); break;
+			case "zcaracubo":
+			case "zca": z = new ZombieCaracubo(); break;		
 			}
-			if (z != null)
-			return (Zombie) z.clone();
-			else return null;
+			return z;
 		}
 		
 		public static String listOfAvailableZombies() {
