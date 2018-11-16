@@ -1,4 +1,4 @@
-package printers;
+ package printers;
 
 import logic.Game;
 
@@ -6,35 +6,25 @@ public class DebugPrinter extends BoardPrinter{
 	
 	public DebugPrinter(Game game) {
 		boardX = 1;
-		boardY = game.get_tot();
+		boardY = game.get_tot() + 1;
 		cellsize = 25;
 	}
 
 	@Override
 	public void encodeGame(Game game) {
-		boardY = game.get_tot();
+		boardY = game.get_tot() + 1;
 		board = new String[boardX][boardY];
-		int index = 0;
-		int x = 0;
-		int y = 0;
-		
-		while (index < boardY){
-			boolean found = false;
-			while (y < Game.DIMY && !found ){
-				String s = game.toStringDebug(x,y);
-				if(!s.equals("")) {
-					found = true;
-					board[0][index] = s;
-					++index;
-				}
-				++y;
-			}
-			if (!found){
-				y = 0;
-				++x;
-			}
+		int i = 0;
+		while( i < game.numPlantas()){
+			board[0][i] = game.toStringDebugp(i);
+			++i;
 		}
-		
+		board[0][i] = "--";
+		++i;
+		while (i< boardY){
+			board[0][i] = game.toStringDebugz(i);
+			++i;
+		}	
 	}
 
 	public String cabecera(Game game) {

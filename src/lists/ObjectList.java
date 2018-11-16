@@ -93,10 +93,7 @@ public class ObjectList {
 		return "";
 	}
 	
-	public String toStringDebug(int x, int y) {
-		if (this.hay(x, y)){
-			return this.lista[this.getIndex(x, y)].toStringDebug();
-		}
-		return "";
+	public String toStringDebug(int i) {
+		return this.lista[i].toStringDebug();
 	}
 }

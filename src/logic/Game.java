@@ -210,12 +210,14 @@ public class Game {
 	}
 	
 	//para DebugPrinter 
-	public String toStringDebug(int x, int y) {
-		String str = "";
-		str = this.plantList.toStringDebug(x,y) + this.zombieList.toStringDebug(x,y);
-		return str;
+	public String toStringDebugp (int i) {
+		return this.plantList.toStringDebug(i);
 	}
 
+	public String toStringDebugz (int i) {
+		return this.zombieList.toStringDebug(i);
+	}
+	
 	//función auxiliar para saber si un hueco está libre
 	private boolean hayCosas(int x, int y) {
 		return (this.plantList.hay(x, y) || this.zombieList.hay(x, y));
@@ -223,6 +225,10 @@ public class Game {
 	
 	public int get_tot(){
 		return plantList.getCont() + zombieList.getCont();
+	}
+	
+	public int numPlantas(){
+		return plantList.getCont();
 	}
 	
 	public int getSoles(){
