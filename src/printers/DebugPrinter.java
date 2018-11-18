@@ -12,18 +12,26 @@ public class DebugPrinter extends BoardPrinter{
 
 	@Override
 	public void encodeGame(Game game) {
-		boardY = game.get_tot() + 1;
-		board = new String[boardX][boardY];
-		int i = 0;
-		while( i < game.numPlantas()){
-			board[0][i] = game.toStringDebugp(i);
-			++i;
+		if (game.numPlantas() == 0 || game.numZombies() == 0){
+			boardY = game.get_tot();
 		}
-		board[0][i] = "--";
-		++i;
-		while (i< boardY){
-			board[0][i] = game.toStringDebugz(i);
-			++i;
+		else{
+			boardY = game.get_tot() + 1;
+		}
+		board = new String[boardX][boardY];
+		int index = 0;
+		for (int i = 0; i < game.numPlantas(); ++i){
+			board[0][index] = game.toStringDebugp(i);
+			++index;
+		}
+		
+		if (boardY > game.get_tot()){
+			board[0][index] = "--";
+			++index;
+		}
+		for (int i = 0; i < game.numZombies(); ++i){
+			board[0][index] = game.toStringDebugz(i);
+			++index;
 		}
 	}
 
