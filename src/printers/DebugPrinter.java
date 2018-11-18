@@ -24,7 +24,7 @@ public class DebugPrinter extends BoardPrinter{
 		while (i< boardY){
 			board[0][i] = game.toStringDebugz(i);
 			++i;
-		}	
+		}
 	}
 
 	public String cabecera(Game game) {
