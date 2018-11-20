@@ -3,7 +3,7 @@ package objects;
 public class Peashooter extends Plant {
 
 	public Peashooter() {
-		super("peashooter", "p", "[P]eashooter", 5, 1, 50, 1);
+		super("p", "peashooter", "[P]eashooter", 5, 1, 1, 50);
 	}
 	
 	public void update() {

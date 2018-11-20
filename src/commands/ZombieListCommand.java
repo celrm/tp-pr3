@@ -7,7 +7,7 @@ import factories.ZombieFactory;
 public class ZombieListCommand extends NoParamsCommand{
 
 	public ZombieListCommand() {
-		super("zombielist", "[Z]ombie List", "Prints the list of available zombies.");
+		super("zombielist", "[Z]ombieList", "Prints the list of available zombies.");
 	}
 
 	@Override

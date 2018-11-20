@@ -3,7 +3,7 @@ package objects;
 public class Nuez extends Plant {
 
 	public Nuez() {
-		super("nuez", "n", "[N]uez", 10, 0, 50, 0);
+		super("n", "nuez", "[N]uez", 10, 0, 0, 50);
 	}
 	
 	public void update() {
