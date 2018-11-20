@@ -5,10 +5,6 @@ public abstract class Zombie extends GameObject {
 	public Zombie(String name, String nameMsg, int vida, int harm, int speed) {
 	    super("z", name, nameMsg, vida, harm, speed);
 	}
-
-	public int getSpeed() {
-		return speed;
-	}
 	
 	public void update() {
 		boolean toca = (this.nacimiento % speed == this.game.getCiclos() % speed);
