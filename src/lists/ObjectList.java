@@ -23,6 +23,7 @@ public class ObjectList {
 		++this.cont;
 	}
 	
+	// al doble
 	private void resize(){
 		GameObject[] aux = this.lista;
 		this.lista = new GameObject[aux.length * 2];
@@ -66,6 +67,7 @@ public class ObjectList {
         return getPosition(x,y) != null;
     }
 	
+	// Quita los muertos, desplaza los vivos
 	private void remove(){
 		int vivo = 0;
 		for (int i = 0; i < this.cont; ++i){
@@ -83,7 +85,6 @@ public class ObjectList {
                 this.lista[i].update();
         }
         this.remove();        
-        
     }
     
 	public String toString(int x, int y) {

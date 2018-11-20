@@ -7,7 +7,7 @@ public class ReleasePrinter extends BoardPrinter {
 	public ReleasePrinter(Game game) {
 		boardX = Game.DIMX;
 		boardY = Game.DIMY;
-		cellsize = 10;
+		cellSize = 10;
 	}
 
 	@Override

@@ -15,9 +15,6 @@ public abstract class Plant extends GameObject {
 	public int getCost() {
 		return cost;
 	}
-	
-	public void update() {
-	}
 
 	public String getSymbol() {
 		return symbol;
@@ -26,6 +23,7 @@ public abstract class Plant extends GameObject {
 	public String toString(){
 		return symbol.toUpperCase() + " [ " + this.getVida() + " ]";
 	}
+	
 	public String toStringDebug(){
 		StringBuilder str = new StringBuilder();
 		str.append(symbol.toUpperCase()).append("[l:").append(this.getVida());

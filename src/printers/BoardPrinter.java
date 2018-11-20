@@ -7,7 +7,7 @@ public abstract class BoardPrinter implements GamePrinter {
 	String[][] board;
 	protected int boardX;
 	protected int boardY;
-	protected int cellsize;
+	protected int cellSize;
 	
 	abstract void encodeGame(Game game);
 	abstract String cabecera(Game game);
@@ -16,7 +16,6 @@ public abstract class BoardPrinter implements GamePrinter {
 		
 		encodeGame(game);
 
-		int cellSize = cellsize;
 		int marginSize = 2;
 		String vDelimiter = "|";
 		String hDelimiter = "-";

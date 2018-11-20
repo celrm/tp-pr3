@@ -7,7 +7,7 @@ public class DebugPrinter extends BoardPrinter{
 	public DebugPrinter(Game game) {
 		boardX = 1;
 		boardY = game.get_tot() + 1;
-		cellsize = 25;
+		cellSize = 25;
 	}
 
 	@Override

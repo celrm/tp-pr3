@@ -14,7 +14,6 @@ public class PrintModeCommand extends Command {
 		this.mode = mode;
 	}
 	
-	// Mejorar con lo de la herencia y eso
 	@Override
 	public void execute(Game game, Controller controller) {
 		BoardPrinter p = null;
@@ -34,7 +33,7 @@ public class PrintModeCommand extends Command {
 		if(!commandWords[0].equals(this.commandText) && !commandWords[0].equals(this.commandText.substring(0, 1)))
 			return null;
 		
-		// TODO aquí va a sacar wrong command también
+		// Aquí va a sacar wrong command también, pero al fin y al cabo lo es
 		if (commandWords.length != 2) {
 			System.out.println("Wrong parameters.");
 			return null;

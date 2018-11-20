@@ -22,20 +22,9 @@ public abstract class GameObject implements Cloneable {
 		this.speed = speed;
 	}
 	
-	public Object clone() {
-		try {
-			return super.clone();
-		} catch (CloneNotSupportedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
 	public abstract String toString();
 	public abstract String toStringDebug();
-	
-	// TODO no sé si va esto o no. no sé si protected o no
+
 	public String getName() {
 	    return this.name;
 	}
@@ -56,13 +45,10 @@ public abstract class GameObject implements Cloneable {
 		return vida;
 	}
 
-	public void update() {
-		
-	}
+	public abstract void update();
 
 	public void danar(int cant) {
-		this.vida -=cant;
-		
+		this.vida -=cant;		
 	}
 	
 	public void setPosition(int x, int y){

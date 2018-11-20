@@ -3,7 +3,9 @@ package commands;
 import logic.Game;
 import play.Controller;
 
-public class UpdateCommand extends NoParamsCommand {
+// No extends de NoParamsCommand porque el parse tiene que ser distinto:
+// No puede preguntar por la primera letra
+public class UpdateCommand extends Command {
 
 	public UpdateCommand() {
 		super("", "[none]", "Skips cycle.");

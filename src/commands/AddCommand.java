@@ -35,10 +35,11 @@ public class AddCommand extends Command {
 
 	@Override
 	public Command parse(String[] commandWords, Controller controller) {
-		if(!commandWords[0].equals(this.commandText) && !commandWords[0].equals(this.commandText.substring(0, 1)))
+		boolean primeraletra = commandWords[0].equals(this.commandText.substring(0, 1));
+		if(!commandWords[0].equals(this.commandText) && !primeraletra)
 			return null;
 		
-		// TODO aquí va a sacar wrong command también
+		// Aquí va a sacar wrong command también, pero al fin y al cabo lo es
 		if (commandWords.length != 4) {
 			System.out.println("Wrong parameters.");
 			return null;

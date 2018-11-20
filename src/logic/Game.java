@@ -43,7 +43,7 @@ public class Game {
 		
 	}
 	
-	// Lo llama addC
+	// Lo llama addCommand.execute()
 	public boolean addPlantToGame(Plant plant, int x, int y) {
 		boolean sol = false;
 		if(this.hayCosas(x,y))
@@ -182,7 +182,7 @@ public class Game {
 
   	public boolean zombieAction(int harm,int x, int y) {
   		boolean sol;
-  		//si tiene S delante, lo ataca
+  		//si tiene plantas delante, lo ataca
   		if(this.plantList.hay(x,y-1)) {
   			this.plantList.danar(x,y-1, harm);
   			sol = true;
@@ -223,6 +223,7 @@ public class Game {
 		return (this.plantList.hay(x, y) || this.zombieList.hay(x, y));
 	}
 	
+	// Para DebugPrinter
 	public int get_tot(){
 		return plantList.getCont() + zombieList.getCont();
 	}
@@ -251,6 +252,7 @@ public class Game {
 		return this.level.toString();
 	}
 	
+	// Para imprimir la última vez
 	public boolean quienGana(){
 		return this.gana;
 	}

@@ -34,15 +34,15 @@ public class Controller {
 			String[] words = scanner.nextLine().toLowerCase().trim().split("\\s+");
 			Command command = CommandParser.parseCommand(words, this);
 			
-			if (command != null) {
+			if (command != null)
 				command.execute(game, this);
-			}
 			
 			else {
 				System.err.println(unknownCommandMsg);
 				setNoPrintGameState();
 			}
 		}
+		// Para pintar el tablero al final también
 		if (!exit){
 			printGame();
 			if (game.quienGana()){

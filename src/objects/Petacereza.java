@@ -4,8 +4,7 @@ package objects;
 public class Petacereza extends Plant {
 
 	public Petacereza() {
-		super("petacereza", "c", "Peta[c]ereza", 2, 10, 50, 2);
-		
+		super("petacereza", "c", "Peta[c]ereza", 2, 10, 50, 2);	
 	}
 	
 	public void update() {
