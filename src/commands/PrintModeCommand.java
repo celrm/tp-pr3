@@ -16,14 +16,21 @@ public class PrintModeCommand extends Command {
 	@Override
 	public void execute(Game game, Controller controller) {
 		BoardPrinter p = null;
+		boolean success = true;
 		switch(mode) {
 		case "release":
-		case "r": p = new ReleasePrinter(game);
+		case "r": p = new ReleasePrinter(game); break;
 		case "debug":
-		case "d": p = new DebugPrinter(game);
+		case "d": p = new DebugPrinter(game); break;
+		default: {
+			System.out.print("Printmode doesn't exist");
+			success = false;
+			}
 		}
-		controller.setPrinter(p);
-		controller.printGame();
+		if(success) {
+			controller.setPrinter(p);
+			controller.printGame();
+		}
 		controller.setNoPrintGameState();
 	}
 
@@ -37,14 +44,7 @@ public class PrintModeCommand extends Command {
 			System.out.println("Wrong parameters.");
 			return null;
 		}
-		boolean debug = commandWords[1].equals("debug");
-		boolean d = commandWords[1].equals("d");
-		boolean release = commandWords[1].equals("release");
-		boolean r = commandWords[1].equals("r");		
-		if(!debug && !d && !release && !r){
-			System.out.print("Printmode doesn't exist");
-			return null;
-		}
+
 		this.mode = commandWords[1];
 		return this;
 	}
