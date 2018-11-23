@@ -7,11 +7,11 @@ public class CommandParser {
 	
 	private static Command[] availableCommands = {
 		new UpdateCommand(),
-		new AddCommand(null, 0, 0),
+		new AddCommand(),
 		new HelpCommand(),
 		new ExitCommand(),
 		new ListCommand(),
-		new PrintModeCommand(null),
+		new PrintModeCommand(),
 		new ResetCommand(),
 		new ZombieListCommand(),
 	};

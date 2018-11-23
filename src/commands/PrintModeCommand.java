@@ -9,9 +9,8 @@ import printers.ReleasePrinter;
 public class PrintModeCommand extends Command {
 	private String mode;
 	
-	public PrintModeCommand(String mode) {
+	public PrintModeCommand() {
 		super("printmode", "[P]rintMode <mode>", "change print mode [Release|Debug]");
-		this.mode = mode;
 	}
 	
 	@Override
@@ -46,7 +45,7 @@ public class PrintModeCommand extends Command {
 			System.out.print("Printmode doesn't exist");
 			return null;
 		}
-		Command com = new PrintModeCommand(commandWords[1]);
-		return com;
+		this.mode = commandWords[1];
+		return this;
 	}
 }

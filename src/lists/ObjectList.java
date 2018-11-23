@@ -68,6 +68,7 @@ public class ObjectList {
     }
 	
 	// Quita los muertos, desplaza los vivos
+	// TODO cambiar
 	private void remove(){
 		int vivo = 0;
 		for (int i = 0; i < this.cont; ++i){

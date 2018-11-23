@@ -7,10 +7,16 @@ public abstract class Zombie extends GameObject {
 	}
 	
 	public void update() {
-		boolean toca = (this.nacimiento % speed == this.game.getCiclos() % speed);
-		boolean noPrimerCiclo = (this.nacimiento != this.game.getCiclos());
 		boolean haAtacado = this.game.zombieAction(this.harm, this.x, this.y);
-		if (!haAtacado && !this.game.hayZombie(x, y-1) && noPrimerCiclo && toca)
+		if (!haAtacado && !this.game.hayZombie(x, y-1) && noPrimerCiclo() && toca())
 			--this.y;
+	}
+	
+	public String listMsg(StringBuilder sol){
+		sol.append(this.getNameMsg()).append(":");
+		sol.append(" Speed: ").append(Integer.toString(this.getSpeed()));
+		sol.append(" Harm: ").append(Integer.toString(this.getHarm())); 
+		sol.append(" Life: ").append(Integer.toString(this.getVida())).append("\n");
+		return sol.toString();
 	}
 }

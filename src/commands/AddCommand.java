@@ -10,11 +10,8 @@ public class AddCommand extends Command {
 	private int x;
 	private int y;
 
-	public AddCommand(String plant, int x, int y) {
+	public AddCommand() {
 		super("add", "[A]dd <plant> <x> <y>", "Adds a plant in position x, y.");
-		this.plantName = plant;
-		this.x = x;
-		this.y = y;
 	}
 	
 	@Override
@@ -54,7 +51,9 @@ public class AddCommand extends Command {
 			return null;
 		}
 
-		Command com = new AddCommand(commandWords[1], x, y);
-		return com;
+		this.plantName = commandWords[1];
+		this.x = x;
+		this.y = y;
+		return this;
 	}
 }

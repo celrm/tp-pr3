@@ -13,4 +13,11 @@ public abstract class Plant extends GameObject {
 	public int getCost() {
 		return cost;
 	}
+	
+	public String listMsg(StringBuilder sol){
+		sol.append(this.getNameMsg()).append(":");
+		sol.append(" Cost: ").append(Integer.toString(this.getCost())).append(" suncoins");
+		sol.append(" Harm: ").append(Integer.toString(this.getHarm())).append("\n");
+		return sol.toString();
+	}
 }

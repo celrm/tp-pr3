@@ -30,12 +30,10 @@ public class PlantFactory {
 	}
 		
 	public static String listOfAvailablePlants() {
-		StringBuilder sol = new StringBuilder();
+		String sol = null;
 		for (Plant item : availablePlants) {
-			sol.append(item.getNameMsg()).append(":");
-			sol.append(" Cost: ").append(Integer.toString(item.getCost())).append(" suncoins");
-			sol.append(" Harm: ").append(Integer.toString(item.getHarm())).append("\n");
+			sol = item.listMsg(new StringBuilder());
 		}
-		return sol.toString();
+		return sol;
 	}
 }

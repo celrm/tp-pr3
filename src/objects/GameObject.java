@@ -24,6 +24,8 @@ public abstract class GameObject implements Cloneable {
 		this.nacimiento = 0;
 	}
 	
+	public abstract String listMsg(StringBuilder sol);
+	
 	public String getSymbol() {
 		return symbol;
 	}
@@ -86,5 +88,12 @@ public abstract class GameObject implements Cloneable {
 		else str.append(",t:0");
 		str.append("]");
 		return str.toString();
+	}
+	
+	protected boolean toca() {
+		return this.nacimiento % this.speed == this.game.getCiclos() % this.speed;
+	}
+	protected boolean noPrimerCiclo() {
+		return this.nacimiento != this.game.getCiclos();
 	}
 }

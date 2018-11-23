@@ -21,18 +21,15 @@ public class ZombieFactory {
 		}
 		return z;
 	}
-		
-	public static String listOfAvailableZombies() {
-		StringBuilder sol = new StringBuilder();
-		for (Zombie item : availableZombies) {
-			sol.append(item.getNameMsg()).append(":");
-			sol.append(" Speed: ").append(Integer.toString(item.getSpeed()));
-			sol.append(" Harm: ").append(Integer.toString(item.getHarm())); 
-			sol.append(" Life: ").append(Integer.toString(item.getVida())).append("\n");
-		}
-		return sol.toString();
-	}
 	
+	public static String listOfAvailableZombies() {
+		String sol = null;
+		for (Zombie item : availableZombies) {
+			sol = item.listMsg(new StringBuilder());
+		}
+		return sol;
+	}
+
 	// Dado el índice del array, dar el nombre del zombie
 	// Llamado en game.computer()
 	public static String zombieName(int pos){
