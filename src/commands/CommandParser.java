@@ -1,5 +1,6 @@
 package commands;
 
+import exceptions.CommandParseException;
 import play.Controller;
 
 // Clase utilidad: todos sus métodos son estáticos
@@ -16,11 +17,11 @@ public class CommandParser {
 		new ZombieListCommand(),
 	};
 	
-	public static Command parseCommand(String[] words, Controller controller) {
+	public static Command parseCommand(String[] words) throws CommandParseException {
 		Command com = null;
 		for (Command item : availableCommands) {
 			if(com==null)
-				com = item.parse(words, controller);
+				com = item.parse(words);
 		}
 		
 		// Si es null no se va a pintar el tablero

@@ -1,7 +1,6 @@
 package commands;
 
 import logic.Game;
-import play.Controller;
 import factories.PlantFactory;
 
 public class ListCommand extends NoParamsCommand{
@@ -11,8 +10,8 @@ public class ListCommand extends NoParamsCommand{
 	}
 
 	@Override
-	public void execute(Game game, Controller controller) {		
+	public boolean execute(Game game) {		
 		System.out.println(PlantFactory.listOfAvailablePlants());
-		controller.setNoPrintGameState();
+		return false;
 	}
 }

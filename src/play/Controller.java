@@ -7,6 +7,8 @@ import printers.ReleasePrinter;
 import logic.Game;
 import commands.Command;
 import commands.CommandParser;
+import exceptions.CommandExecuteException;
+import exceptions.CommandParseException;
 
 public class Controller {
 	private Game game;
@@ -15,47 +17,54 @@ public class Controller {
 	private BoardPrinter gamePrinter;
 	private final String unknownCommandMsg = "Unknown command";
 	private final String prompt = "Command > ";
-	private boolean dontPrint;
 	
 	public Controller(Game j, Scanner sc) {
 		this.game = j;
 		this.scanner = sc;
 		this.exit = false;
-		this.dontPrint = false;
 		this.gamePrinter = new ReleasePrinter(j);
 	} 
 	
+//	while (!game.isFinished()){
+//		System.out.print(prompt);
+//		String[] words = in.nextLine().trim(). split ("\\s+");
+//		try {
+//		Command command = CommandGenerator.parse(words);
+//		if (command != null) {
+//		if (command.execute(game)) printGame();
+//		} else
+//		System.out.println(unknownCommandMsg);
+//		} catch (CommandParseException | CommandExecuteException ex) {
+//		System.out.format(ex.getMessage() + " %n %n");
+//		}
+//		}
+	
 	public void run() {
+		printGame();
+		
 		while (!game.isFinished() && !exit) {
-			printGame();
-			dontPrint = false;
 			
 			System.out.print(prompt);
 			String[] words = scanner.nextLine().toLowerCase().trim().split("\\s+");
-			Command command = CommandParser.parseCommand(words, this);
-			
-			if (command != null)
-				command.execute(game, this);
-			
-			else {
-				System.err.println(unknownCommandMsg);
-				setNoPrintGameState();
+			try {
+				Command command = CommandParser.parseCommand(words);
+
+				if (command != null) {
+					if (command.execute(game)) printGame();
+				}
+				else System.err.println(unknownCommandMsg);
+			}
+			catch (CommandParseException | CommandExecuteException ex) {
+				System.out.format(ex.getMessage() + " %n %n");
 			}
 		}
+		
 		// Para pintar el tablero al final también
 		if (!exit){
-			printGame();
-			if (game.quienGana()){
+			if (game.quienGana())
 				System.out.println("You win!");
-			}
-			else{
-				System.out.println("Zombies win :(");
-			}
+			else System.out.println("Zombies win :(");
 		}
-	}
-	
-	public void setNoPrintGameState() {
-		this.dontPrint = true;
 	}
 	
 	public void setPrinter(BoardPrinter print) {
@@ -63,10 +72,8 @@ public class Controller {
 	}
 	
 	public void printGame() {
-		if(!dontPrint) {
 		System.out.println();
 		System.out.println(gamePrinter.printGame(game));
-		}
 	}
 	
 	public void exit() {

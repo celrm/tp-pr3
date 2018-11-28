@@ -1,7 +1,6 @@
 package commands;
 
 import logic.Game;
-import play.Controller;
 
 public class HelpCommand extends NoParamsCommand {
 
@@ -10,8 +9,8 @@ public class HelpCommand extends NoParamsCommand {
 	}
 
 	@Override
-	public void execute(Game game, Controller controller) {
+	public boolean execute(Game game) {
 		System.out.println(CommandParser.commandHelp());
-		controller.setNoPrintGameState();
+		return false;
 	}
 }

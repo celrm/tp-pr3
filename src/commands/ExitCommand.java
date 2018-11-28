@@ -10,7 +10,8 @@ public class ExitCommand extends NoParamsCommand{
 	}
 
 	@Override
-	public void execute(Game game, Controller controller) {
-		controller.exit();
+	public boolean execute(Game game) {
+		//controller.exit();
+		return true;
 	}
 }

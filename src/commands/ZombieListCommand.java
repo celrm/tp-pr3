@@ -11,8 +11,8 @@ public class ZombieListCommand extends NoParamsCommand{
 	}
 
 	@Override
-	public void execute(Game game, Controller controller) {		
+	public boolean execute(Game game) {		
 		System.out.println(ZombieFactory.listOfAvailableZombies());
-		controller.setNoPrintGameState();
+		return false;
 	}
 }

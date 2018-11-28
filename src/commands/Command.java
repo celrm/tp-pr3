@@ -1,5 +1,7 @@
 package commands;
 
+import exceptions.CommandExecuteException;
+import exceptions.CommandParseException;
 import logic.Game;
 import play.Controller;
 
@@ -18,9 +20,9 @@ public abstract class Command {
 //	Some commands may generate an error in the execute or parse methods.
 //	In the absence of exceptions, they must the tell the controller not to print the board
 	
-	public abstract void execute(Game game, Controller controller);
+	public abstract boolean execute(Game game) throws CommandExecuteException;
 	
-	public abstract Command parse(String[] commandWords, Controller controller);
+	public abstract Command parse(String[] commandWords) throws CommandParseException;
 
 	public String helpText() {
 		return commandTextMsg + ": " + this.helpTextMsg;

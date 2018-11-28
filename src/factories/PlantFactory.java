@@ -1,5 +1,6 @@
 package factories;
 
+import exceptions.CommandParseException;
 import objects.Plant;
 import objects.Nuez;
 import objects.Peashooter;
@@ -14,7 +15,7 @@ public class PlantFactory {
 		new Nuez()
 	};
 		
-	public static Plant getPlant(String plantName) {
+	public static Plant getPlant(String plantName) throws CommandParseException {
 		Plant p = null;
 		switch(plantName) {
 		case "sunflower":
@@ -24,7 +25,8 @@ public class PlantFactory {
 		case "petacereza":
 		case "c": p = new Petacereza(); break;
 		case "nuez": 
-		case "n": p = new Nuez(); break;				
+		case "n": p = new Nuez(); break;
+		default : throw new CommandParseException("No existe esta planta: " + plantName);
 		}
 		return p;
 	}

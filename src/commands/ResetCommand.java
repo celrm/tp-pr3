@@ -10,7 +10,8 @@ public class ResetCommand extends NoParamsCommand{
 	}
 
 	@Override
-	public void execute(Game game, Controller controller) {
+	public boolean execute(Game game) {
 		game.reset();
+		return true;
 	}
 }

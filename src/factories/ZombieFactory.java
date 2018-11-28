@@ -1,5 +1,6 @@
 package factories;
 
+import exceptions.CommandParseException;
 import objects.Zombie;
 import objects.ZombieCaracubo;
 import objects.ZombieComun;
@@ -18,6 +19,7 @@ public class ZombieFactory {
 		case "zombie comun": z = new ZombieComun(); break;
 		case "zombie deportista": z = new ZombieDeportista(); break;
 		case "zombie caracubo": z = new ZombieCaracubo(); break;		
+		//default : throw new Exception("No existe este zombie: " + zombieName); ????
 		}
 		return z;
 	}

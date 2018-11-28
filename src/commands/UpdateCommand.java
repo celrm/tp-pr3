@@ -12,11 +12,12 @@ public class UpdateCommand extends Command {
 	}
 
 	@Override
-	public void execute(Game game, Controller controller) {
+	public boolean execute(Game game) {
 		game.update();
+		return true;
 	}
 	
-	public Command parse(String[] commandWords, Controller controller) {
+	public Command parse(String[] commandWords) {
 		if(commandWords[0].equals(this.commandText)) {
 			return this;
 		}
