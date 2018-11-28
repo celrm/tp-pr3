@@ -8,7 +8,7 @@ import play.Controller;
 public abstract class Command {
 
 	protected final String commandText;
-	private String commandTextMsg;
+	protected String commandTextMsg;
 	private String helpTextMsg;
 
 	public Command(String commandText, String commandTextMsg, String helpTextMsg) {
@@ -22,7 +22,7 @@ public abstract class Command {
 	
 	public abstract boolean execute(Game game) throws CommandExecuteException;
 	
-	public abstract Command parse(String[] commandWords) throws CommandParseException;
+	public abstract Command parse(String[] commandWords) throws CommandParseException, NumberFormatException;
 
 	public String helpText() {
 		return commandTextMsg + ": " + this.helpTextMsg;

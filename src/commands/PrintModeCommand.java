@@ -23,7 +23,7 @@ public class PrintModeCommand extends Command {
 		case "r": p = new ReleasePrinter(game); break;
 		case "debug":
 		case "d": p = new DebugPrinter(game); break;
-		default: throw new CommandExecuteException("Printmode" + mode + " doesn't exist"); // Esto no debería ser de parse?
+		default: throw new CommandExecuteException("Unknown print mode: " + mode); // Esto no debería ser de parse?
 		}
 		return false;
 	}
@@ -33,10 +33,8 @@ public class PrintModeCommand extends Command {
 		if(!commandWords[0].equals(this.commandText) && !commandWords[0].equals(this.commandText.substring(0, 1)))
 			return null;
 		
-		// Aquí va a sacar wrong command también, pero al fin y al cabo lo es
-		if (commandWords.length != 2) {
-			throw new CommandParseException("Wrong number of parameters: " + commandWords.length);
-		}
+		if (commandWords.length != 2)
+			throw new CommandParseException("Incorrect number of arguments for " + this.commandText + " command: " + this.commandTextMsg);
 
 		this.mode = commandWords[1];
 		return this;

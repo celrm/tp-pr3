@@ -2,6 +2,8 @@ package logic;
 
 import java.util.Random;
 
+import exceptions.CommandExecuteException;
+import exceptions.CommandParseException;
 import factories.ZombieFactory;
 import objects.Plant;
 import objects.Sunflower;
@@ -44,21 +46,17 @@ public class Game {
 	}
 	
 	// Lo llama addCommand.execute()
-	public boolean addPlantToGame(Plant plant, int x, int y) {
-		boolean sol = false;
+	public void addPlantToGame(Plant plant, int x, int y) throws CommandExecuteException {
 		if(this.hayCosas(x,y))
-			System.out.println("There's already something there.");
+			throw new CommandExecuteException("Failed to add "+plant.getName()+": (" +x+", "+y+") is already occupied");
 		
-		else if (this.soles.num() >= plant.getCost()) {
-			plant.setPosition(x, y);
-			plant.setGame(this);
-			this.plantList.add(plant);
-			this.soles.add(-plant.getCost());
-			sol = true;
-		}
-		
-		else System.out.println("Not enough cash.");
-		return sol;
+		if (this.soles.num() < plant.getCost())
+			throw new CommandExecuteException("Failed to add "+plant.getName()+": not enough suncoins to buy it");
+	
+		plant.setPosition(x, y);
+		plant.setGame(this);
+		this.plantList.add(plant);
+		this.soles.add(-plant.getCost());
 	}
 	
 	public boolean addZombieToGame(Zombie zombie, int x, int y) {

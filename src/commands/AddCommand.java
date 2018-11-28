@@ -18,32 +18,36 @@ public class AddCommand extends Command {
 	
 	@Override
 	public boolean execute(Game game) throws CommandExecuteException {		
-		boolean executed = game.addPlantToGame(plant, x, y);
-		if(executed)
-			game.update();
-		return executed;
+		game.addPlantToGame(plant, x, y);
+		game.update();
+		return true;
 	}
 
 	@Override
-	public Command parse(String[] commandWords) throws CommandParseException, NumberFormatException {
+	public Command parse(String[] commandWords) throws CommandParseException {
 		boolean primeraletra = commandWords[0].equals(this.commandText.substring(0, 1));
 		if(!commandWords[0].equals(this.commandText) && !primeraletra)
 			return null;
 		
-		// Aquí va a sacar wrong command también, pero al fin y al cabo lo es
 		if (commandWords.length != 4)
-			throw new CommandParseException("Wrong number of parameters: " + commandWords.length);
-
-		int x = Integer.parseInt(commandWords[2]);
-		int y = Integer.parseInt(commandWords[3]);
-
-		// El -1 para el glitch
-		if(x<0 || y<0 || x>=Game.DIMX || y>=Game.DIMY-1)
-			throw new CommandParseException("Wrong position: (" +x+","+y+") is outside the field");
+			throw new CommandParseException("Incorrect number of arguments for " + this.commandText + " command: " + this.commandTextMsg);
 
 		this.plant = PlantFactory.getPlant(commandWords[1]); // Esto antes estaba en execute pero en clase dijo que no
-		this.x = x;
-		this.y = y;
-		return this;
+		
+		try {
+			int x = Integer.parseInt(commandWords[2]);
+			int y = Integer.parseInt(commandWords[3]);
+			
+			// El -1 para el glitch
+			if(x<0 || y<0 || x>=Game.DIMX || y>=Game.DIMY-1) // es este de execute??
+				throw new CommandParseException("Failed to add " + plant.getName() + ": (" +x+", "+y+") is an invalid position");
+
+			this.x = x;
+			this.y = y;
+			return this;
+		}
+		catch (NumberFormatException ex) {
+			throw new CommandParseException("Invalid argument for " + this.commandText + " command, number expected: " + this.commandTextMsg);
+		}
 	}
 }

@@ -15,7 +15,7 @@ public class Controller {
 	private Scanner scanner;
 	private boolean exit;
 	private BoardPrinter gamePrinter;
-	private final String unknownCommandMsg = "Unknown command";
+	private final String unknownCommandMsg = "Unknown command. Use ’help’ to see the available commands";
 	private final String prompt = "Command > ";
 	
 	public Controller(Game j, Scanner sc) {
@@ -65,6 +65,7 @@ public class Controller {
 				System.out.println("You win!");
 			else System.out.println("Zombies win :(");
 		}
+		else System.out.println("****** Game over!: User exit ******");
 	}
 	
 	public void setPrinter(BoardPrinter print) {

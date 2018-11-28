@@ -26,7 +26,7 @@ public class PlantFactory {
 		case "c": p = new Petacereza(); break;
 		case "nuez": 
 		case "n": p = new Nuez(); break;
-		default : throw new CommandParseException("No existe esta planta: " + plantName);
+		default : throw new CommandParseException("Unknown plant name: " + plantName);
 		}
 		return p;
 	}

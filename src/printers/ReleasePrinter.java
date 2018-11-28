@@ -31,7 +31,7 @@ public class ReleasePrinter extends BoardPrinter {
 	
 	public String cabecera(Game game) {
 		StringBuilder str = new StringBuilder();
-		str.append("Number of cycles: ").append(Integer.toString(game.getCiclos()));
+		str.append("Current cycle: ").append(Integer.toString(game.getCiclos()));
 		str.append("\nSun coins: ").append(Integer.toString(game.getSoles()));
 		str.append("\nRemaining Zombies: ").append(game.remZombies());
 		str.append("\n");
