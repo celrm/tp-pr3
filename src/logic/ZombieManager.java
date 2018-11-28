@@ -9,8 +9,8 @@ public class ZombieManager {
 	private Random rand;
 	
 	public ZombieManager(Level level, Random rand){
-		this.numZombies = level.numZombies();
-		this.frec = level.frec();
+		this.numZombies = level.getNumberOfZombies();
+		this.frec = level.getZombieFrequency();
 		this.rand = rand;
 	}
 	

@@ -1,36 +1,37 @@
 package logic;
 
 public enum  Level{
-	EASY, HARD, INSANE;
+	EASY(3, 0.1), HARD(5, 0.2), INSANE(10, 0.3);
 	
-	public int numZombies(){
-		int num = 0;
-		switch(this){
-		case EASY: num = 3; break;
-		case HARD:  num = 5; break;
-		case INSANE: num = 10; break;
-		}
-		return num;
-	}
-	public double frec(){
-		double num = 0.0;
-		switch(this){
-		case EASY: num = 0.1; break;
-		case HARD:  num = 0.2; break;
-		case INSANE: num = 0.3; break;
-		}
-		return num;
+	private int numberOfZombies;
+	private double zombieFrequency;
+	
+	private Level(int zombieNum, double zombieFreq){
+		numberOfZombies = zombieNum;
+		zombieFrequency = zombieFreq;
 	}
 	
-	public String toString(){
-		String str;
-		switch(this){
-		case EASY: str = "EASY"; break;
-		case HARD:  str = "HARD" ; break;
-		case INSANE: str = "INSANE"; break;
-		default: str = "EASY"; break;
-		}
-		return str;
+	public int getNumberOfZombies() {
+		return numberOfZombies;
+	}
+	
+	public double getZombieFrequency() {
+		return zombieFrequency;
+	}
+	
+	public static Level parse(String inputString) {
+		for (Level level : Level.values() )
+			if (level.name().equalsIgnoreCase(inputString)) 
+				return level;
+		return null;
+	}
+	
+	public static String all(String separator) {
+		StringBuilder sb = new StringBuilder();
+		for (Level level : Level.values() )
+			sb.append(level.name() + separator);
+		String allLevels = sb.toString();
+		return allLevels.substring(0, allLevels.length()-separator.length());
 	}
 }
 
