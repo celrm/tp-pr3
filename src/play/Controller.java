@@ -52,7 +52,8 @@ public class Controller {
 				if (command != null) {
 					if (command.execute(game)) printGame();
 				}
-				else System.err.println(unknownCommandMsg);
+				// out o err??
+				else System.out.println(unknownCommandMsg);
 			}
 			catch (CommandParseException | CommandExecuteException ex) {
 				System.out.format(ex.getMessage() + " %n %n");

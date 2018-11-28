@@ -41,7 +41,8 @@ public class AddCommand extends Command {
 			// El -1 para el glitch
 			if(x<0 || y<0 || x>=Game.DIMX || y>=Game.DIMY-1) // es este de execute??
 				throw new CommandParseException("Failed to add " + plant.getName() + ": (" +x+", "+y+") is an invalid position");
-
+			// uppercase plantname?
+			
 			this.x = x;
 			this.y = y;
 			return this;

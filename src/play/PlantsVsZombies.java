@@ -20,8 +20,10 @@ public class PlantsVsZombies {
 			
 			Level level = Level.parse(args[0]);
 			if(level == null)
-				throw new Exception(": level must be one of: " + Level.all(", "));
+				throw new Exception(constantInfo + Level.all("|")+" [seed]: level must be one of: " + Level.all(", "));
 			
+			System.out.println("Welcome to plantsVsZombies v3.0");
+			System.out.println("Random seed used: " + seed);
 			
 			Game juego = new Game(rnd, level, seed);
 			Scanner sc = new Scanner(System.in);
@@ -38,6 +40,14 @@ public class PlantsVsZombies {
 
 	}
 	
-
+//	La aplicación sería más mantenible y flexible si las clases PlantFactory
+//	y ZombieFactory utilizaran el mismo mecanismo para la creación de plantas que
+//	la clase CommandParser utiliza para la creación de comandos. Es decir, que el fun-
+//	cionamiento de los métodos getPlant y getZombie de las primeras fuera el del
+//	método parse de la segunda, lo que implicaría tener un método parse en los obje-
+//	tos del juego. Ya que estamos, se podría también crear una clase PrinterManager
+//	para hacer el papel de la clase CommandParser y utilizar este mismo mecanis-
+//	mo para gestionar los distintos tipos de printer, lo que implicaría tener un método
+//	parse en los printers.
 }
 

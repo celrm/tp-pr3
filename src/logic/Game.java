@@ -47,8 +47,9 @@ public class Game {
 	
 	// Lo llama addCommand.execute()
 	public void addPlantToGame(Plant plant, int x, int y) throws CommandExecuteException {
+		// uppercase plantname?
 		if(this.hayCosas(x,y))
-			throw new CommandExecuteException("Failed to add "+plant.getName()+": (" +x+", "+y+") is already occupied");
+			throw new CommandExecuteException("Failed to add "+plant.getName()+": position (" +x+", "+y+") is already occupied");
 		
 		if (this.soles.num() < plant.getCost())
 			throw new CommandExecuteException("Failed to add "+plant.getName()+": not enough suncoins to buy it");
