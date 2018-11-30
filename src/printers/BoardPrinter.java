@@ -8,7 +8,14 @@ public abstract class BoardPrinter implements GamePrinter {
 	protected int boardX;
 	protected int boardY;
 	protected int cellSize;
+	protected String symbol;
+	protected String name;
 	
+	public BoardPrinter (String symbol, String name,int cellSize){
+		this.symbol = symbol;
+		this.name = name;
+		this.cellSize = cellSize;
+		}
 	abstract void encodeGame(Game game);
 	abstract String cabecera(Game game);
 	abstract BoardPrinter parse(String mode);

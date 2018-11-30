@@ -6,16 +6,14 @@ public class ReleasePrinter extends BoardPrinter {
 	private String symbol;
 	private String name;
 	
-	public ReleasePrinter(Game game) {
-		symbol = "r";
-		name = "release";
-		boardX = Game.DIMX;
-		boardY = Game.DIMY;
-		cellSize = 10;
+	public ReleasePrinter() {
+		super("r","release", 10);
 	}
 
 	@Override
 	public void encodeGame(Game game) {
+		boardX = Game.DIMX;
+		boardY = Game.DIMY;
 	 	board = new String[boardX][boardY];
 		for(int i = 0; i < boardX; i++) {
 			for(int j = 0; j < boardY; j++) {

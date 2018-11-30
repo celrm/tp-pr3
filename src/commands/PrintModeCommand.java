@@ -17,10 +17,7 @@ public class PrintModeCommand extends Command {
 	@Override
 	public boolean execute(Game game) throws CommandExecuteException {
 		BoardPrinter p = PrinterManager.parsePrinter(mode);
-		
-		if (p == null){
-			throw new CommandExecuteException("Unknown print mode: " + mode);
-		}
+
 		game.setPrinter(p);
 		return true;
 	}

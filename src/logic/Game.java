@@ -46,7 +46,7 @@ public class Game {
 		this.soles = new SuncoinManager();
 		
 		this.gana = false;
-		this.gamePrinter = new ReleasePrinter(this);
+		this.gamePrinter = new ReleasePrinter();
 	}
 	
 	// Lo llama addCommand.execute()
@@ -125,7 +125,13 @@ public class Game {
 			// Tipo de zombie aleatorio
 			int tipo = Math.abs(this.rand.nextInt() % ZombieFactory.numZombies());
 			String zombieName = ZombieFactory.zombieName(tipo);
-			Zombie zombie = ZombieFactory.getZombie(zombieName);
+			Zombie zombie = null;
+			try {
+				zombie = ZombieFactory.getZombie(zombieName);
+			}
+			//Como nunca se va a lanzar la excepción en esta parte, no hace falta tratarla
+			catch (CommandParseException e) {
+			}
 			
 			//y añado al zombie
 			if (zombie != null) {

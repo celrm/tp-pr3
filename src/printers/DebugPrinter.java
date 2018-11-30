@@ -3,19 +3,15 @@
 import logic.Game;
 
 public class DebugPrinter extends BoardPrinter{
-	private String symbol;
-	private String name;
-	
-	public DebugPrinter(Game game) {
-		symbol = "d";
-		name = "debug";
-		boardX = 1;
-		boardY = game.get_tot() + 1;
-		cellSize = 25;
+
+	public DebugPrinter() {
+		super("d","debug", 25);
 	}
 
 	@Override
 	public void encodeGame(Game game) {
+		boardX = 1;
+		boardY = game.get_tot() + 1;;
 		if (game.numPlantas() == 0 || game.numZombies() == 0){
 			boardY = game.get_tot();
 		}
