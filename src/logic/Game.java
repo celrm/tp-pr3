@@ -8,8 +8,10 @@ import factories.ZombieFactory;
 import objects.Plant;
 import objects.Sunflower;
 import objects.Zombie;
+import printers.BoardPrinter;
+import printers.ReleasePrinter;
 import lists.ObjectList;
-
+import printers.PrinterManager;
 
 public class Game {
 	public static final int DIMX = 4;
@@ -25,8 +27,10 @@ public class Game {
 	private int ciclos;
 	private SuncoinManager soles;
 	private ZombieManager zManager;
-
+	
 	private boolean gana;
+	
+	private BoardPrinter gamePrinter;
 	
 	public Game(Random rand, Level n, long seed) {
 		this.rand = rand;
@@ -42,7 +46,7 @@ public class Game {
 		this.soles = new SuncoinManager();
 		
 		this.gana = false;
-		
+		this.gamePrinter = new ReleasePrinter(this);
 	}
 	
 	// Lo llama addCommand.execute()
@@ -215,6 +219,10 @@ public class Game {
 
 	public String toStringDebugz (int i) {
 		return this.zombieList.toStringDebug(i);
+	}
+	
+	public void setPrinter(BoardPrinter print) {
+		this.gamePrinter = print;
 	}
 	
 	//función auxiliar para saber si un hueco está libre

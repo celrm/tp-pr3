@@ -31,7 +31,7 @@ public class PlantsVsZombies {
 
 			controlador.run();
 		}
-		catch (RuntimeException ex) {
+		catch (NumberFormatException ex) {
 			System.out.format(constantInfo + Level.all("|")+" [seed]: the seed must be a number" + " %n %n");
 		}
 		catch (Exception ex) {
@@ -40,12 +40,7 @@ public class PlantsVsZombies {
 
 	}
 	
-//	La aplicación sería más mantenible y flexible si las clases PlantFactory
-//	y ZombieFactory utilizaran el mismo mecanismo para la creación de plantas que
-//	la clase CommandParser utiliza para la creación de comandos. Es decir, que el fun-
-//	cionamiento de los métodos getPlant y getZombie de las primeras fuera el del
-//	método parse de la segunda, lo que implicaría tener un método parse en los obje-
-//	tos del juego. Ya que estamos, se podría también crear una clase PrinterManager
+//Ya que estamos, se podría también crear una clase PrinterManager
 //	para hacer el papel de la clase CommandParser y utilizar este mismo mecanis-
 //	mo para gestionar los distintos tipos de printer, lo que implicaría tener un método
 //	parse en los printers.

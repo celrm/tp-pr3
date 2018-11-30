@@ -1,5 +1,7 @@
 package objects;
 
+import exceptions.CommandParseException;
+
 public abstract class Zombie extends GameObject {
 	
 	public Zombie(String name, String nameMsg, int vida, int harm, int speed) {
@@ -18,5 +20,11 @@ public abstract class Zombie extends GameObject {
 		sol.append(" Harm: ").append(Integer.toString(this.getHarm())); 
 		sol.append(" Life: ").append(Integer.toString(this.getVida())).append("\n");
 		return sol.toString();
+	}
+	public Zombie parse(String ZombieName) throws CommandParseException {
+		boolean primeraletra = ZombieName.equals(this.getSymbol());
+		if(!ZombieName.equals(this.getName()) && !primeraletra)
+			return null;
+		else return this;
 	}
 }

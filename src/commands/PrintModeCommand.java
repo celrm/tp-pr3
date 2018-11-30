@@ -3,10 +3,9 @@ package commands;
 import exceptions.CommandExecuteException;
 import exceptions.CommandParseException;
 import logic.Game;
-import play.Controller;
-import printers.DebugPrinter;
 import printers.BoardPrinter;
-import printers.ReleasePrinter;
+import printers.PrinterManager;
+
 
 public class PrintModeCommand extends Command {
 	private String mode;
@@ -17,15 +16,13 @@ public class PrintModeCommand extends Command {
 	
 	@Override
 	public boolean execute(Game game) throws CommandExecuteException {
-		BoardPrinter p = null;
-		switch(mode) {
-		case "release":
-		case "r": p = new ReleasePrinter(game); break;
-		case "debug":
-		case "d": p = new DebugPrinter(game); break;
-		default: throw new CommandExecuteException("Unknown print mode: " + mode); // Esto no debería ser de parse?
+		BoardPrinter p = PrinterManager.parsePrinter(mode);
+		
+		if (p == null){
+			throw new CommandExecuteException("Unknown print mode: " + mode);
 		}
-		return false;
+		game.setPrinter(p);
+		return true;
 	}
 
 	@Override

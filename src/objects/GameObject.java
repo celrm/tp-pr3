@@ -1,5 +1,9 @@
 package objects;
 
+import commands.Command;
+
+import exceptions.CommandParseException;
+import factories.PlantFactory;
 import logic.Game;
 
 public abstract class GameObject implements Cloneable {
@@ -96,4 +100,6 @@ public abstract class GameObject implements Cloneable {
 	protected boolean noPrimerCiclo() {
 		return this.nacimiento != this.game.getCiclos();
 	}
+	
+	public abstract GameObject parse(String ObjectName) throws CommandParseException;
 }

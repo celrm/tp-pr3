@@ -3,8 +3,12 @@ package printers;
 import logic.Game;
 
 public class ReleasePrinter extends BoardPrinter {
-
+	private String symbol;
+	private String name;
+	
 	public ReleasePrinter(Game game) {
+		symbol = "r";
+		name = "release";
 		boardX = Game.DIMX;
 		boardY = Game.DIMY;
 		cellSize = 10;
@@ -36,6 +40,13 @@ public class ReleasePrinter extends BoardPrinter {
 		str.append("\nRemaining Zombies: ").append(game.remZombies());
 		str.append("\n");
 		return str.toString();
+	}
+	
+	public ReleasePrinter parse(String mode) {
+		if(!mode.equals(this.symbol) && !mode.equals(this.name))
+			return null;
+
+		return this;
 	}
 
 }

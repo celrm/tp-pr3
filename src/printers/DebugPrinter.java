@@ -3,8 +3,12 @@
 import logic.Game;
 
 public class DebugPrinter extends BoardPrinter{
+	private String symbol;
+	private String name;
 	
 	public DebugPrinter(Game game) {
+		symbol = "d";
+		name = "debug";
 		boardX = 1;
 		boardY = game.get_tot() + 1;
 		cellSize = 25;
@@ -44,6 +48,13 @@ public class DebugPrinter extends BoardPrinter{
 		str.append("\nSeed: ").append(game.seed());
 		str.append("\n");
 		return str.toString();
+	}
+	
+	public DebugPrinter parse(String mode) {
+		if(!mode.equals(this.symbol) && !mode.equals(this.name))
+			return null;
+
+		return this;
 	}
 
 }

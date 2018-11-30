@@ -1,5 +1,7 @@
 package objects;
 
+import exceptions.CommandParseException;
+
 
 public abstract class Plant extends GameObject {
 
@@ -19,5 +21,11 @@ public abstract class Plant extends GameObject {
 		sol.append(" Cost: ").append(Integer.toString(this.getCost())).append(" suncoins");
 		sol.append(" Harm: ").append(Integer.toString(this.getHarm())).append("\n");
 		return sol.toString();
+	}
+	public Plant parse(String PlantName) throws CommandParseException {
+		boolean primeraletra = PlantName.equals(this.getSymbol());
+		if(!PlantName.equals(this.getName()) && !primeraletra)
+			return null;
+		else return this;
 	}
 }

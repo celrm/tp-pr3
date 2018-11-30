@@ -14,7 +14,6 @@ public class Controller {
 	private Game game;
 	private Scanner scanner;
 	private boolean exit;
-	private BoardPrinter gamePrinter;
 	private final String unknownCommandMsg = "Unknown command. Use ’help’ to see the available commands";
 	private final String prompt = "Command > ";
 	
@@ -22,7 +21,6 @@ public class Controller {
 		this.game = j;
 		this.scanner = sc;
 		this.exit = false;
-		this.gamePrinter = new ReleasePrinter(j);
 	} 
 	
 //	while (!game.isFinished()){
@@ -69,10 +67,7 @@ public class Controller {
 		else System.out.println("****** Game over!: User exit ******");
 	}
 	
-	public void setPrinter(BoardPrinter print) {
-		this.gamePrinter = print;
-	}
-	
+
 	public void printGame() {
 		System.out.println();
 		System.out.println(gamePrinter.printGame(game));

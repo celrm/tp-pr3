@@ -11,7 +11,7 @@ public abstract class BoardPrinter implements GamePrinter {
 	
 	abstract void encodeGame(Game game);
 	abstract String cabecera(Game game);
-
+	abstract BoardPrinter parse(String mode);
 	public String boardToString(Game game) {
 		
 		encodeGame(game);

@@ -1,6 +1,7 @@
 package factories;
 
 import exceptions.CommandParseException;
+import objects.Plant;
 import objects.Zombie;
 import objects.ZombieCaracubo;
 import objects.ZombieComun;
@@ -13,13 +14,14 @@ public class ZombieFactory {
 		new ZombieCaracubo()
 	};
 
-	public static Zombie getZombie(String zombieName){
+	public static Zombie getZombie(String zombieName) throws CommandParseException {
 		Zombie z = null;
-		switch(zombieName) {
-		case "zombie comun": z = new ZombieComun(); break;
-		case "zombie deportista": z = new ZombieDeportista(); break;
-		case "zombie caracubo": z = new ZombieCaracubo(); break;		
-		//default : throw new Exception("No existe este zombie: " + zombieName); ????
+		for (Zombie item : availableZombies) {
+			if(z==null)
+				z = item.parse(zombieName);
+		}
+		if (z == null){
+			throw new CommandParseException("Unknown zombie name: " + zombieName);
 		}
 		return z;
 	}
