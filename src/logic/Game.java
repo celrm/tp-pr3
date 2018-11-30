@@ -263,4 +263,8 @@ public class Game {
 	public boolean quienGana(){
 		return this.gana;
 	}
+	
+	public String toString(){
+		return this.gamePrinter.printGame(this);
+	}
 }
