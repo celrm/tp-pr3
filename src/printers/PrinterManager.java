@@ -18,18 +18,3 @@ public class PrinterManager {
 		return p;
 	}
 }
-
-
-	
-
-	
-	// Lo usa HelpCommand
-	public static String commandHelp() {
-		StringBuilder strb = new StringBuilder();
-		for (Command item : availableCommands) {
-			strb.append(item.helpText() + "\n");
-		}
-		String str = strb.toString();		
-		return str;
-	}
-}
