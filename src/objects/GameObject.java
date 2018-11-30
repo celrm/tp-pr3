@@ -1,9 +1,6 @@
 package objects;
 
-import commands.Command;
-
 import exceptions.CommandParseException;
-import factories.PlantFactory;
 import logic.Game;
 
 public abstract class GameObject implements Cloneable {

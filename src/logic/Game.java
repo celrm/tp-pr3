@@ -11,7 +11,6 @@ import objects.Zombie;
 import printers.BoardPrinter;
 import printers.ReleasePrinter;
 import lists.ObjectList;
-import printers.PrinterManager;
 
 public class Game {
 	public static final int DIMX = 4;

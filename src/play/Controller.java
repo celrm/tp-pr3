@@ -2,8 +2,7 @@ package play;
 
 import java.util.Scanner;
 
-import printers.BoardPrinter;
-import printers.ReleasePrinter;
+
 import logic.Game;
 import commands.Command;
 import commands.CommandParser;

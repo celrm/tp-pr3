@@ -1,7 +1,6 @@
 package commands;
 
 import logic.Game;
-import play.Controller;
 
 public class ResetCommand extends NoParamsCommand{
 

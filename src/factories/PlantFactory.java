@@ -1,7 +1,5 @@
 package factories;
 
-import commands.Command;
-
 import exceptions.CommandParseException;
 import objects.Plant;
 import objects.Nuez;

@@ -3,7 +3,6 @@ package commands;
 import exceptions.CommandExecuteException;
 import exceptions.CommandParseException;
 import logic.Game;
-import play.Controller;
 
 public abstract class Command {
 
