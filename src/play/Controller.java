@@ -70,7 +70,7 @@ public class Controller {
 
 	public void printGame() {
 		System.out.println();
-		System.out.println(gamePrinter.printGame(game));
+		System.out.println(game);
 	}
 	
 	public void exit() {
