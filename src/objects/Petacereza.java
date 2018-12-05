@@ -1,5 +1,7 @@
 package objects;
 
+import exceptions.CommandParseException;
+
 
 public class Petacereza extends Plant {
 
@@ -13,5 +15,10 @@ public class Petacereza extends Plant {
 			this.danar(this.getVida());
 		}
 	}
-
+	public Plant parse(String PlantName) throws CommandParseException {
+		boolean primeraletra = PlantName.equals(this.getSymbol());
+		if(!PlantName.equals(this.getName()) && !primeraletra)
+			return null;
+		else return new Petacereza();
+	}
 }

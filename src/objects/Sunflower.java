@@ -1,5 +1,7 @@
 package objects;
 
+import exceptions.CommandParseException;
+
 public class Sunflower extends Plant {
 	public static final int PRODUCE_SOLES = 10;
 	
@@ -11,6 +13,10 @@ public class Sunflower extends Plant {
 		if (toca() && noPrimerCiclo()) 
 			game.generarSoles();
 	}
-
+	public Plant parse(String PlantName) throws CommandParseException {
+		boolean primeraletra = PlantName.equals(this.getSymbol());
+		if(!PlantName.equals(this.getName()) && !primeraletra)
+			return null;
+		else return new Sunflower();
+	}
 }
-

@@ -21,10 +21,5 @@ public abstract class Zombie extends GameObject {
 		sol.append(" Life: ").append(Integer.toString(this.getVida())).append("\n");
 		return sol.toString();
 	}
-	public Zombie parse(String ZombieName) throws CommandParseException {
-		boolean primeraletra = ZombieName.equals(this.getSymbol());
-		if(!ZombieName.equals(this.getName()) && !primeraletra)
-			return null;
-		else return this;
-	}
+	public abstract Zombie parse(String ZombieName) throws CommandParseException;
 }

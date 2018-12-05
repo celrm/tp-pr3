@@ -22,10 +22,5 @@ public abstract class Plant extends GameObject {
 		sol.append(" Harm: ").append(Integer.toString(this.getHarm())).append("\n");
 		return sol.toString();
 	}
-	public Plant parse(String PlantName) throws CommandParseException {
-		boolean primeraletra = PlantName.equals(this.getSymbol());
-		if(!PlantName.equals(this.getName()) && !primeraletra)
-			return null;
-		else return this;
-	}
+	public abstract Plant parse(String PlantName) throws CommandParseException;
 }

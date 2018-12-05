@@ -34,15 +34,11 @@ public class PlantsVsZombies {
 		catch (NumberFormatException ex) {
 			System.out.format(constantInfo + Level.all("|")+" [seed]: the seed must be a number" + " %n %n");
 		}
+		// Invent
 		catch (Exception ex) {
 			System.out.format(ex.getMessage() + " %n %n");
 		}
 
 	}
-	
-//Ya que estamos, se podría también crear una clase PrinterManager
-//	para hacer el papel de la clase CommandParser y utilizar este mismo mecanis-
-//	mo para gestionar los distintos tipos de printer, lo que implicaría tener un método
-//	parse en los printers.
 }
 

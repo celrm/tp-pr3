@@ -20,21 +20,7 @@ public class Controller {
 		this.game = j;
 		this.scanner = sc;
 		this.exit = false;
-	} 
-	
-//	while (!game.isFinished()){
-//		System.out.print(prompt);
-//		String[] words = in.nextLine().trim(). split ("\\s+");
-//		try {
-//		Command command = CommandGenerator.parse(words);
-//		if (command != null) {
-//		if (command.execute(game)) printGame();
-//		} else
-//		System.out.println(unknownCommandMsg);
-//		} catch (CommandParseException | CommandExecuteException ex) {
-//		System.out.format(ex.getMessage() + " %n %n");
-//		}
-//		}
+	}
 	
 	public void run() {
 		printGame();

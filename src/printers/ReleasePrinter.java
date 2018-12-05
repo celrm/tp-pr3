@@ -3,8 +3,6 @@ package printers;
 import logic.Game;
 
 public class ReleasePrinter extends BoardPrinter {
-	private String symbol;
-	private String name;
 	
 	public ReleasePrinter() {
 		super("r","release", 10);
