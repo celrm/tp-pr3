@@ -2,12 +2,12 @@ package play;
 
 import java.util.Scanner;
 
-
 import logic.Game;
 import commands.Command;
 import commands.CommandParser;
 import exceptions.CommandExecuteException;
 import exceptions.CommandParseException;
+import exceptions.FileContentsException;
 
 public class Controller {
 	private Game game;
@@ -38,7 +38,7 @@ public class Controller {
 				// out o err??
 				else System.out.println(unknownCommandMsg);
 			}
-			catch (CommandParseException | CommandExecuteException ex) {
+			catch (CommandParseException | CommandExecuteException | FileContentsException ex) {
 				System.out.format(ex.getMessage() + " %n %n");
 			}
 		}

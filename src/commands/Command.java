@@ -2,6 +2,7 @@ package commands;
 
 import exceptions.CommandExecuteException;
 import exceptions.CommandParseException;
+import exceptions.FileContentsException;
 import logic.Game;
 
 public abstract class Command {
@@ -19,7 +20,7 @@ public abstract class Command {
 //	Some commands may generate an error in the execute or parse methods.
 //	In the absence of exceptions, they must the tell the controller not to print the board
 	
-	public abstract boolean execute(Game game) throws CommandExecuteException;
+	public abstract boolean execute(Game game) throws CommandExecuteException, FileContentsException;
 	
 	public abstract Command parse(String[] commandWords) throws CommandParseException, NumberFormatException;
 

@@ -1,11 +1,13 @@
 package logic;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.Random;
 
 import exceptions.CommandExecuteException;
 import exceptions.CommandParseException;
+import exceptions.FileContentsException;
 import factories.ZombieFactory;
 import objects.Plant;
 import objects.Sunflower;
@@ -276,6 +278,9 @@ public class Game {
 	}
 	
 	public void store (BufferedWriter outStream) throws IOException{
+		outStream.write("Plants Vs Zombies v3.0");
+		outStream.newLine();
+		outStream.newLine();
 		outStream.write("cycle: ");
 		outStream.write(Integer.toString(this.ciclos));
 		outStream.newLine();
@@ -293,5 +298,8 @@ public class Game {
 		outStream.newLine();
 		outStream.write("zombieList: ");
 		this.zombieList.store(outStream);
+	}
+	public void load(BufferedReader inStream) throws IOException{
+		
 	}
 }
