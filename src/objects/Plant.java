@@ -1,8 +1,5 @@
 package objects;
 
-import exceptions.CommandParseException;
-
-
 public abstract class Plant extends GameObject {
 
 	private final int cost;

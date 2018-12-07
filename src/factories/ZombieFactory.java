@@ -1,6 +1,5 @@
 package factories;
 
-import exceptions.CommandParseException;
 import objects.Zombie;
 import objects.ZombieCaracubo;
 import objects.ZombieComun;
@@ -22,6 +21,7 @@ public class ZombieFactory {
 		return z;
 	}
 	
+	// ZombieListCommand.execute()
 	public static String listOfAvailableZombies() {
 		String sol = null;
 		for (Zombie item : availableZombies) {
@@ -31,7 +31,7 @@ public class ZombieFactory {
 	}
 
 	// Dado el índice del array, dar el nombre del zombie
-	// Llamado en game.computer()
+	// Game.computer()
 	public static String zombieName(int pos){
 		String sol = null;
 		int j = 0;
@@ -44,9 +44,9 @@ public class ZombieFactory {
 		return sol;
 	}
 	
-	// Llamado para tener el rango del rand
-	// en computer()
-	public static int numZombies(){
+	// Para tener el rango del rand
+	// Game.computer()
+	public static int numAvZombies(){
 		return availableZombies.length;
 
 	}

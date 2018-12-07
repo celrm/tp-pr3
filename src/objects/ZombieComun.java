@@ -1,6 +1,5 @@
 package objects;
 
-import exceptions.CommandParseException;
 import objects.Zombie;
 
 public class ZombieComun extends Zombie {

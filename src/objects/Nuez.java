@@ -1,7 +1,5 @@
 package objects;
 
-import exceptions.CommandParseException;
-
 public class Nuez extends Plant {
 
 	public Nuez() {

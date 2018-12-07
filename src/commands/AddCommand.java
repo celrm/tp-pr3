@@ -17,7 +17,11 @@ public class AddCommand extends Command {
 	
 	@Override
 	public boolean execute(Game game) throws CommandExecuteException {		
-		game.addPlantToGame(plant, x, y);
+		try {
+			game.addPlantToGame(plant, x, y);
+		} catch(CommandExecuteException ex) {
+			throw new CommandExecuteException("Failed to add " + plant.getName() + ": " + ex.getMessage());
+		} // uppercase plant name?
 		game.update();
 		return true;
 	}
@@ -27,28 +31,19 @@ public class AddCommand extends Command {
 		if(!word(commandWords[0].toLowerCase(),1))
 			return null;
 		
-		if (commandWords.length != 4)
-			throw new CommandParseException("Incorrect number of arguments for " + this.commandText + " command: " + this.commandTextMsg);
-
+		numParameters(commandWords.length, 4);
+		
 		this.plant = PlantFactory.getPlant(commandWords[1].toLowerCase());
 		if (plant == null)
 			throw new CommandParseException("Unknown plant name: " + commandWords[1]);
 			
 		try {
-			int x = Integer.parseInt(commandWords[2]);
-			int y = Integer.parseInt(commandWords[3]);
-			
-			// El -1 para el glitch
-			if(x<0 || y<0 || x>=Game.DIMX || y>=Game.DIMY-1) // es este de execute??
-				throw new CommandParseException("Failed to add " + plant.getName() + ": (" +x+", "+y+") is an invalid position");
-			// uppercase plantname?
-			
-			this.x = x;
-			this.y = y;
-			return this;
+			this.x = Integer.parseInt(commandWords[2]);
+			this.y = Integer.parseInt(commandWords[3]);
 		}
 		catch (NumberFormatException ex) {
 			throw new CommandParseException("Invalid argument for " + this.commandText + " command, number expected: " + this.commandTextMsg);
 		}
+		return this;
 	}
 }

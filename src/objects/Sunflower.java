@@ -1,7 +1,5 @@
 package objects;
 
-import exceptions.CommandParseException;
-
 public class Sunflower extends Plant {
 	public static final int PRODUCE_SOLES = 10;
 	

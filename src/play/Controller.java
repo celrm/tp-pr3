@@ -21,10 +21,8 @@ public class Controller {
 	}
 	
 	public void run() {
-		printGame();
-		
-		while (!game.isFinished()) {
-			
+		printGame();		
+		while (!game.isFinished()) {			
 			System.out.print(prompt);
 			String[] words = scanner.nextLine().trim().split("\\s+");
 			try {
@@ -32,26 +30,17 @@ public class Controller {
 
 				if (command != null) {
 					if (command.execute(game)) printGame();
-				}
-				else System.out.println(unknownCommandMsg);
+				} else
+					System.out.println(unknownCommandMsg);
 			}
 			catch (CommandParseException | CommandExecuteException | FileContentsException ex) {
 				System.out.format(ex.getMessage() + " %n %n");
 			}
 		}
-		
-		// Para pintar el tablero al final también
-		if (!game.getExit()){
-			if (game.quienGana())
-				System.out.println("You win!");
-			else System.out.println("Zombies win :(");
-		}
-		else System.out.println("****** Game over!: User exit ******");
 	}
 	
 	public void printGame() {
 		System.out.println();
 		System.out.println(game);
-	}
-	
+	}	
 }

@@ -6,7 +6,7 @@ import java.io.IOException;
 import exceptions.CommandParseException;
 import logic.Game;
 
-public abstract class GameObject implements Cloneable {
+public abstract class GameObject {
 	private final String symbol;
 	private final String name;
 	private final String nameMsg;
@@ -75,7 +75,7 @@ public abstract class GameObject implements Cloneable {
 
 	public void setGame(Game game) {
 		this.game = game;
-		this.nacimiento = game.getCiclos();
+		this.nacimiento = game.getCycles();
 	}
 	
 	public String toString() {
@@ -88,17 +88,17 @@ public abstract class GameObject implements Cloneable {
 		str.append(",x:").append(this.x);
 		str.append(",y:").append(this.y);
 		if(speed != 0)
-			str.append(",t:").append(speed - ((this.game.getCiclos() - this.nacimiento) % speed));
+			str.append(",t:").append(speed - ((this.game.getCycles() - this.nacimiento) % speed));
 		else str.append(",t:0");
 		str.append("]");
 		return str.toString();
 	}
 	
 	protected boolean toca() {
-		return this.nacimiento % this.speed == this.game.getCiclos() % this.speed;
+		return this.nacimiento % this.speed == this.game.getCycles() % this.speed;
 	}
 	protected boolean noPrimerCiclo() {
-		return this.nacimiento != this.game.getCiclos();
+		return this.nacimiento != this.game.getCycles();
 	}
 	
 	public abstract GameObject parse(String ObjectName) throws CommandParseException;
@@ -112,7 +112,7 @@ public abstract class GameObject implements Cloneable {
 		outStream.write(":");
 		outStream.write(Integer.toString(this.y));
 		outStream.write(":");
-		outStream.write(Integer.toString(speed - ((this.game.getCiclos() - this.nacimiento) % speed)));
+		outStream.write(Integer.toString(speed - ((this.game.getCycles() - this.nacimiento) % speed)));
 	}
 
 	public void setAttributes(int vida, int x, int y, int t) {

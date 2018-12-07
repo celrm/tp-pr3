@@ -1,6 +1,5 @@
 package factories;
 
-import exceptions.CommandParseException;
 import objects.Plant;
 import objects.Nuez;
 import objects.Peashooter;
@@ -23,7 +22,8 @@ public class PlantFactory {
 		}
 		return p;
 	}
-
+	
+	// ListCommand.execute()
 	public static String listOfAvailablePlants() {
 		String sol = null;
 		for (Plant item : availablePlants) {

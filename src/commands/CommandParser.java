@@ -2,9 +2,9 @@ package commands;
 
 import exceptions.CommandParseException;
 
-// Clase utilidad: todos sus métodos son estáticos
 public class CommandParser {
 	
+	// Muy importante mantener UpdateCommand el primero, por no acceder a "".
 	private static Command[] availableCommands = {
 		new UpdateCommand(),
 		new AddCommand(),
@@ -24,18 +24,16 @@ public class CommandParser {
 			if(com==null)
 				com = item.parse(words);
 		}
-		
-		// Si es null no se va a pintar el tablero
 		return com;
 	}
 	
-	// Lo usa HelpCommand
+	// HelpCommand.execute()
 	public static String commandHelp() {
 		StringBuilder strb = new StringBuilder();
-		for (Command item : availableCommands) {
+		
+		for (Command item : availableCommands)
 			strb.append(item.helpText() + "\n");
-		}
-		String str = strb.toString();		
-		return str;
+		
+		return strb.toString();
 	}
 }

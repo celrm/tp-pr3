@@ -18,9 +18,9 @@ public class UpdateCommand extends Command {
 	}
 	
 	public Command parse(String[] commandWords) {
-		if(commandWords[0].equals(this.commandText)) {
+		if(commandWords[0].equals(this.commandText))
 			return this;
-		}
+
 		else return null;		
 	}
 }

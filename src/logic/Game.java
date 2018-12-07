@@ -29,13 +29,11 @@ public class Game {
 	private ObjectList plantList;
 	private ObjectList zombieList;
 
-	private int ciclos;
-	private SuncoinManager soles;
+	private int cycles;
+	private SuncoinManager sManager;
 	private ZombieManager zManager;
 	
-	private boolean win;
-	private boolean exit;
-	
+	private boolean exit;	
 	private BoardPrinter gamePrinter;
 	
 	public Game(Random rand, Level n, long seed) {
@@ -48,96 +46,144 @@ public class Game {
 		
 		this.zManager = new ZombieManager(this.level, this.rand);
 		
-		this.ciclos = 0;
-		this.soles = new SuncoinManager();
+		this.cycles = 0;
+		this.sManager = new SuncoinManager();
 		
-		this.win = false;
 		this.exit = false;
 		this.gamePrinter = new ReleasePrinter();
 	}
+
+	private boolean taken(int x, int y) {
+		return (this.plantList.hay(x, y) || this.zombieList.hay(x, y));
+	}
+	public int numObjects(){
+		return numPlants() + numZombies();
+	}
+	public int numPlants(){
+		return plantList.getCont();
+	}
+	public int numZombies(){
+		return zombieList.getCont();
+	}
+	public int getCycles(){
+		return this.cycles;
+	}	
+	public int getSuncoins(){
+		return this.sManager.getSuncoins();
+	}	
+	public int remZombies(){
+		return this.zManager.getRemZombies();
+	}	
+	public long getSeed(){
+		return seed;
+	}	
+	public String getLevelName(){
+		return this.level.name();
+	}
 	
-	// Lo llama addCommand.execute()
+	// Controller.run()
+	public boolean isFinished() {
+		boolean victory = playerWins();
+		boolean out = exit || victory || zombiesWin();
+		if (out) {
+			System.out.println("****** Game over!: ");
+			if (exit)
+				System.out.println("User exit");
+			else if (victory)
+				System.out.print("You win!");
+			else 
+				System.out.print("Zombies win :(");
+			System.out.print(" ******");
+		}
+		return out;
+	}
+	private boolean playerWins() {
+		return (this.zManager.getRemZombies() == 0) && (numZombies() == 0);
+  	}
+	private boolean zombiesWin() {
+  		boolean sol = false;
+  		for (int j = 0; j < DIMX && !sol; ++j)
+  			sol = this.zombieList.hay(j,0);
+		return sol;
+  	}
+	public String toString(){
+		return this.gamePrinter.printGame(this);
+	}
+	
+	// AddCommand.execute()
 	public void addPlantToGame(Plant plant, int x, int y) throws CommandExecuteException {
-		// uppercase plantname?
-		if(this.hayCosas(x,y))
-			throw new CommandExecuteException("Failed to add "+plant.getName()+": position (" +x+", "+y+") is already occupied");
+		if(x<0 || y<0 || x>=DIMX || y>=DIMY-1) // es este de parse??
+			throw new CommandExecuteException("("+x+", "+y+") is an invalid position");
 		
-		if (this.soles.num() < plant.getCost())
-			throw new CommandExecuteException("Failed to add "+plant.getName()+": not enough suncoins to buy it");
+		if(this.taken(x,y))
+			throw new CommandExecuteException("position (" +x+", "+y+") is already occupied");
+		
+		if (this.sManager.getSuncoins() < plant.getCost())
+			throw new CommandExecuteException("not enough suncoins to buy it");
 	
 		plant.setPosition(x, y);
 		plant.setGame(this);
 		this.plantList.add(plant);
-		this.soles.add(-plant.getCost());
+		this.sManager.add(-plant.getCost());
 	}
 	
-	public boolean addZombieToGame(Zombie zombie, int x, int y) {
-		boolean sol = false;
-		if(this.hayCosas(x,y))
-			System.out.println("There's already something there.");
-		
-		else {
-			zombie.setPosition(x, y);
-			zombie.setGame(this);
-			this.zombieList.add(zombie);
-			sol = true;
-		}
-
-		return sol;
+	// ExitCommand.execute()
+	public void exit() {
+		exit = true;
 	}
 	
-	// Lo llama Controller
-	public boolean isFinished() {
-		return exit || playerWins() || zombiesWin();
+	// PrintModeCommand.execute()
+	public void setPrinter(BoardPrinter print) {
+		this.gamePrinter = print;
+	}
+	// ReleasePrinter.encodeGame()
+	public String toStringRelease(int x, int y) {
+		return this.plantList.toString(x,y) + this.zombieList.toString(x,y);
+	}	
+	// DebugPrinter.encodeGame()
+	public String toStringDebugPlants(int i) {
+		return this.plantList.toStringDebug(i);
+	}
+	public String toStringDebugZombies(int i) {
+		return this.zombieList.toStringDebug(i);
+	}
+	
+	// ResetCommand.execute()
+	public void reset() {
+		this.plantList = new ObjectList();
+		this.zombieList = new ObjectList();
+
+		this.zManager = new ZombieManager(this.level, this.rand);
+
+		this.cycles = 0;
+		this.sManager = new SuncoinManager();
 	}
 
-	private boolean playerWins() {
-		//si no hay zombies por salir y están todos muertos
-  	    boolean sol = this.zManager.getNumZombies() == 0 && this.zombieList.getCont() == 0;
+	// UpdateCommand.execute() y AddCommand.execute()
+	public void update() {
+		this.plantList.update();
+		this.zombieList.update();
 		
-		if(sol)
-			win = true;
-		//System.out.println("You win!");
-  		
-		return sol;
-  	}
-
-	private boolean zombiesWin() {
-  	    //recorre la primera columna hasta que encuentra un zombie
-  		boolean sol = false;
-  		
-  		for (int j = 0; j < Game.DIMX && !sol; ++j) {
-  			sol = this.zombieList.hay(j,0);
-  		}
-  		
-  		//if(sol)
-		//	System.out.println("Zombies win :(");
-  		
-		return sol;
-  	}
-
+		this.computer();
+		this.cycles++;
+	}
 	private void computer() {		
-		boolean posible = false;		
-		//si hay algún hueco en la columna DIMY - 1
-		for (int i = 0; i < Game.DIMX && !posible; ++i)
-			posible = !this.hayCosas(i, Game.DIMY - 1);
+		boolean posible = false;
+		for (int i = 0; i < DIMX && !posible; ++i)
+			posible = !this.taken(i, DIMY - 1);
 		
-		//y si toca que salga en este ciclo
 		if (posible && this.zManager.isZombieAdded()) {
 			// Fila aleatoria
 			int x;
-			do x = Math.abs(this.rand.nextInt() % Game.DIMX);
-			while (this.hayCosas(x, Game.DIMY-1));
+			do x = Math.abs(this.rand.nextInt() % DIMX);
+			while (this.taken(x, DIMY-1));
 			
 			// Tipo de zombie aleatorio
-			int tipo = Math.abs(this.rand.nextInt() % ZombieFactory.numZombies());
+			int tipo = Math.abs(this.rand.nextInt() % ZombieFactory.numAvZombies());
 			String zombieName = ZombieFactory.zombieName(tipo);
-			Zombie zombie = null;
+			Zombie zombie = ZombieFactory.getZombie(zombieName);
 			
-			zombie = ZombieFactory.getZombie(zombieName);
-			//Como nunca se va a lanzar la excepción en esta parte, no hace falta tratarla
-			
-			//y añado al zombie
+			// Añado al zombie
 			if (zombie != null) {
 				zombie.setPosition(x, DIMY-1);
 				zombie.setGame(this);
@@ -146,148 +192,55 @@ public class Game {
 		}
 	}
 	
-	// Lo llama resetC
-		public void reset() {
-			this.plantList = new ObjectList();
-			this.zombieList = new ObjectList();
-
-			this.zManager = new ZombieManager(this.level, this.rand);
-
-			this.ciclos = 0;
-			this.soles = new SuncoinManager();
-		}
-
-	// Lo llama updateC -- tiene tambien que llamarse cada ciclo no?
-	public void update() {
-		this.plantList.update();
-		this.zombieList.update();
-		
-		this.computer();
-		this.ciclos++;
-	}
-
-
+	// Sunflower.update()
   	public void generarSoles() {
-  		//añade los soles que le tocan
-  		this.soles.add(Sunflower.PRODUCE_SOLES);
-  	}
-  	
+  		this.sManager.add(Sunflower.PRODUCE_SOLES);
+  	}	
+	// Peashooter.update()  	
   	public void disparar(int x, int y, int harm) {
   		boolean found = false;
-  		//recorre la fila en la que está p
-		for (int j = y+1; j < Game.DIMY && !found; ++j) {
-			//y si hay un zombie lo daña, y deja de buscar
+		for (int j = y+1; j < DIMY && !found; ++j) {
 			if (this.zombieList.hay(x, j)) {
 	  			this.zombieList.danar(x,j,harm);
 	  			found = true;
 			}
 		}
-  	}
-  	
+  	}	
+	// Petacereza.update()
   	public void explotar(int x, int y, int harm) {
   		for(int i = x-1; i <= x + 1; ++i)
   			for(int j = y-1; j <= y + 1; ++j) {
-  				boolean dentro = !(i<0 || j<0 || i>=Game.DIMX || j>=Game.DIMY);
+  				boolean dentro = !(i<0 || j<0 || i>=DIMX || j>=DIMY);
   				if(dentro && this.zombieList.hay(i,j))
   		  			this.zombieList.danar(i,j,harm);
   			}
-  	}
-
+  	}  		
+	// Zombie.update()
   	public boolean zombieAction(int harm,int x, int y) {
-  		boolean sol;
-  		//si tiene plantas delante, lo ataca
   		if(this.plantList.hay(x,y-1)) {
   			this.plantList.danar(x,y-1, harm);
-  			sol = true;
+  			return true;
   		}
-  		//si no, no ha atacado a nadie
-  		else sol = false;
-  		return sol;
-  	}
-  	
-  	//Lo necesitamos public para que no se pisen los zombies
+  		return false;
+  	}  	
+  	// Zombie.update() - Para que no se pisen los zombies
   	public boolean hayZombie(int x, int y) {
   		return this.zombieList.hay(x,y);
   	}
-
-	//usado para saber frecuencias de acciones en plantas y zombies
-	public int getCiclos(){
-		return this.ciclos;
-	}
-
-	//para gameprinter, modifica str si hay algo en alguna lista
-	public String toString(int x, int y) {
-		return this.plantList.toString(x,y) + this.zombieList.toString(x,y);
-	}
 	
-	//para DebugPrinter 
-	public String toStringDebugp (int i) {
-		return this.plantList.toStringDebug(i);
-	}
-
-	public String toStringDebugz (int i) {
-		return this.zombieList.toStringDebug(i);
-	}
-	
-	public void setPrinter(BoardPrinter print) {
-		this.gamePrinter = print;
-	}
-	
-	//función auxiliar para saber si un hueco está libre
-	private boolean hayCosas(int x, int y) {
-		return (this.plantList.hay(x, y) || this.zombieList.hay(x, y));
-	}
-	
-	// Para DebugPrinter
-	public int get_tot(){
-		return plantList.getCont() + zombieList.getCont();
-	}
-	
-	public int numPlantas(){
-		return plantList.getCont();
-	}
-
-	public int numZombies(){
-		return zombieList.getCont();
-	}
-	
-	public int getSoles(){
-		return this.soles.num();
-	}
-	
-	public int remZombies(){
-		return this.zManager.getNumZombies();
-	}
-	
-	public long seed(){
-		return seed;
-	}
-	
-	public String getLevelName(){
-		return this.level.toString();
-	}
-	
-	// Para imprimir la última vez
-	public boolean quienGana(){
-		return this.win;
-	}
-	
-	public String toString(){
-		return this.gamePrinter.printGame(this);
-	}
-	
+  	// SaveCommand.execute()
 	public void store (BufferedWriter outStream) throws IOException{
 		outStream.write("cycle: ");
-		outStream.write(Integer.toString(this.ciclos));
+		outStream.write(Integer.toString(getCycles()));
 		outStream.newLine();
 		outStream.write("sunCoins: ");
-		outStream.write(Integer.toString(this.getSoles()));
+		outStream.write(Integer.toString(getSuncoins()));
 		outStream.newLine();
 		outStream.write("level: ");
 		outStream.write(this.getLevelName());
 		outStream.newLine();
 		outStream.write("remZombies: ");
-		outStream.write(Integer.toString(this.remZombies()));
+		outStream.write(Integer.toString(remZombies()));
 		outStream.newLine();
 		outStream.write("plantList: ");
 		this.plantList.store(outStream);
@@ -295,21 +248,25 @@ public class Game {
 		outStream.write("zombieList: ");
 		this.zombieList.store(outStream);
 	}
+	
+  	// LoadCommand.execute()
 	public void load(BufferedReader inStream) throws FileContentsException {
 		Level oldlevel = level;
 		ObjectList oldplantList = plantList;
 		ObjectList oldzombieList = zombieList;
-		int oldciclos = ciclos;
-		SuncoinManager oldsoles = soles;
+		int oldciclos = cycles;
+		SuncoinManager oldsManager = sManager;
 		ZombieManager oldzManager = zManager;
 		BoardPrinter oldgamePrinter = gamePrinter;
+		// Cutrísima forma de hacer el backup
 		
 		try {
+			// Debería asegurarme de absolutamente todo?
 			String[] words = loadLine(inStream,"cycle",false);
-			this.ciclos = Integer.parseInt(words[0]);
+			this.cycles = Integer.parseInt(words[0]);
 			
 			words = loadLine(inStream,"sunCoins",false);
-			soles.add(Integer.parseInt(words[0])-soles.num());
+			sManager.add(Integer.parseInt(words[0]) - sManager.getSuncoins());
 			
 			words = loadLine(inStream,"level",false);
 			this.level = Level.parse(words[0]);
@@ -317,17 +274,20 @@ public class Game {
 				throw new FileContentsException("Wrong level");
 			
 			words = loadLine(inStream,"remZombies",false);
-			this.zManager.setNumZombies(Integer.parseInt(words[0]));
+			this.zManager.setRemZombies(Integer.parseInt(words[0]));
 			
 			words = loadLine(inStream,"plantList",true);
 			this.plantList = new ObjectList();
 			for(int i = 0; i < words.length; ++i) {
 				String[] attr = words[i].split("\\:");
+		
 				if(attr.length != 5)
 					throw new FileContentsException("Wrong number of plant attributes: plant " + i);
+				
 				Plant p = PlantFactory.getPlant(attr[0]);
 				if (p == null)
 					throw new FileContentsException("Unknown plant name: " + attr[0]);
+				
 				p.setAttributes(Integer.parseInt(attr[1]),Integer.parseInt(attr[2]),Integer.parseInt(attr[3]),Integer.parseInt(attr[4]));
 				p.setGame(this);
 				plantList.add(p);
@@ -337,11 +297,14 @@ public class Game {
 			this.zombieList = new ObjectList();
 			for(int i = 0; i < words.length; ++i) {
 				String[] attr = words[i].split("\\:");
+				
 				if(attr.length != 5)
 					throw new FileContentsException("wrong number of zombie attributes: zombie " + i);
+				
 				Zombie p = ZombieFactory.getZombie(attr[0]);
 				if (p == null)
 					throw new FileContentsException("Unknown zombie name: " + attr[0]);
+				
 				p.setAttributes(Integer.parseInt(attr[1]),Integer.parseInt(attr[2]),Integer.parseInt(attr[3]),Integer.parseInt(attr[4]));
 				p.setGame(this);
 				zombieList.add(p);
@@ -352,23 +315,24 @@ public class Game {
 			level = oldlevel;
 			plantList = oldplantList;
 			zombieList = oldzombieList;
-			ciclos = oldciclos;
-			soles = oldsoles;
+			cycles = oldciclos;
+			sManager = oldsManager;
 			zManager = oldzManager;
 			gamePrinter = oldgamePrinter;
 			throw new FileContentsException(ex.getMessage());
-		} catch (NumberFormatException ex) {
+		} catch (NumberFormatException ex) { // Not sure si tengo que capturarla aquí y not sure del mensaje
 			level = oldlevel;
 			plantList = oldplantList;
 			zombieList = oldzombieList;
-			ciclos = oldciclos;
-			soles = oldsoles;
+			cycles = oldciclos;
+			sManager = oldsManager;
 			zManager = oldzManager;
 			gamePrinter = oldgamePrinter;
-			throw new FileContentsException("not a number");			
+			throw new FileContentsException("Not a number");			
 		}
 	}
-
+	
+	// Por qué public? y va aquí?
 	public static final String wrongPrefixMsg = "unknown game attribute: ";
 	public static final String lineTooLongMsg = "too many words on line commencing: ";
 	public static final String lineTooShortMsg = "missing data on line commencing: ";
@@ -405,12 +369,5 @@ public class Game {
 			words = new String[0];
 		}
 		return words;
-	}
-
-	public void exit() {
-		exit = true;
-	}
-	public boolean getExit() {
-		return exit;
 	}
 }

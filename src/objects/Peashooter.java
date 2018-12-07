@@ -1,7 +1,5 @@
 package objects;
 
-import exceptions.CommandParseException;
-
 public class Peashooter extends Plant {
 
 	public Peashooter() {

@@ -27,8 +27,7 @@ public class PrintModeCommand extends Command {
 		if(!word(commandWords[0].toLowerCase(),1))
 			return null;
 		
-		if (commandWords.length != 2)
-			throw new CommandParseException("Incorrect number of arguments for " + this.commandText + " command: " + this.commandTextMsg);
+		numParameters(commandWords.length, 2);
 
 		this.mode = commandWords[1].toLowerCase();
 		return this;

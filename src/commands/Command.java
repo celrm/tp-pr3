@@ -17,20 +17,22 @@ public abstract class Command {
 		this.helpTextMsg = helpTextMsg;
 	}
 	
-//	Some commands may generate an error in the execute or parse methods.
-//	In the absence of exceptions, they must the tell the controller not to print the board
-	
 	public abstract boolean execute(Game game) throws CommandExecuteException, FileContentsException;
+	public abstract Command parse(String[] commandWords) throws CommandParseException;
 	
-	public abstract Command parse(String[] commandWords) throws CommandParseException, NumberFormatException;
-
 	public String helpText() {
 		return commandTextMsg + ": " + this.helpTextMsg;
 	}
-	public boolean word(String str,int n) {
+	
+	protected boolean word(String str,int n) {
 		boolean primeraletra = str.equals(this.commandText.substring(0, n));
 		if(!str.toLowerCase().equals(this.commandText) && !primeraletra)
 			return false;
 		return true;
+	}
+	
+	protected void numParameters(int length, int n) throws CommandParseException {
+		if (length != n)
+			throw new CommandParseException("Incorrect number of arguments for " + this.commandText + " command: " + this.commandTextMsg);
 	}
 }

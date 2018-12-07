@@ -4,21 +4,21 @@ import java.util.Random;
 
 public class ZombieManager {
     
-	private int numZombies;
+	private int remZombies;
 	private double frec;
 	private Random rand;
 	
 	public ZombieManager(Level level, Random rand){
-		this.numZombies = level.getNumberOfZombies();
+		this.remZombies = level.getNumberOfZombies();
 		this.frec = level.getZombieFrequency();
 		this.rand = rand;
 	}
 	
 	public boolean isZombieAdded() {
-		if (this.numZombies > 0) {
+		if (this.remZombies > 0) {
 			Double d = rand.nextDouble();
 			if (d < this.frec) {
-				this.numZombies -= 1;
+				this.remZombies -= 1;
 				return true;
 			} else {
 				return false;
@@ -27,10 +27,10 @@ public class ZombieManager {
 		else return false;
 	}
 	
-	public int getNumZombies() {
-	    return this.numZombies;
+	public int getRemZombies() {
+	    return this.remZombies;
 	}
-	public void setNumZombies(int num) {
-	    this.numZombies = num;
+	public void setRemZombies(int num) {
+	    this.remZombies = num;
 	}
 }

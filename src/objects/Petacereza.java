@@ -1,8 +1,5 @@
 package objects;
 
-import exceptions.CommandParseException;
-
-
 public class Petacereza extends Plant {
 
 	public Petacereza() {

@@ -40,9 +40,8 @@ public class SaveCommand extends Command {
 		if(!word(commandWords[0].toLowerCase(),1))
 			return null;
 		
-		if (commandWords.length != 2){
-			throw new CommandParseException("Incorrect number of arguments for " + this.commandText + " command: " + this.commandTextMsg);
-		}
+		numParameters(commandWords.length, 2);
+
 		fileName = commandWords[1];
 		return this;
 	}
