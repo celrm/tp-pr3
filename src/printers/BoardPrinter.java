@@ -1,5 +1,6 @@
 package printers;
 
+import utils.MyStringUtils;
 import logic.Game;
 
 public abstract class BoardPrinter implements GamePrinter {

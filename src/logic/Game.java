@@ -1,5 +1,7 @@
 package logic;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.Random;
 
 import exceptions.CommandExecuteException;
@@ -271,5 +273,25 @@ public class Game {
 	
 	public String toString(){
 		return this.gamePrinter.printGame(this);
+	}
+	
+	public void store (BufferedWriter outStream) throws IOException{
+		outStream.write("cycle: ");
+		outStream.write(Integer.toString(this.ciclos));
+		outStream.newLine();
+		outStream.write("sunCoins: ");
+		outStream.write(Integer.toString(this.getSoles()));
+		outStream.newLine();
+		outStream.write("level: ");
+		outStream.write(this.getLevelName());
+		outStream.newLine();
+		outStream.write("remZombies: ");
+		outStream.write(Integer.toString(this.remZombies()));
+		outStream.newLine();
+		outStream.write("plantList: ");
+		this.plantList.store(outStream);
+		outStream.newLine();
+		outStream.write("zombieList: ");
+		this.zombieList.store(outStream);
 	}
 }

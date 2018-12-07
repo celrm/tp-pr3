@@ -1,11 +1,15 @@
 package objects;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 import exceptions.CommandParseException;
 
 public abstract class Zombie extends GameObject {
-	
-	public Zombie(String name, String nameMsg, int vida, int harm, int speed) {
+	private String ident;
+	public Zombie(String name, String nameMsg, int vida, int harm, int speed, String ident) {
 	    super("z", name, nameMsg, vida, harm, speed);
+		this.ident = ident;
 	}
 	
 	public void update() {
@@ -22,4 +26,16 @@ public abstract class Zombie extends GameObject {
 		return sol.toString();
 	}
 	public abstract Zombie parse(String ZombieName) throws CommandParseException;
+	
+	public void store (BufferedWriter outStream) throws IOException{
+		outStream.write(ident);
+		outStream.write(":");
+		outStream.write(Integer.toString(super.getVida()));
+		outStream.write(":");
+		outStream.write(Integer.toString(this.x));
+		outStream.write(":");
+		outStream.write(Integer.toString(this.y));
+		outStream.write(":");
+		outStream.write(Integer.toString(speed - ((this.game.getCiclos() - this.nacimiento) % speed)));
+	}
 }

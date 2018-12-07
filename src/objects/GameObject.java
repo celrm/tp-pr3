@@ -1,5 +1,8 @@
 package objects;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 import exceptions.CommandParseException;
 import logic.Game;
 
@@ -99,4 +102,16 @@ public abstract class GameObject implements Cloneable {
 	}
 	
 	public abstract GameObject parse(String ObjectName) throws CommandParseException;
+	
+	public void store (BufferedWriter outStream) throws IOException{
+		outStream.write(this.symbol);
+		outStream.write(":");
+		outStream.write(Integer.toString(this.vida));
+		outStream.write(":");
+		outStream.write(Integer.toString(this.x));
+		outStream.write(":");
+		outStream.write(Integer.toString(this.y));
+		outStream.write(":");
+		outStream.write(Integer.toString(speed - ((this.game.getCiclos() - this.nacimiento) % speed)));
+	}
 }

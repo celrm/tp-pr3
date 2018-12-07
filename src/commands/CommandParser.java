@@ -14,6 +14,7 @@ public class CommandParser {
 		new PrintModeCommand(),
 		new ResetCommand(),
 		new ZombieListCommand(),
+		new SaveCommand(),
 	};
 	
 	public static Command parseCommand(String[] words) throws CommandParseException {

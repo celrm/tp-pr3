@@ -1,5 +1,8 @@
 package lists;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 import objects.GameObject;
 
 public class ObjectList {
@@ -97,5 +100,14 @@ public class ObjectList {
 	
 	public String toStringDebug(int i) {
 		return this.lista[i].toStringDebug();
+	}
+	
+	public void store (BufferedWriter outStream) throws IOException{
+		for (int i = 0; i < this.cont;++i){
+			if (i != 0){
+				outStream.write(", ");
+			}
+			this.lista[i].store(outStream);
+		}
 	}
 }

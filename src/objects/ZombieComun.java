@@ -6,7 +6,7 @@ import objects.Zombie;
 public class ZombieComun extends Zombie {
 
 	public ZombieComun() {
-		super("zombie comun","[Z]ombie comun", 5, 1, 2);
+		super("zombie comun","[Z]ombie comun", 5, 1, 2, "z");
 	}
 	public Zombie parse(String ZombieName) throws CommandParseException {
 		boolean primeraletra = ZombieName.equals(this.getSymbol());
