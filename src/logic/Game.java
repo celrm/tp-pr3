@@ -33,7 +33,8 @@ public class Game {
 	private SuncoinManager soles;
 	private ZombieManager zManager;
 	
-	private boolean gana;
+	private boolean win;
+	private boolean exit;
 	
 	private BoardPrinter gamePrinter;
 	
@@ -50,7 +51,8 @@ public class Game {
 		this.ciclos = 0;
 		this.soles = new SuncoinManager();
 		
-		this.gana = false;
+		this.win = false;
+		this.exit = false;
 		this.gamePrinter = new ReleasePrinter();
 	}
 	
@@ -86,7 +88,7 @@ public class Game {
 	
 	// Lo llama Controller
 	public boolean isFinished() {
-		return playerWins() || zombiesWin();
+		return exit || playerWins() || zombiesWin();
 	}
 
 	private boolean playerWins() {
@@ -94,7 +96,7 @@ public class Game {
   	    boolean sol = this.zManager.getNumZombies() == 0 && this.zombieList.getCont() == 0;
 		
 		if(sol)
-			gana = true;
+			win = true;
 		//System.out.println("You win!");
   		
 		return sol;
@@ -270,7 +272,7 @@ public class Game {
 	
 	// Para imprimir la última vez
 	public boolean quienGana(){
-		return this.gana;
+		return this.win;
 	}
 	
 	public String toString(){
@@ -323,7 +325,7 @@ public class Game {
 			words = loadLine(inStream,"level",false);
 			this.level = Level.parse(words[0]);
 			if (this.level == null)
-				throw new FileContentsException("wrong level");
+				throw new FileContentsException("Wrong level");
 			
 			words = loadLine(inStream,"remZombies",false);
 			this.zManager.setNumZombies(Integer.parseInt(words[0]));
@@ -333,7 +335,7 @@ public class Game {
 			for(int i = 0; i < words.length; ++i) {
 				String[] attr = words[i].split("\\:");
 				if(attr.length != 5)
-					throw new FileContentsException("wrong number of plant attributes: plant " + i);
+					throw new FileContentsException("Wrong number of plant attributes: plant " + i);
 				Plant p = PlantFactory.getPlant(attr[0]);
 				p.setAttributes(Integer.parseInt(attr[1]),Integer.parseInt(attr[2]),Integer.parseInt(attr[3]),Integer.parseInt(attr[4]));
 				p.setGame(this);
@@ -410,5 +412,12 @@ public class Game {
 			words = new String[0];
 		}
 		return words;
+	}
+
+	public void exit() {
+		exit = true;
+	}
+	public boolean getExit() {
+		return exit;
 	}
 }

@@ -24,14 +24,13 @@ public class AddCommand extends Command {
 
 	@Override
 	public Command parse(String[] commandWords) throws CommandParseException {
-		boolean primeraletra = commandWords[0].equals(this.commandText.substring(0, 1));
-		if(!commandWords[0].equals(this.commandText) && !primeraletra)
+		if(!word(commandWords[0].toLowerCase(),1))
 			return null;
 		
 		if (commandWords.length != 4)
 			throw new CommandParseException("Incorrect number of arguments for " + this.commandText + " command: " + this.commandTextMsg);
 
-		this.plant = PlantFactory.getPlant(commandWords[1]); // Esto antes estaba en execute pero en clase dijo que no
+		this.plant = PlantFactory.getPlant(commandWords[1].toLowerCase()); // Esto antes estaba en execute pero en clase dijo que no
 		
 		try {
 			int x = Integer.parseInt(commandWords[2]);

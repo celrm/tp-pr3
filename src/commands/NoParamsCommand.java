@@ -10,9 +10,9 @@ public abstract class NoParamsCommand extends Command {
 	
 	@Override
 	public Command parse(String[] commandWords) throws CommandParseException {
-		if(!commandWords[0].equals(this.commandText) && !commandWords[0].equals(this.commandText.substring(0, 1))) {
+		if(!word(commandWords[0].toLowerCase(),1))
 			return null;
-		}
+		
 		// uppercase commandText??
 		if (commandWords.length != 1)
 			throw new CommandParseException(this.commandText + " command has no arguments");

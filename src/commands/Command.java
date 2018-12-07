@@ -27,4 +27,10 @@ public abstract class Command {
 	public String helpText() {
 		return commandTextMsg + ": " + this.helpTextMsg;
 	}
+	public boolean word(String str,int n) {
+		boolean primeraletra = str.equals(this.commandText.substring(0, n));
+		if(!str.toLowerCase().equals(this.commandText) && !primeraletra)
+			return false;
+		return true;
+	}
 }

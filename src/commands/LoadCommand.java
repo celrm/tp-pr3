@@ -34,10 +34,9 @@ public class LoadCommand extends Command {
 
 	@Override
 	public Command parse(String[] commandWords) throws CommandParseException {
-		boolean primerasletras = commandWords[0].equals(this.commandText.substring(0, 2));
-		if (!commandWords[0].equals(this.commandText) &&  !primerasletras ){
+		if(!word(commandWords[0].toLowerCase(),2))
 			return null;
-		}
+		
 		if (commandWords.length != 2){
 			throw new CommandParseException("Incorrect number of arguments for " + this.commandText + " command: " + this.commandTextMsg);
 		}

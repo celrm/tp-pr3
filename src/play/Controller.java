@@ -12,23 +12,21 @@ import exceptions.FileContentsException;
 public class Controller {
 	private Game game;
 	private Scanner scanner;
-	private boolean exit;
 	private final String unknownCommandMsg = "Unknown command. Use ’help’ to see the available commands";
 	private final String prompt = "Command > ";
 	
 	public Controller(Game j, Scanner sc) {
 		this.game = j;
 		this.scanner = sc;
-		this.exit = false;
 	}
 	
 	public void run() {
 		printGame();
 		
-		while (!game.isFinished() && !exit) {
+		while (!game.isFinished()) {
 			
 			System.out.print(prompt);
-			String[] words = scanner.nextLine().toLowerCase().trim().split("\\s+");
+			String[] words = scanner.nextLine().trim().split("\\s+");
 			try {
 				Command command = CommandParser.parseCommand(words);
 
@@ -43,7 +41,7 @@ public class Controller {
 		}
 		
 		// Para pintar el tablero al final también
-		if (!exit){
+		if (!game.getExit()){
 			if (game.quienGana())
 				System.out.println("You win!");
 			else System.out.println("Zombies win :(");
@@ -51,14 +49,9 @@ public class Controller {
 		else System.out.println("****** Game over!: User exit ******");
 	}
 	
-
 	public void printGame() {
 		System.out.println();
 		System.out.println(game);
-	}
-	
-	public void exit() {
-		this.exit = true;
 	}
 	
 }

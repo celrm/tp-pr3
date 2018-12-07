@@ -24,13 +24,13 @@ public class PrintModeCommand extends Command {
 
 	@Override
 	public Command parse(String[] commandWords) throws CommandParseException {
-		if(!commandWords[0].equals(this.commandText) && !commandWords[0].equals(this.commandText.substring(0, 1)))
+		if(!word(commandWords[0].toLowerCase(),1))
 			return null;
 		
 		if (commandWords.length != 2)
 			throw new CommandParseException("Incorrect number of arguments for " + this.commandText + " command: " + this.commandTextMsg);
 
-		this.mode = commandWords[1];
+		this.mode = commandWords[1].toLowerCase();
 		return this;
 	}
 }
