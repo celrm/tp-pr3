@@ -23,8 +23,12 @@ public class LoadCommand extends Command {
 		boolean valido = MyStringUtils.isValidFilename(nombre) && MyStringUtils.fileExists(nombre) && MyStringUtils.isReadable(nombre);
 		if (!valido)
 			throw new CommandExecuteException("File not found");
-		try (BufferedReader outStream = new BufferedReader(new FileReader(nombre))) {
-			game.load(outStream);
+		try (BufferedReader inStream = new BufferedReader(new FileReader(nombre))) {
+			String line = inStream.readLine().trim();
+			if ( !line.equals("Plants Vs Zombies v3.0") )
+				throw new FileContentsException("missing: Plants Vs Zombies v3.0");
+			line = inStream.readLine();
+			game.load(inStream);
 			System.out.println("Game successfully loaded from file " + this.fileName + ".dat");
 		} catch (IOException e) {
 			throw new FileContentsException("Error de E/S : " + e);

@@ -24,6 +24,9 @@ public class SaveCommand extends Command {
 		if (!valido)
 			throw new CommandExecuteException("Invalid filename: the filename contains invalid characters");
 		try (BufferedWriter outStream = new BufferedWriter(new FileWriter(nombre))) {
+			outStream.write("Plants Vs Zombies v3.0");
+			outStream.newLine();
+			outStream.newLine();
 			game.store(outStream);
 			System.out.println("Game successfully saved in file " + this.fileName + ".dat. Use the load command to reload it");
 		} catch (IOException e) {

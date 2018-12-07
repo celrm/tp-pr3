@@ -277,9 +277,6 @@ public class Game {
 	}
 	
 	public void store (BufferedWriter outStream) throws IOException{
-		outStream.write("Plants Vs Zombies v3.0");
-		outStream.newLine();
-		outStream.newLine();
 		outStream.write("cycle: ");
 		outStream.write(Integer.toString(this.ciclos));
 		outStream.newLine();
@@ -308,11 +305,6 @@ public class Game {
 		BoardPrinter oldgamePrinter = gamePrinter;
 		
 		try {
-			String line = inStream.readLine().trim();
-			if ( !line.equals("Plants Vs Zombies v3.0") )
-				throw new FileContentsException("missing: Plants Vs Zombies v3.0");
-			line = inStream.readLine();
-			
 			String[] words = loadLine(inStream,"cycle",false);
 			this.ciclos = Integer.parseInt(words[0]);
 			
