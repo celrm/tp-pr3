@@ -15,7 +15,7 @@ public class PlantFactory {
 		new Nuez()
 	};
 		
-	public static Plant getPlant(String plantName) throws CommandParseException {
+	public static Plant getPlant(String plantName) {
 		Plant p = null;
 		for (Plant item : availablePlants) {
 			if(p==null)

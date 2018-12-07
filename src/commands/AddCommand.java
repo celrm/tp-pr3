@@ -30,8 +30,10 @@ public class AddCommand extends Command {
 		if (commandWords.length != 4)
 			throw new CommandParseException("Incorrect number of arguments for " + this.commandText + " command: " + this.commandTextMsg);
 
-		this.plant = PlantFactory.getPlant(commandWords[1].toLowerCase()); // Esto antes estaba en execute pero en clase dijo que no
-		
+		this.plant = PlantFactory.getPlant(commandWords[1].toLowerCase());
+		if (plant == null)
+			throw new CommandParseException("Unknown plant name: " + commandWords[1]);
+			
 		try {
 			int x = Integer.parseInt(commandWords[2]);
 			int y = Integer.parseInt(commandWords[3]);

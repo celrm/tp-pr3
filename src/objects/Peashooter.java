@@ -11,7 +11,7 @@ public class Peashooter extends Plant {
 	public void update() {
 		if (toca()) this.game.disparar(this.x, this.y, this.harm);
 	}
-	public Plant parse(String PlantName) throws CommandParseException {
+	public Plant parse(String PlantName) {
 		boolean primeraletra = PlantName.equals(this.getSymbol());
 		if(!PlantName.equals(this.getName()) && !primeraletra)
 			return null;

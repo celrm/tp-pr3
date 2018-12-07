@@ -133,12 +133,9 @@ public class Game {
 			int tipo = Math.abs(this.rand.nextInt() % ZombieFactory.numZombies());
 			String zombieName = ZombieFactory.zombieName(tipo);
 			Zombie zombie = null;
-			try {
-				zombie = ZombieFactory.getZombie(zombieName);
-			}
+			
+			zombie = ZombieFactory.getZombie(zombieName);
 			//Como nunca se va a lanzar la excepción en esta parte, no hace falta tratarla
-			catch (CommandParseException e) {
-			}
 			
 			//y añado al zombie
 			if (zombie != null) {
@@ -337,6 +334,8 @@ public class Game {
 				if(attr.length != 5)
 					throw new FileContentsException("Wrong number of plant attributes: plant " + i);
 				Plant p = PlantFactory.getPlant(attr[0]);
+				if (p == null)
+					throw new FileContentsException("Unknown plant name: " + attr[0]);
 				p.setAttributes(Integer.parseInt(attr[1]),Integer.parseInt(attr[2]),Integer.parseInt(attr[3]),Integer.parseInt(attr[4]));
 				p.setGame(this);
 				plantList.add(p);
@@ -349,13 +348,15 @@ public class Game {
 				if(attr.length != 5)
 					throw new FileContentsException("wrong number of zombie attributes: zombie " + i);
 				Zombie p = ZombieFactory.getZombie(attr[0]);
+				if (p == null)
+					throw new FileContentsException("Unknown zombie name: " + attr[0]);
 				p.setAttributes(Integer.parseInt(attr[1]),Integer.parseInt(attr[2]),Integer.parseInt(attr[3]),Integer.parseInt(attr[4]));
 				p.setGame(this);
 				zombieList.add(p);
 			}
 			
 			this.gamePrinter = new ReleasePrinter();
-		} catch(CommandParseException | IOException | FileContentsException ex) {
+		} catch(IOException | FileContentsException ex) {
 			level = oldlevel;
 			plantList = oldplantList;
 			zombieList = oldzombieList;

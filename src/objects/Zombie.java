@@ -25,7 +25,7 @@ public abstract class Zombie extends GameObject {
 		sol.append(" Life: ").append(Integer.toString(this.getVida())).append("\n");
 		return sol.toString();
 	}
-	public abstract Zombie parse(String ZombieName) throws CommandParseException;
+	public abstract Zombie parse(String ZombieName);
 	
 	public void store (BufferedWriter outStream) throws IOException{
 		outStream.write(ident);

@@ -13,14 +13,11 @@ public class ZombieFactory {
 		new ZombieCaracubo()
 	};
 
-	public static Zombie getZombie(String zombieName) throws CommandParseException {
+	public static Zombie getZombie(String zombieName) {
 		Zombie z = null;
 		for (Zombie item : availableZombies) {
 			if(z==null)
 				z = item.parse(zombieName);
-		}
-		if (z == null){
-			throw new CommandParseException("Unknown zombie name: " + zombieName);
 		}
 		return z;
 	}

@@ -13,7 +13,7 @@ public class Nuez extends Plant {
 		// Necesito esta función porque se supone que todas las plantas se actualizan.
 		// También podría quitar el abstract del gameObject.update() y dejar ese vacío, y borrar éste.
 	}
-	public Plant parse(String PlantName) throws CommandParseException {
+	public Plant parse(String PlantName) {
 		boolean primeraletra = PlantName.equals(this.getSymbol());
 		if(!PlantName.equals(this.getName()) && !primeraletra)
 			return null;
