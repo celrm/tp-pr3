@@ -102,11 +102,10 @@ public class ObjectList {
 		return this.lista[i].toStringDebug();
 	}
 	
-	public void store (BufferedWriter outStream) throws IOException{
+	public void store(BufferedWriter outStream) throws IOException{
 		for (int i = 0; i < this.cont;++i){
-			if (i != 0){
+			if (i != 0)
 				outStream.write(", ");
-			}
 			this.lista[i].store(outStream);
 		}
 	}

@@ -5,9 +5,11 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.Random;
 
+import commands.LoadCommand;
 import exceptions.CommandExecuteException;
 import exceptions.CommandParseException;
 import exceptions.FileContentsException;
+import factories.PlantFactory;
 import factories.ZombieFactory;
 import objects.Plant;
 import objects.Sunflower;
@@ -89,7 +91,7 @@ public class Game {
 
 	private boolean playerWins() {
 		//si no hay zombies por salir y están todos muertos
-  	    boolean sol = this.zManager.numZombies() == 0 && this.zombieList.getCont() == 0;
+  	    boolean sol = this.zManager.getNumZombies() == 0 && this.zombieList.getCont() == 0;
 		
 		if(sol)
 			gana = true;
@@ -257,7 +259,7 @@ public class Game {
 	}
 	
 	public int remZombies(){
-		return this.zManager.numZombies();
+		return this.zManager.getNumZombies();
 	}
 	
 	public long seed(){
@@ -299,7 +301,95 @@ public class Game {
 		outStream.write("zombieList: ");
 		this.zombieList.store(outStream);
 	}
-	public void load(BufferedReader inStream) throws IOException{
-		
+	public void load(BufferedReader inStream) throws FileContentsException {
+		securityCopy();
+		try {
+			String line = inStream.readLine().trim();
+			if ( !line.equals("Plants Vs Zombies v3.0") )
+				throw new FileContentsException("missing: Plants Vs Zombies v3.0");
+			line = inStream.readLine();
+			
+			String[] words = loadLine(inStream,"cycle",false);
+			this.ciclos = Integer.parseInt(words[0]);
+			
+			words = loadLine(inStream,"sunCoins",false);
+			soles.add(Integer.parseInt(words[0])-soles.num());
+			
+			words = loadLine(inStream,"level",false);
+			this.level = Level.parse(words[0]);
+			if (this.level == null)
+				throw new FileContentsException("wrong level");
+			
+			words = loadLine(inStream,"remZombies",false);
+			this.zManager.setNumZombies(Integer.parseInt(words[0]));
+			
+			words = loadLine(inStream,"plantList",true);
+			this.plantList = new ObjectList();
+			for(int i = 0; i < words.length; ++i) {
+				String[] attr = words[i].split("\\:");
+				if(attr.length != 5)
+					throw new FileContentsException("wrong number of plant attributes: plant " + i);
+				Plant p = PlantFactory.getPlant(attr[0]);
+				p.setAttributes(Integer.parseInt(attr[1]),Integer.parseInt(attr[2]),Integer.parseInt(attr[3]),Integer.parseInt(attr[4]));
+				p.setGame(this);
+				plantList.add(p);
+			}
+			
+			words = loadLine(inStream,"zombieList",true);
+			this.zombieList = new ObjectList();
+			for(int i = 0; i < words.length; ++i) {
+				String[] attr = words[i].split("\\:");
+				if(attr.length != 5)
+					throw new FileContentsException("wrong number of zombie attributes: zombie " + i);
+				Zombie p = ZombieFactory.getZombie(attr[0]);
+				p.setAttributes(Integer.parseInt(attr[1]),Integer.parseInt(attr[2]),Integer.parseInt(attr[3]),Integer.parseInt(attr[4]));
+				p.setGame(this);
+				zombieList.add(p);
+			}
+		} catch(CommandParseException | IOException | FileContentsException ex) {
+			restore();
+			throw new FileContentsException(ex.getMessage());
+		} catch (NumberFormatException ex) {
+			restore();
+			throw new FileContentsException("not a number");			
+		}
+	}
+
+	public static final String wrongPrefixMsg = "unknown game attribute: ";
+	public static final String lineTooLongMsg = "too many words on line commencing: ";
+	public static final String lineTooShortMsg = "missing data on line commencing: ";
+	
+	public String[] loadLine(BufferedReader inStream, String prefix, boolean isList) throws IOException, FileContentsException {
+		String line = inStream.readLine().trim();
+		// absence of the prefix is invalid
+		if ( ! line . startsWith(prefix + ":") )
+			throw new FileContentsException(wrongPrefixMsg + prefix);
+		// cut the prefix and the following colon off the line
+		// then trim it to get the attribute contents
+		String contentString = line. substring(prefix . length() +1).trim();
+		String[] words;
+		// the attribute contents are not empty
+		if (! contentString. equals("")) {
+			if (! isList ) {
+				// split non−list attribute contents into words
+				// using 1−or−more−white−spaces as separator
+				words = contentString.split ("\\s+");
+			// a non−list attribute with contents of more than one word is invalid
+			if (words.length != 1)
+				throw new FileContentsException(lineTooLongMsg + prefix);
+			} else
+				// split list attribute contents into words
+				// using comma+0−or−more−white−spaces as separator
+				words = contentString.split (",\\s*");
+		// the attribute contents are empty
+		} else {
+			// a non−list attribute with empty contents is invalid
+			if (! isList )
+				throw new FileContentsException(lineTooShortMsg + prefix);
+			// a list attibute with empty contents is valid;
+			// use a zero−length array to store its words
+			words = new String[0];
+		}
+		return words;
 	}
 }

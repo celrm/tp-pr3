@@ -27,7 +27,10 @@ public class ZombieManager {
 		else return false;
 	}
 	
-	public int numZombies() {
+	public int getNumZombies() {
 	    return this.numZombies;
+	}
+	public void setNumZombies(int num) {
+	    this.numZombies = num;
 	}
 }

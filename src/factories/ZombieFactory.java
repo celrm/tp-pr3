@@ -40,7 +40,7 @@ public class ZombieFactory {
 		int j = 0;
 		for (Zombie item : availableZombies) {
 			if (pos == j){
-				sol = item.getName();
+				sol = item.getIdent();
 			}
 			++j;
 		}

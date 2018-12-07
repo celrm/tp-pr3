@@ -10,7 +10,7 @@ public abstract class GameObject implements Cloneable {
 	private final String symbol;
 	private final String name;
 	private final String nameMsg;
-	private int vida;
+	protected int vida;
 	protected final int harm;
 	protected final int speed;
 	protected int x;
@@ -113,5 +113,12 @@ public abstract class GameObject implements Cloneable {
 		outStream.write(Integer.toString(this.y));
 		outStream.write(":");
 		outStream.write(Integer.toString(speed - ((this.game.getCiclos() - this.nacimiento) % speed)));
+	}
+
+	public void setAttributes(int vida, int x, int y, int t) {
+		this.vida = vida;
+		this.x = x;
+		this.y = y;
+		this.nacimiento = this.speed - t;
 	}
 }

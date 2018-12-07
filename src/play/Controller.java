@@ -35,7 +35,6 @@ public class Controller {
 				if (command != null) {
 					if (command.execute(game)) printGame();
 				}
-				// out o err??
 				else System.out.println(unknownCommandMsg);
 			}
 			catch (CommandParseException | CommandExecuteException | FileContentsException ex) {

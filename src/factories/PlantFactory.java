@@ -21,9 +21,6 @@ public class PlantFactory {
 			if(p==null)
 				p = item.parse(plantName);
 		}
-		if (p == null){
-			throw new CommandParseException("Unknown plant name: " + plantName);
-		}
 		return p;
 	}
 

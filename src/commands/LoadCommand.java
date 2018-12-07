@@ -19,12 +19,13 @@ public class LoadCommand extends Command {
 
 	@Override
 	public boolean execute(Game game) throws CommandExecuteException, FileContentsException {
-		boolean valido = MyStringUtils.isValidFilename(fileName) && MyStringUtils.fileExists(fileName) && MyStringUtils.isReadable(fileName);
+		String nombre = this.fileName + ".dat";
+		boolean valido = MyStringUtils.isValidFilename(nombre) && MyStringUtils.fileExists(nombre) && MyStringUtils.isReadable(nombre);
 		if (!valido)
 			throw new CommandExecuteException("File not found");
-		try (BufferedReader outStream = new BufferedReader(new FileReader(fileName))) {
+		try (BufferedReader outStream = new BufferedReader(new FileReader(nombre))) {
 			game.load(outStream);
-			System.out.println("Game successfully loaded from file " + this.fileName + ">.dat");
+			System.out.println("Game successfully loaded from file " + this.fileName + ".dat");
 		} catch (IOException e) {
 			throw new FileContentsException("Error de E/S : " + e);
 		}return false;
@@ -42,5 +43,4 @@ public class LoadCommand extends Command {
 		fileName = commandWords[1];
 		return this;
 	}
-
 }
