@@ -23,8 +23,8 @@ public class Game {
 	public static final int DIMY = 8;
 
 	private Random rand;
-	private Level level;
 	public long seed;
+	private Level level;
 	
 	private ObjectList plantList;
 	private ObjectList zombieList;
@@ -218,9 +218,7 @@ public class Game {
 
 	//para gameprinter, modifica str si hay algo en alguna lista
 	public String toString(int x, int y) {
-		String str = "";
-		str = this.plantList.toString(x,y) + this.zombieList.toString(x,y);
-		return str;
+		return this.plantList.toString(x,y) + this.zombieList.toString(x,y);
 	}
 	
 	//para DebugPrinter 
@@ -302,7 +300,14 @@ public class Game {
 		this.zombieList.store(outStream);
 	}
 	public void load(BufferedReader inStream) throws FileContentsException {
-		securityCopy();
+		Level oldlevel = level;
+		ObjectList oldplantList = plantList;
+		ObjectList oldzombieList = zombieList;
+		int oldciclos = ciclos;
+		SuncoinManager oldsoles = soles;
+		ZombieManager oldzManager = zManager;
+		BoardPrinter oldgamePrinter = gamePrinter;
+		
 		try {
 			String line = inStream.readLine().trim();
 			if ( !line.equals("Plants Vs Zombies v3.0") )
@@ -346,11 +351,25 @@ public class Game {
 				p.setGame(this);
 				zombieList.add(p);
 			}
+			
+			this.gamePrinter = new ReleasePrinter();
 		} catch(CommandParseException | IOException | FileContentsException ex) {
-			restore();
+			level = oldlevel;
+			plantList = oldplantList;
+			zombieList = oldzombieList;
+			ciclos = oldciclos;
+			soles = oldsoles;
+			zManager = oldzManager;
+			gamePrinter = oldgamePrinter;
 			throw new FileContentsException(ex.getMessage());
 		} catch (NumberFormatException ex) {
-			restore();
+			level = oldlevel;
+			plantList = oldplantList;
+			zombieList = oldzombieList;
+			ciclos = oldciclos;
+			soles = oldsoles;
+			zManager = oldzManager;
+			gamePrinter = oldgamePrinter;
 			throw new FileContentsException("not a number");			
 		}
 	}

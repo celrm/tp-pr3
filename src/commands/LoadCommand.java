@@ -28,7 +28,8 @@ public class LoadCommand extends Command {
 			System.out.println("Game successfully loaded from file " + this.fileName + ".dat");
 		} catch (IOException e) {
 			throw new FileContentsException("Error de E/S : " + e);
-		}return false;
+		}
+		return true;
 	}
 
 	@Override
