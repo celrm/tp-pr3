@@ -27,10 +27,11 @@ public class SaveCommand extends Command {
 			outStream.write("Plants Vs Zombies v3.0");
 			outStream.newLine();
 			outStream.newLine();
+			
 			game.store(outStream);
 			System.out.println("Game successfully saved in file " + this.fileName + ".dat. Use the load command to reload it");
 		} catch (IOException e) {
-			throw new FileContentsException("Error de E/S : " + e);
+			throw new FileContentsException("I/O error: " + e.getMessage());
 		}
 		return false;
 	}

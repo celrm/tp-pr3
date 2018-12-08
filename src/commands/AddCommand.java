@@ -2,6 +2,7 @@ package commands;
 
 import logic.Game;
 import objects.Plant;
+import utils.MyStringUtils;
 import exceptions.CommandExecuteException;
 import exceptions.CommandParseException;
 import factories.PlantFactory;
@@ -20,8 +21,8 @@ public class AddCommand extends Command {
 		try {
 			game.addPlantToGame(plant, x, y);
 		} catch(CommandExecuteException ex) {
-			throw new CommandExecuteException("Failed to add " + plant.getName() + ": " + ex.getMessage());
-		} // uppercase plant name?
+			throw new CommandExecuteException("Failed to add " + MyStringUtils.capitalize(plant.getName()) + ": " + ex.getMessage());
+		}
 		game.update();
 		return true;
 	}

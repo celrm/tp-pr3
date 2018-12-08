@@ -7,6 +7,18 @@ import java.nio.file.InvalidPathException;
 
 public class MyStringUtils {
 	
+	public static String capitalize(String s) {
+		StringBuilder result = new StringBuilder(s.length());
+		String[] words = s.split("\\s");
+		for(int i=0,l=words.length;i<l;++i) {
+			if(i>0) result.append(" ");      
+			result.append(Character.toUpperCase(words[i].charAt(0)))
+				  .append(words[i].substring(1));
+
+		}
+		return result.toString();
+	}
+	
 	public static String repeat(String elmnt, int length) {
 		String result = "";
 		for (int i = 0; i < length; i ++) {

@@ -3,8 +3,6 @@ package objects;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
-import exceptions.CommandParseException;
-
 public abstract class Zombie extends GameObject {
 	private String ident;
 	public Zombie(String name, String nameMsg, int vida, int harm, int speed, String ident) {

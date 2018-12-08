@@ -1,5 +1,6 @@
 package commands;
 
+import utils.MyStringUtils;
 import exceptions.CommandExecuteException;
 import exceptions.CommandParseException;
 import exceptions.FileContentsException;
@@ -26,13 +27,13 @@ public abstract class Command {
 	
 	protected boolean word(String str,int n) {
 		boolean primeraletra = str.equals(this.commandText.substring(0, n));
-		if(!str.toLowerCase().equals(this.commandText) && !primeraletra)
+		if(!str.equals(this.commandText) && !primeraletra)
 			return false;
 		return true;
 	}
 	
 	protected void numParameters(int length, int n) throws CommandParseException {
 		if (length != n)
-			throw new CommandParseException("Incorrect number of arguments for " + this.commandText + " command: " + this.commandTextMsg);
+			throw new CommandParseException("Incorrect number of arguments for " + MyStringUtils.capitalize(this.commandText) + " command: " + this.commandTextMsg);
 	}
 }

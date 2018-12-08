@@ -5,18 +5,16 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.Random;
 
-import commands.LoadCommand;
-import exceptions.CommandExecuteException;
-import exceptions.CommandParseException;
-import exceptions.FileContentsException;
-import factories.PlantFactory;
-import factories.ZombieFactory;
+import lists.ObjectList;
 import objects.Plant;
 import objects.Sunflower;
 import objects.Zombie;
 import printers.BoardPrinter;
 import printers.ReleasePrinter;
-import lists.ObjectList;
+import exceptions.CommandExecuteException;
+import exceptions.FileContentsException;
+import factories.PlantFactory;
+import factories.ZombieFactory;
 
 public class Game {
 	public static final int DIMX = 4;
@@ -116,7 +114,7 @@ public class Game {
 			throw new CommandExecuteException("("+x+", "+y+") is an invalid position");
 		
 		if(this.taken(x,y))
-			throw new CommandExecuteException("position (" +x+", "+y+") is already occupied");
+			throw new CommandExecuteException("position ("+x+", "+y+") is already occupied");
 		
 		if (this.sManager.getSuncoins() < plant.getCost())
 			throw new CommandExecuteException("not enough suncoins to buy it");
@@ -261,20 +259,28 @@ public class Game {
 		// Cutrísima forma de hacer el backup
 		
 		try {
-			// Debería asegurarme de absolutamente todo?
 			String[] words = loadLine(inStream,"cycle",false);
 			this.cycles = Integer.parseInt(words[0]);
+			if (this.cycles < 0)
+				throw new FileContentsException("negative cycle");
+			
 			
 			words = loadLine(inStream,"sunCoins",false);
-			sManager.add(Integer.parseInt(words[0]) - sManager.getSuncoins());
+			int newsuncoins = Integer.parseInt(words[0]);
+			if (newsuncoins < 0)
+				throw new FileContentsException("negative suncoins");
+			sManager.add(newsuncoins - sManager.getSuncoins());
 			
 			words = loadLine(inStream,"level",false);
 			this.level = Level.parse(words[0]);
 			if (this.level == null)
-				throw new FileContentsException("Wrong level");
+				throw new FileContentsException("unknown level name");
 			
 			words = loadLine(inStream,"remZombies",false);
-			this.zManager.setRemZombies(Integer.parseInt(words[0]));
+			int newremz = Integer.parseInt(words[0]);
+			if (newremz < 0)
+				throw new FileContentsException("negative remaining zombies");
+			this.zManager.setRemZombies(newremz);
 			
 			words = loadLine(inStream,"plantList",true);
 			this.plantList = new ObjectList();
@@ -282,11 +288,11 @@ public class Game {
 				String[] attr = words[i].split("\\:");
 		
 				if(attr.length != 5)
-					throw new FileContentsException("Wrong number of plant attributes: plant " + i);
+					throw new FileContentsException("wrong number of attributes in plant #" + i);
 				
 				Plant p = PlantFactory.getPlant(attr[0]);
 				if (p == null)
-					throw new FileContentsException("Unknown plant name: " + attr[0]);
+					throw new FileContentsException("unknown plant name: " + attr[0]);
 				
 				p.setAttributes(Integer.parseInt(attr[1]),Integer.parseInt(attr[2]),Integer.parseInt(attr[3]),Integer.parseInt(attr[4]));
 				p.setGame(this);
@@ -299,11 +305,11 @@ public class Game {
 				String[] attr = words[i].split("\\:");
 				
 				if(attr.length != 5)
-					throw new FileContentsException("wrong number of zombie attributes: zombie " + i);
+					throw new FileContentsException("wrong number of attributes in zombie #" + i);
 				
 				Zombie p = ZombieFactory.getZombie(attr[0]);
 				if (p == null)
-					throw new FileContentsException("Unknown zombie name: " + attr[0]);
+					throw new FileContentsException("unknown zombie name: " + attr[0]);
 				
 				p.setAttributes(Integer.parseInt(attr[1]),Integer.parseInt(attr[2]),Integer.parseInt(attr[3]),Integer.parseInt(attr[4]));
 				p.setGame(this);
@@ -320,7 +326,7 @@ public class Game {
 			zManager = oldzManager;
 			gamePrinter = oldgamePrinter;
 			throw new FileContentsException(ex.getMessage());
-		} catch (NumberFormatException ex) { // Not sure si tengo que capturarla aquí y not sure del mensaje
+		} catch (NumberFormatException ex) {
 			level = oldlevel;
 			plantList = oldplantList;
 			zombieList = oldzombieList;
@@ -328,7 +334,7 @@ public class Game {
 			sManager = oldsManager;
 			zManager = oldzManager;
 			gamePrinter = oldgamePrinter;
-			throw new FileContentsException("Not a number");			
+			throw new FileContentsException("expected number");			
 		}
 	}
 	
