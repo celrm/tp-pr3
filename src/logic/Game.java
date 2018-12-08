@@ -121,6 +121,7 @@ public class Game {
 	
 		plant.setPosition(x, y);
 		plant.setGame(this);
+		plant.setBirth(getCycles());
 		this.plantList.add(plant);
 		this.sManager.add(-plant.getCost());
 	}
@@ -185,6 +186,7 @@ public class Game {
 			if (zombie != null) {
 				zombie.setPosition(x, DIMY-1);
 				zombie.setGame(this);
+				zombie.setBirth(getCycles());
 				this.zombieList.add(zombie);
 			}
 		}
@@ -284,37 +286,54 @@ public class Game {
 			
 			words = loadLine(inStream,"plantList",true);
 			this.plantList = new ObjectList();
-			for(int i = 0; i < words.length; ++i) {
-				String[] attr = words[i].split("\\:");
+			for(int i = 1; i <= words.length; ++i) {
+				String[] attr = words[i-1].split("\\:");
 		
 				if(attr.length != 5)
 					throw new FileContentsException("wrong number of attributes in plant #" + i);
 				
 				Plant p = PlantFactory.getPlant(attr[0]);
 				if (p == null)
-					throw new FileContentsException("unknown plant name: " + attr[0]);
-				
-				p.setAttributes(Integer.parseInt(attr[1]),Integer.parseInt(attr[2]),Integer.parseInt(attr[3]),Integer.parseInt(attr[4]));
+					throw new FileContentsException("unknown plant #"+i+" name " + attr[0]);
+				try{
+					int x = Integer.parseInt(attr[2]);
+					int y = Integer.parseInt(attr[3]);
+					if(taken(x,y))
+						throw new FileContentsException("its position occupied");						
+					p.setAttributes(Integer.parseInt(attr[1]),x,y,Integer.parseInt(attr[4]));
+				} catch (FileContentsException e) {
+					throw new FileContentsException("plant #"+i+" has "+e.getMessage());
+				}
 				p.setGame(this);
 				plantList.add(p);
 			}
 			
 			words = loadLine(inStream,"zombieList",true);
 			this.zombieList = new ObjectList();
-			for(int i = 0; i < words.length; ++i) {
-				String[] attr = words[i].split("\\:");
+			for(int i = 1; i <= words.length; ++i) {
+				String[] attr = words[i-1].split("\\:");
 				
 				if(attr.length != 5)
 					throw new FileContentsException("wrong number of attributes in zombie #" + i);
 				
-				Zombie p = ZombieFactory.getZombie(attr[0]);
-				if (p == null)
-					throw new FileContentsException("unknown zombie name: " + attr[0]);
+				Zombie z = ZombieFactory.getZombie(attr[0]);
+				if (z == null)
+					throw new FileContentsException("unknown zombie #"+i+" name " + attr[0]);
 				
-				p.setAttributes(Integer.parseInt(attr[1]),Integer.parseInt(attr[2]),Integer.parseInt(attr[3]),Integer.parseInt(attr[4]));
-				p.setGame(this);
-				zombieList.add(p);
+				try{
+					int x = Integer.parseInt(attr[2]);
+					int y = Integer.parseInt(attr[3]);
+					if(taken(x,y))
+						throw new FileContentsException("its position occupied");						
+					z.setAttributes(Integer.parseInt(attr[1]),x,y,Integer.parseInt(attr[4]));
+				} catch (FileContentsException e) {
+					throw new FileContentsException("zombie #"+i+" has "+e.getMessage());
+				}
+				z.setGame(this);
+				zombieList.add(z);
 			}
+			if(newremz + zombieList.getCont() != this.level.getNumberOfZombies())
+				throw new FileContentsException("wrong number of zombies in level "+this.level.name());				
 			
 			this.gamePrinter = new ReleasePrinter();
 		} catch(IOException | FileContentsException ex) {
@@ -334,7 +353,7 @@ public class Game {
 			sManager = oldsManager;
 			zManager = oldzManager;
 			gamePrinter = oldgamePrinter;
-			throw new FileContentsException("expected number");			
+			throw new FileContentsException("expected integer");			
 		}
 	}
 	

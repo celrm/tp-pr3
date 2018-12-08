@@ -3,8 +3,9 @@ package objects;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
-import exceptions.CommandParseException;
 import logic.Game;
+import exceptions.CommandParseException;
+import exceptions.FileContentsException;
 
 public abstract class GameObject {
 	private final String symbol;
@@ -75,7 +76,10 @@ public abstract class GameObject {
 
 	public void setGame(Game game) {
 		this.game = game;
-		this.nacimiento = game.getCycles();
+	}
+
+	public void setBirth(int cycles) {
+		this.nacimiento = cycles;	
 	}
 	
 	public String toString() {
@@ -115,10 +119,23 @@ public abstract class GameObject {
 		outStream.write(Integer.toString(speed - ((this.game.getCycles() - this.nacimiento) % speed)));
 	}
 
-	public void setAttributes(int vida, int x, int y, int t) {
+	public void setAttributes(int vida, int x, int y, int t) throws FileContentsException {
+		if (vida < 0)
+			throw new FileContentsException("negative life");
+		if (vida > this.vida)
+			throw new FileContentsException("too much life");
 		this.vida = vida;
+		
+		if(x<0 || y<0 || x>=Game.DIMX || y>=Game.DIMY)
+			throw new FileContentsException("out of range position");
 		this.x = x;
 		this.y = y;
+		
+		if (t < 0)
+			throw new FileContentsException("negative object cycle");
 		this.nacimiento = this.speed - t;
+		if (nacimiento < 0)
+			throw new FileContentsException("faster speed than cycle");
+		
 	}
 }
