@@ -84,14 +84,14 @@ public class Game {
 		boolean victory = playerWins();
 		boolean out = exit || victory || zombiesWin();
 		if (out) {
-			System.out.println("****** Game over!: ");
+			System.out.print("****** Game over!: ");
 			if (exit)
-				System.out.println("User exit");
+				System.out.print("User exit");
 			else if (victory)
 				System.out.print("You win!");
 			else 
 				System.out.print("Zombies win :(");
-			System.out.print(" ******");
+			System.out.println(" ******");
 		}
 		return out;
 	}
@@ -200,6 +200,8 @@ public class Game {
   	public void disparar(int x, int y, int harm) {
   		boolean found = false;
 		for (int j = y+1; j < DIMY && !found; ++j) {
+			if (this.plantList.hay(x, j))
+	  			found = true;
 			if (this.zombieList.hay(x, j)) {
 	  			this.zombieList.danar(x,j,harm);
 	  			found = true;
@@ -264,8 +266,7 @@ public class Game {
 			String[] words = loadLine(inStream,"cycle",false);
 			this.cycles = Integer.parseInt(words[0]);
 			if (this.cycles < 0)
-				throw new FileContentsException("negative cycle");
-			
+				throw new FileContentsException("negative cycle");		
 			
 			words = loadLine(inStream,"sunCoins",false);
 			int newsuncoins = Integer.parseInt(words[0]);
@@ -332,8 +333,6 @@ public class Game {
 				z.setGame(this);
 				zombieList.add(z);
 			}
-			if(newremz + zombieList.getCont() != this.level.getNumberOfZombies())
-				throw new FileContentsException("wrong number of zombies in level "+this.level.name());				
 			
 			this.gamePrinter = new ReleasePrinter();
 		} catch(IOException | FileContentsException ex) {
