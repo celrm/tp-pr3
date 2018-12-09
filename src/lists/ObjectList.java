@@ -70,17 +70,18 @@ public class ObjectList {
         return getPosition(x,y) != null;
     }
 	
-	// Quita los muertos, desplaza los vivos
-	// TODO cambiar
+
 	private void remove(){
-		int vivo = 0;
-		for (int i = 0; i < this.cont; ++i){
-			if (this.lista[i].getVida()>0){
-				this.lista[vivo] = this.lista[i];
-				++vivo;
+		GameObject[] aux = this.lista;
+		this.lista = new GameObject[aux.length];
+		int j  =  0;
+		for(int i = 0; i < this.cont; ++i){
+			if (aux[i].getVida() > 0){
+				this.lista[j] = aux[i];
+				++j;
 			}
 		}
-		this.cont = vivo;
+		this.cont = j;
 
 	}
 	
