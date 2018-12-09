@@ -25,10 +25,10 @@ public class PlantFactory {
 	
 	// ListCommand.execute()
 	public static String listOfAvailablePlants() {
-		String sol = null;
+		StringBuilder sol = new StringBuilder();
 		for (Plant item : availablePlants) {
-			sol = item.listMsg(new StringBuilder());
+			sol.append(item.listMsg(new StringBuilder())+'\n');
 		}
-		return sol;
+		return sol.toString();
 	}
 }

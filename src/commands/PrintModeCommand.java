@@ -11,7 +11,7 @@ public class PrintModeCommand extends Command {
 	private String mode;
 	
 	public PrintModeCommand() {
-		super("printmode", "[P]rintMode <mode>", "change print mode [Release|Debug]");
+		super("printmode", "[P]rintMode <mode>", "Changes print mode [Release|Debug]");
 	}
 	
 	@Override

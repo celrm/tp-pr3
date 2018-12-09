@@ -162,8 +162,9 @@ public class Game {
 	public void update() {
 		this.plantList.update();
 		this.zombieList.update();
-		this.zombieList.remove();
+
 		this.plantList.remove();
+		this.zombieList.remove();
 		
 		this.computer();
 		this.cycles++;

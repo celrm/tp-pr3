@@ -1,5 +1,6 @@
 package factories;
 
+import objects.Plant;
 import objects.Zombie;
 import objects.ZombieCaracubo;
 import objects.ZombieComun;
@@ -23,11 +24,11 @@ public class ZombieFactory {
 	
 	// ZombieListCommand.execute()
 	public static String listOfAvailableZombies() {
-		String sol = null;
+		StringBuilder sol = new StringBuilder();
 		for (Zombie item : availableZombies) {
-			sol = item.listMsg(new StringBuilder());
+			sol.append(item.listMsg(new StringBuilder())+'\n');
 		}
-		return sol;
+		return sol.toString();
 	}
 
 	// Dado el índice del array, dar el nombre del zombie

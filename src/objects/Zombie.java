@@ -20,7 +20,7 @@ public abstract class Zombie extends GameObject {
 		sol.append(this.getNameMsg()).append(":");
 		sol.append(" Speed: ").append(Integer.toString(this.getSpeed()));
 		sol.append(" Harm: ").append(Integer.toString(this.getHarm())); 
-		sol.append(" Life: ").append(Integer.toString(this.getVida())).append("\n");
+		sol.append(" Life: ").append(Integer.toString(this.getVida()));
 		return sol.toString();
 	}
 	public abstract Zombie parse(String ZombieName);

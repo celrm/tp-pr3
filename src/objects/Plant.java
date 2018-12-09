@@ -16,7 +16,7 @@ public abstract class Plant extends GameObject {
 	public String listMsg(StringBuilder sol){
 		sol.append(this.getNameMsg()).append(":");
 		sol.append(" Cost: ").append(Integer.toString(this.getCost())).append(" suncoins");
-		sol.append(" Harm: ").append(Integer.toString(this.getHarm())).append("\n");
+		sol.append(" Harm: ").append(Integer.toString(this.getHarm()));
 		return sol.toString();
 	}
 	public abstract Plant parse(String PlantName);
