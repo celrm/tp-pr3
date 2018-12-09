@@ -15,7 +15,6 @@ public class PrinterManager {
 				p = item.parse(mode);
 		}
 		if (p == null){
-			//Es un parseo pero contenido en un execute, es entonces execute??
 			throw new CommandExecuteException("Unknown print mode: " + mode);
 		}
 		return p;

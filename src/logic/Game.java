@@ -269,7 +269,6 @@ public class Game {
 		SuncoinManager oldsManager = sManager;
 		ZombieManager oldzManager = zManager;
 		BoardPrinter oldgamePrinter = gamePrinter;
-		// Cutrísima forma de hacer el backup
 		
 		try {
 			String[] words = loadLine(inStream,"cycle",false);
@@ -367,7 +366,6 @@ public class Game {
 		}
 	}
 	
-	// Por qué public? y va aquí?
 	public static final String wrongPrefixMsg = "unknown game attribute: ";
 	public static final String lineTooLongMsg = "too many words on line commencing: ";
 	public static final String lineTooShortMsg = "missing data on line commencing: ";

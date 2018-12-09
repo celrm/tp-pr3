@@ -1,6 +1,5 @@
 package factories;
 
-import objects.Plant;
 import objects.Zombie;
 import objects.ZombieCaracubo;
 import objects.ZombieComun;
