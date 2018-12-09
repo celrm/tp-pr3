@@ -160,8 +160,9 @@ public class Game {
 
 	// UpdateCommand.execute() y AddCommand.execute()
 	public void update() {
-		this.plantList.update();
 		this.zombieList.update();
+		this.plantList.update();
+
 		
 		this.computer();
 		this.cycles++;
