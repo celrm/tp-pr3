@@ -81,19 +81,17 @@ public class Game {
 	
 	// Controller.run()
 	public boolean isFinished() {
-		boolean victory = playerWins();
-		boolean out = exit || victory || zombiesWin();
-		if (out) {
+		if (exit) {
 			System.out.print("****** Game over!: ");
-			if (exit)
-				System.out.print("User exit");
-			else if (victory)
+			if (playerWins())
 				System.out.print("You win!");
-			else 
+			else if (zombiesWin())
 				System.out.print("Zombies win :(");
+			else 
+				System.out.print("User exit");
 			System.out.println(" ******");
 		}
-		return out;
+		return exit;
 	}
 	private boolean playerWins() {
 		return (this.zManager.getRemZombies() == 0) && (numZombies() == 0);
@@ -160,14 +158,22 @@ public class Game {
 
 	// UpdateCommand.execute() y AddCommand.execute()
 	public void update() {
-		this.plantList.update();
-		this.zombieList.update();
-
-		this.plantList.remove();
-		this.zombieList.remove();
 		
 		this.computer();
+
+		this.plantList.update();
+		if(playerWins())
+			exit = true;
+		else {
+		this.zombieList.update();
+		if(zombiesWin())
+			exit = true;
+		else {
+		this.plantList.remove();
+		this.zombieList.remove();
 		this.cycles++;
+		}
+		}
 	}
 	private void computer() {		
 		boolean posible = false;
