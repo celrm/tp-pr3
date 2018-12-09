@@ -34,7 +34,7 @@ public abstract class Zombie extends GameObject {
 		outStream.write(":");
 		outStream.write(Integer.toString(this.y));
 		outStream.write(":");
-		outStream.write(Integer.toString(speed - ((this.game.getCycles() - this.nacimiento) % speed)));
+		outStream.write(Integer.toString((speed == 0)? 0 :speed - ((this.game.getCycles() - this.nacimiento) % speed)));
 	}
 	public String getIdent() {
 		return this.ident;

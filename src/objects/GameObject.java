@@ -91,9 +91,7 @@ public abstract class GameObject {
 		str.append(this.getSymbol().toUpperCase()).append("[l:").append(this.getVida());
 		str.append(",x:").append(this.x);
 		str.append(",y:").append(this.y);
-		if(speed != 0)
-			str.append(",t:").append(speed - ((this.game.getCycles() - this.nacimiento) % speed));
-		else str.append(",t:0");
+		str.append(",t:").append((speed == 0)? 0 :speed - ((this.game.getCycles() - this.nacimiento) % speed));
 		str.append("]");
 		return str.toString();
 	}
@@ -116,7 +114,7 @@ public abstract class GameObject {
 		outStream.write(":");
 		outStream.write(Integer.toString(this.y));
 		outStream.write(":");
-		outStream.write(Integer.toString(speed - ((this.game.getCycles() - this.nacimiento) % speed)));
+		outStream.write(Integer.toString((speed == 0)? 0 :speed - ((this.game.getCycles() - this.nacimiento) % speed)));
 	}
 
 	public void setAttributes(int vida, int x, int y, int t) throws FileContentsException {

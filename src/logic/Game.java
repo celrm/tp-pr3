@@ -253,7 +253,7 @@ public class Game {
 	
   	// LoadCommand.execute()
 	public void load(BufferedReader inStream) throws FileContentsException {
-		Level oldlevel = level;
+		String oldlevel = level.name();
 		ObjectList oldplantList = plantList;
 		ObjectList oldzombieList = zombieList;
 		int oldciclos = cycles;
@@ -272,7 +272,8 @@ public class Game {
 			int newsuncoins = Integer.parseInt(words[0]);
 			if (newsuncoins < 0)
 				throw new FileContentsException("negative suncoins");
-			sManager.add(newsuncoins - sManager.getSuncoins());
+			sManager = new SuncoinManager();
+			sManager.add(newsuncoins);
 			
 			words = loadLine(inStream,"level",false);
 			this.level = Level.parse(words[0]);
@@ -283,7 +284,8 @@ public class Game {
 			int newremz = Integer.parseInt(words[0]);
 			if (newremz < 0)
 				throw new FileContentsException("negative remaining zombies");
-			this.zManager.setRemZombies(newremz);
+			zManager = new ZombieManager(level, rand);
+			zManager.setRemZombies(newremz);
 			
 			words = loadLine(inStream,"plantList",true);
 			this.plantList = new ObjectList();
@@ -336,7 +338,7 @@ public class Game {
 			
 			this.gamePrinter = new ReleasePrinter();
 		} catch(IOException | FileContentsException ex) {
-			level = oldlevel;
+			level = Level.parse(oldlevel);
 			plantList = oldplantList;
 			zombieList = oldzombieList;
 			cycles = oldciclos;
@@ -345,7 +347,7 @@ public class Game {
 			gamePrinter = oldgamePrinter;
 			throw new FileContentsException(ex.getMessage());
 		} catch (NumberFormatException ex) {
-			level = oldlevel;
+			level = Level.parse(oldlevel);
 			plantList = oldplantList;
 			zombieList = oldzombieList;
 			cycles = oldciclos;
