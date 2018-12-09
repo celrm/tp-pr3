@@ -71,7 +71,7 @@ public class ObjectList {
     }
 	
 
-	private void remove(){
+	public void remove(){
 		GameObject[] aux = this.lista;
 		this.lista = new GameObject[aux.length];
 		int j  =  0;
@@ -88,8 +88,7 @@ public class ObjectList {
 	public void update(){
         for (int i = 0; i < this.cont; ++i){
                 this.lista[i].update();
-        }
-        this.remove();        
+        }   
     }
     
 	public String toString(int x, int y) {
