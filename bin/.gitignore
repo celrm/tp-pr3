@@ -1,6 +1,5 @@
-/utils/
-/logic/
-/objects/
-/lists/
-/factories/
 /commands/
+/factories/
+/objects/
+/printers/
+/logic/

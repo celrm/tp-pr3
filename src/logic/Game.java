@@ -343,7 +343,8 @@ public class Game {
 				z.setGame(this);
 				zombieList.add(z);
 			}
-			
+			if (newremz + words.length > level.getNumberOfZombies())
+				throw new FileContentsException("too many zombies");
 			this.gamePrinter = new ReleasePrinter();
 		} catch(IOException | FileContentsException ex) {
 			level = Level.parse(oldlevel);
